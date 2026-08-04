@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Butiquim Bistrô — Cardápio & Engenharia de Menu</title>
+<style>
+/* ── TELA DE SENHA ─────────────────────────────────────── */
+#tela-senha{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#0d2b10 0%,#1a4a20 60%,#2d6b30 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+#tela-senha.oculto{display:none;}
+.senha-box{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(240,180,41,0.4);
+  border-radius:16px;padding:48px 40px;width:100%;max-width:380px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;
+}
+.senha-logo{font-size:28px;letter-spacing:4px;font-weight:700;color:#f0b429;margin-bottom:2px;}
+.senha-sub{font-size:11px;letter-spacing:2px;color:#999;text-transform:uppercase;margin-bottom:36px;}
+.senha-label{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;text-align:left;}
+.senha-input{
+  width:100%;padding:12px 16px;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(240,180,41,0.4);border-radius:8px;
+  color:#fff;font-size:18px;letter-spacing:4px;text-align:center;
+  outline:none;transition:border-color .2s;
+}
+.senha-input:focus{border-color:#f0b429;}
+.senha-btn{
+  width:100%;margin-top:16px;padding:13px;
+  background:#f0b429;color:#1a4a20;border:none;border-radius:8px;
+  font-size:14px;font-weight:800;letter-spacing:1px;cursor:pointer;
+  text-transform:uppercase;transition:background .2s;
+}
+.senha-btn:hover{background:#f5c84a;}
+.senha-erro{color:#e74c3c;font-size:12px;margin-top:10px;min-height:18px;}
+.senha-hint{margin-top:24px;font-size:10px;color:#555;border-top:1px solid rgba(255,255,255,0.07);padding-top:16px;}
+/* ─────────────────────────────────────────────────────── */
+:root {
+  --cor-primaria: #1a4a20;
+  --cor-accent:   #f0b429;
+  --cor-bg:       #f5f8f5;
+  --cor-verde:    #1e8449;
+  --cor-verde-bg: #d5f5e3;
+  --cor-amarelo:  #a04000;
+  --cor-amarelo-bg:#fdebd0;
+  --cor-vermelho: #922b21;
+  --cor-vermelho-bg:#fadbd8;
+  --cor-cinza:    #6d7b6e;
+  --cor-borda:    #d8e4d8;
+  --sombra:       0 2px 12px rgba(26,74,32,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--cor-bg);color:#333;font-size:14px;}
+
+header{background:var(--cor-primaria);color:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:22px;letter-spacing:3px;font-weight:800;color:var(--cor-accent);}
+.logo span{font-size:10px;display:block;letter-spacing:2px;color:#ccc;margin-top:1px;font-weight:400;}
+.header-right{display:flex;gap:10px;align-items:center;}
+.btn-header{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:6px 14px;border-radius:4px;cursor:pointer;font-size:12px;}
+.btn-header:hover{background:rgba(255,255,255,0.22);}
+.btn-accent{background:var(--cor-accent);color:var(--cor-primaria);border:none;padding:7px 16px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:700;}
+.btn-accent:hover{background:#f5c84a;}
+
+.alerta-cmv{display:none;background:#7b241c;color:#fce4dc;font-size:12px;padding:8px 28px;text-align:center;}
+.alerta-cmv.visivel{display:block;}
+
+.tabs{background:#fff;border-bottom:2px solid var(--cor-borda);padding:0 28px;display:flex;overflow-x:auto;}
+.tab{padding:10px 16px;cursor:pointer;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:3px solid transparent;color:var(--cor-cinza);white-space:nowrap;}
+.tab:hover{color:var(--cor-primaria);}
+.tab.ativo{color:var(--cor-primaria);border-bottom-color:var(--cor-accent);}
+
+.conteudo{padding:20px 28px;}
+.categoria{display:none;}
+.categoria.ativo{display:block;}
+.titulo-cat{font-size:17px;font-weight:700;color:var(--cor-primaria);margin-bottom:4px;}
+.sub-cat{font-size:11px;color:var(--cor-cinza);margin-bottom:14px;}
+
+table.main{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:var(--sombra);}
+table.main thead tr{background:var(--cor-primaria);color:#fff;}
+table.main th{padding:9px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+th.r,td.r{text-align:right;}
+table.main td{padding:8px 12px;border-bottom:1px solid var(--cor-borda);vertical-align:middle;}
+table.main tr:last-child td{border-bottom:none;}
+table.main tbody tr:hover td{background:#f0f8f0;}
+
+.nm{font-weight:600;color:var(--cor-primaria);cursor:pointer;}
+.nm:hover{color:var(--cor-accent);text-decoration:underline;}
+.dsc{font-size:10px;color:var(--cor-cinza);margin-top:1px;}
+
+input.n{border:1px solid var(--cor-borda);border-radius:3px;padding:3px 6px;font-size:13px;background:#f8fef8;text-align:right;}
+input.n:focus{outline:none;border-color:var(--cor-accent);}
+input.n.preco{width:78px;font-weight:700;color:var(--cor-primaria);}
+input.n.meta{width:58px;color:#555;}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;}
+.badge.ok{background:var(--cor-verde-bg);color:var(--cor-verde);}
+.badge.alerta{background:var(--cor-amarelo-bg);color:var(--cor-amarelo);}
+.badge.ruim{background:var(--cor-vermelho-bg);color:var(--cor-vermelho);}
+
+.btn-ft{background:none;border:1px solid var(--cor-accent);color:var(--cor-accent);padding:3px 9px;border-radius:3px;cursor:pointer;font-size:10px;font-weight:700;}
+.btn-ft:hover{background:var(--cor-accent);color:#fff;}
+
+.barra-cont{height:6px;border-radius:3px;background:#eee;margin-top:3px;overflow:hidden;}
+.barra-fill{height:100%;border-radius:3px;transition:width .3s;}
+
+tfoot.rod tr td{background:#edf5ed;border-top:2px solid var(--cor-borda);font-weight:700;color:var(--cor-primaria);}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1000;justify-content:center;align-items:flex-start;padding:20px;overflow-y:auto;}
+.overlay.aberto{display:flex;}
+.modal{background:#fff;border-radius:10px;width:100%;max-width:860px;box-shadow:0 8px 40px rgba(0,0,0,.3);margin:auto;}
+.mhdr{background:var(--cor-primaria);color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;border-radius:10px 10px 0 0;}
+.mtit{font-size:17px;font-weight:700;color:var(--cor-accent);}
+.msub{font-size:10px;color:#bbb;margin-top:2px;}
+.btn-x{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:0 4px;line-height:1;}
+.mbody{padding:18px 22px;}
+
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.slbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--cor-cinza);margin-bottom:6px;font-weight:700;}
+.preparo{background:#f0f8f0;border-left:3px solid var(--cor-accent);padding:10px 14px;font-size:12px;line-height:1.7;color:#444;}
+
+table.ft{width:100%;border-collapse:collapse;}
+table.ft th{background:#edf5ed;color:var(--cor-primaria);font-size:10px;text-transform:uppercase;padding:7px 9px;border:1px solid var(--cor-borda);}
+table.ft td{padding:6px 9px;border:1px solid var(--cor-borda);font-size:12px;vertical-align:middle;}
+table.ft input{border:1px solid #ddd;border-radius:3px;padding:3px 5px;font-size:12px;background:#f8fef8;}
+table.ft input:focus{outline:none;border-color:var(--cor-accent);}
+table.ft input.qtd-in{width:70px;text-align:right;}
+table.ft input.preco-in{width:75px;text-align:right;}
+table.ft .tot-row{background:#edf5ed;font-weight:700;}
+
+.ft-resumo{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;background:#f0f8f0;padding:12px;border-radius:6px;border:1px solid var(--cor-borda);}
+.ft-res-item{text-align:center;}
+.ft-res-item .lbl{font-size:9px;color:var(--cor-cinza);text-transform:uppercase;letter-spacing:.5px;}
+.ft-res-item .val{font-size:16px;font-weight:700;color:var(--cor-primaria);}
+
+.mftr{padding:12px 22px;background:#f5f8f5;border-top:1px solid var(--cor-borda);display:flex;align-items:center;gap:12px;border-radius:0 0 10px 10px;}
+.mftr .inf{font-size:11px;color:var(--cor-cinza);}
+.btn-save{background:var(--cor-primaria);color:#fff;border:none;padding:8px 18px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:700;margin-left:auto;}
+.btn-save:hover{background:#2d6b30;}
+
+.ing-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:58vh;overflow-y:auto;padding-right:6px;}
+.ing-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--cor-borda);}
+.ing-row label{flex:1;font-size:12px;}
+.ing-row .un{font-size:10px;color:var(--cor-cinza);width:28px;}
+.ing-row input{width:80px;border:1px solid #ddd;border-radius:3px;padding:3px 7px;text-align:right;font-size:12px;}
+
+@media(max-width:700px){
+  .conteudo{padding:10px;}
+  .mgrid,.ft-resumo{grid-template-columns:1fr;}
+  .ing-grid{grid-template-columns:1fr;}
+  th.hide-mob,td.hide-mob{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TELA DE SENHA ══════════════════════════════════════ -->
+<div id="tela-senha">
+  <div class="senha-box">
+    <div class="senha-logo">BUTIQUIM BISTRÔ</div>
+    <div class="senha-sub">Gestão de Cardápio — Acesso Restrito</div>
+    <div class="senha-label">Senha de acesso</div>
+    <input class="senha-input" type="password" id="senha-input"
+      placeholder="••••••••" maxlength="32"
+      onkeydown="if(event.key==='Enter')verificarSenha()">
+    <button class="senha-btn" onclick="verificarSenha()">Entrar</button>
+    <div class="senha-erro" id="senha-erro"></div>
+    <div class="senha-hint">Área restrita — apenas usuários autorizados.</div>
+  </div>
+</div>
+
+<script>
+// SHA-256 de "bistro2025"
+const HASH_CORRETO = '7eabb634196acde034206c584b406cc35df7b8a84652061780bb33a44dfecaa1';
+const SESSAO_KEY   = 'bistro_auth_ok';
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function _iniciarApp(){
+  document.body.style.overflow = '';
+  if(typeof _guardarMixBase === 'function') _guardarMixBase();
+  if(typeof _executarMetaGlobal === 'function') setTimeout(_executarMetaGlobal, 100);
+}
+
+async function verificarSenha(){
+  const inp   = document.getElementById('senha-input');
+  const erro  = document.getElementById('senha-erro');
+  const valor = inp.value.trim();
+  if(!valor){ erro.textContent='Digite a senha para continuar.'; return; }
+  erro.textContent='';
+  const hash = await sha256(valor);
+  if(hash === HASH_CORRETO){
+    sessionStorage.setItem(SESSAO_KEY,'1');
+    document.getElementById('tela-senha').classList.add('oculto');
+    _iniciarApp();
+  } else {
+    erro.textContent='Senha incorreta. Tente novamente.';
+    inp.value=''; inp.focus();
+  }
+}
+
+(async()=>{
+  if(sessionStorage.getItem(SESSAO_KEY)==='1'){
+    document.getElementById('tela-senha').classList.add('oculto');
+    window.addEventListener('load', ()=>setTimeout(_iniciarApp,200));
+  } else {
+    document.body.style.overflow='hidden';
+    setTimeout(()=>document.getElementById('senha-input').focus(),100);
+  }
+})();
+</script>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
+<header>
+  <div class="logo">BUTIQUIM BISTRÔ<span>Engenharia de Menu — Gestão Gerencial</span></div>
+  <div class="header-right">
+    <button class="btn-header" onclick="abrirPrecos()">⚙ Preços de Compra</button>
+    <button class="btn-header" onclick="desbloquearTodos()" style="background:rgba(240,180,41,0.15);border-color:rgba(240,180,41,0.5);color:#f0b429" title="Remove todas as travas manuais">🔓 Desbloquear Todos</button>
+    <button class="btn-header" onclick="exportarExcel()" style="background:rgba(39,174,96,0.25);border-color:rgba(39,174,96,0.6);color:#2ecc71">⬇ Exportar Excel</button>
+    <button class="btn-accent" onclick="abrirBalancear()">⚖ Balancear Mix</button>
+  </div>
+</header>
+
+<!-- BARRA DE META -->
+<div style="background:#0d2b10;border-bottom:3px solid var(--cor-accent);padding:10px 28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+  <div style="display:flex;align-items:center;gap:10px;background:rgba(240,180,41,0.12);border:1px solid rgba(240,180,41,0.4);border-radius:8px;padding:8px 14px">
+    <span style="font-size:10px;color:#f0b429;font-weight:700;text-transform:uppercase;letter-spacing:1px;white-space:nowrap">🎯 Metas</span>
+    <span style="color:#333;font-size:16px">|</span>
+
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <span style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.5px">Faturamento R$</span>
+      <input id="meta-fat-global" type="number" value="50000" step="5000" min="5000"
+        style="width:108px;background:transparent;border:none;border-bottom:2px solid var(--cor-accent);color:#fff;font-size:19px;font-weight:800;text-align:center;outline:none;padding:1px 2px;"
+        oninput="aplicarMetaGlobal()">
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <span style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.5px">Ticket Médio R$</span>
+      <input id="meta-ticket-global" type="number" value="48" step="2" min="10"
+        style="width:64px;background:transparent;border:none;border-bottom:2px solid #6a9;color:#fff;font-size:19px;font-weight:800;text-align:center;outline:none;padding:1px 2px;"
+        oninput="aplicarMetaGlobal()">
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <span style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.5px">CMV máx. %</span>
+      <input id="meta-cmv-global" type="number" value="28" step="1" min="10" max="50"
+        style="width:46px;background:transparent;border:none;border-bottom:2px solid #aaa;color:#fff;font-size:19px;font-weight:700;text-align:center;outline:none;padding:1px 2px;"
+        oninput="aplicarMetaGlobal()">
+    </div>
+
+    <span style="color:#444;font-size:16px">→</span>
+
+    <div style="display:flex;flex-direction:column;align-items:center;background:rgba(106,180,120,0.15);border-radius:6px;padding:4px 10px;">
+      <span style="font-size:9px;color:#6ab478;text-transform:uppercase;letter-spacing:.5px">Pessoas/mês</span>
+      <span id="pessoas-calc" style="font-size:19px;font-weight:800;color:#6ab478">1042</span>
+    </div>
+    <div id="meta-status" style="font-size:10px;color:#aaa;white-space:nowrap;align-self:center">↵ recalcula ao digitar</div>
+  </div>
+
+  <div style="width:1px;height:36px;background:rgba(255,255,255,0.15);margin:0 4px;"></div>
+  <div style="text-align:center;min-width:90px;">
+    <div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px;">CMV Ponderado</div>
+    <div class="val" id="cmv-pond" style="font-size:20px;font-weight:700;color:var(--cor-accent)">—</div>
+  </div>
+  <div style="width:1px;height:36px;background:rgba(255,255,255,0.15);margin:0 4px;"></div>
+  <div style="text-align:center;min-width:110px;">
+    <div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px;">Margem de Contribuição/mês</div>
+    <div id="luc-total" style="font-size:20px;font-weight:700;color:#2ecc71">—</div>
+  </div>
+  <div style="text-align:center;min-width:90px;" class="hide-mob">
+    <div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px;">Porções/mês</div>
+    <div id="porcoes-total" style="font-size:20px;font-weight:700;color:#ddd">—</div>
+  </div>
+  <div style="width:1px;height:36px;background:rgba(255,255,255,0.15);margin:0 4px;"></div>
+  <div style="text-align:center;min-width:90px;">
+    <div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px;">Ticket Médio Real</div>
+    <div id="ticket-med" style="font-size:20px;font-weight:700;color:#ddd">—</div>
+  </div>
+  <span id="rec-total" style="display:none"></span>
+  <span id="cus-total" style="display:none"></span>
+</div>
+<div class="alerta-cmv" id="alerta-cmv">
+  ⚠ CMV ponderado acima da meta — ajuste a meta ou os preços de venda.
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div class="conteudo" id="conteudo"></div>
+
+<!-- OVERLAY FICHA TÉCNICA -->
+<div class="overlay" id="ov-ficha">
+  <div class="modal" id="mod-ficha"></div>
+</div>
+
+<!-- OVERLAY PREÇOS GLOBAIS -->
+<div class="overlay" id="ov-precos">
+  <div class="modal" style="max-width:700px">
+    <div class="mhdr">
+      <div><div class="mtit">Preços de Compra — Ingredientes</div><div class="msub">Atualize para recalcular todos os itens em tempo real</div></div>
+      <button class="btn-x" onclick="fecharOverlay('ov-precos')">×</button>
+    </div>
+    <div class="mbody"><div class="ing-grid" id="lista-ing"></div></div>
+    <div class="mftr">
+      <span class="inf">R$/kg, R$/L ou R$/unidade</span>
+      <button class="btn-save" onclick="salvarPrecos()">Salvar e Recalcular</button>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLAY BALANCEAR MIX -->
+<div class="overlay" id="ov-bal">
+  <div class="modal" style="max-width:780px">
+    <div class="mhdr">
+      <div><div class="mtit">⚖ Análise do Mix de Vendas</div><div class="msub">CMV ponderado e sugestão de reequilíbrio</div></div>
+      <button class="btn-x" onclick="fecharOverlay('ov-bal')">×</button>
+    </div>
+    <div class="mbody" id="bal-body">Carregando...</div>
+    <div class="mftr">
+      <span class="inf">Ajuste as metas de vendas na tabela para ver o impacto em tempo real</span>
+      <button class="btn-save" onclick="fecharOverlay('ov-bal')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ================================================================
+// PREÇOS DE INGREDIENTES (R$/kg, R$/L ou R$/un) — Base: Fichas Técnicas Butiquim Bistrô
+// ================================================================
+let precos = {
+  // Proteínas
+  'Frango Grelhado':      {p:22.00, u:'kg'},
+  'Peito de Peru':        {p:38.00, u:'kg'},
+  'Presunto':             {p:36.00, u:'kg'},
+  'Bacon':                {p:27.89, u:'kg'},
+  'Atum':                 {p:52.00, u:'kg'},
+  'Salmão Defumado':      {p:85.00, u:'kg'},
+  // Laticínios
+  'Queijo Minas':         {p:32.00, u:'kg'},
+  'Cheddar':              {p:65.30, u:'kg'},
+  'Mussarela':            {p:36.00, u:'kg'},
+  'Mussarela de Búfala':  {p:85.00, u:'kg'},
+  'Cream Cheese':         {p:38.00, u:'kg'},
+  'Parmesão':             {p:62.00, u:'kg'},
+  'Manteiga':             {p:28.90, u:'kg'},
+  'Iogurte Natural':      {p:12.00, u:'kg'},
+  'Iogurte Grego':        {p:32.00, u:'kg'},
+  'Creme de Leite':       {p:18.00, u:'kg'},
+  'Leite Integral':       {p: 5.00, u:'L'},
+  // Ovos
+  'Ovo Caipira':          {p: 1.00, u:'un'},
+  // Pães
+  'Pão Italiano':         {p: 4.80, u:'un'},
+  'Pão de Queijo':        {p: 2.50, u:'un'},
+  'Pão Artesanal':        {p:18.00, u:'kg'},
+  'Pão de Forma':         {p: 8.00, u:'kg'},
+  // Vegetais e Saladas
+  'Alface Americana':     {p: 8.00, u:'kg'},
+  'Alface Crespa':        {p: 8.00, u:'kg'},
+  'Rúcula':               {p:25.00, u:'kg'},
+  'Mix de Folhas':        {p:22.00, u:'kg'},
+  'Tomate':               {p: 6.00, u:'kg'},
+  'Tomate Cereja':        {p:16.00, u:'kg'},
+  'Pepino':               {p: 5.00, u:'kg'},
+  'Cenoura':              {p: 4.00, u:'kg'},
+  'Beterraba':            {p: 4.00, u:'kg'},
+  'Cebolinha':            {p:20.00, u:'kg'},
+  'Manjericão':           {p:30.00, u:'kg'},
+  'Espinafre':            {p:18.00, u:'kg'},
+  'Palmito':              {p:32.00, u:'kg'},
+  'Cebola Roxa':          {p: 6.00, u:'kg'},
+  'Milho':                {p: 6.00, u:'kg'},
+  // Frutas
+  'Banana':               {p: 5.00, u:'kg'},
+  'Morango':              {p:22.00, u:'kg'},
+  'Manga':                {p:12.00, u:'kg'},
+  'Abacaxi':              {p: 8.00, u:'kg'},
+  'Mamão':                {p: 6.00, u:'kg'},
+  'Melão':                {p: 8.00, u:'kg'},
+  'Kiwi':                 {p:25.00, u:'kg'},
+  'Açaí':                 {p:28.00, u:'kg'},
+  'Maçã':                 {p:10.00, u:'kg'},
+  'Uva':                  {p:20.00, u:'kg'},
+  // Grãos e Cereais
+  'Granola':              {p:20.00, u:'kg'},
+  'Aveia':                {p:12.00, u:'kg'},
+  'Chia':                 {p:35.00, u:'kg'},
+  'Linhaça':              {p:15.00, u:'kg'},
+  'Castanha do Pará':     {p:55.00, u:'kg'},
+  'Nozes':                {p:65.00, u:'kg'},
+  'Mel':                  {p:38.00, u:'kg'},
+  // Pastagens/Bases
+  'Creme de Abacate':     {p:11.26, u:'kg'},
+  'Vinagrete':            {p:34.78, u:'kg'},
+  'Guacamole':            {p:18.00, u:'kg'},
+  'Hummus':               {p:22.00, u:'kg'},
+  // Bebidas base
+  'Leite de Amêndoa':     {p:22.00, u:'L'},
+  'Leite de Coco':        {p:15.00, u:'L'},
+  'Suco de Laranja':      {p: 8.00, u:'L'},
+  'Polpa de Fruta':       {p:15.00, u:'kg'},
+  // Cafés
+  'Café Moído':           {p:52.00, u:'kg'},
+  'Chocolate em Pó':      {p:38.00, u:'kg'},
+  'Calda de Chocolate':   {p:28.00, u:'kg'},
+  'Canela':               {p:60.00, u:'kg'},
+  // Molhos e Condimentos
+  'Azeite Extravirgem':   {p:52.00, u:'L'},
+  'Molho Balsâmico':      {p:42.00, u:'L'},
+  'Limão':                {p: 8.00, u:'kg'},
+  'Mostarda Dijon':       {p:25.00, u:'kg'},
+  'Maionese':             {p:15.00, u:'kg'},
+  'Molho Caesar':         {p:28.00, u:'kg'},
+  // Pão de Queijo
+  'Polvilho':             {p:10.00, u:'kg'},
+  'Queijo Meia Cura':     {p:52.00, u:'kg'},
+  // Tortas e Doces
+  'Farinha de Trigo':     {p: 5.00, u:'kg'},
+  'Açúcar':              {p: 5.00, u:'kg'},
+  'Ovos':                 {p: 0.80, u:'un'},
+  'Manteiga de Garrafa':  {p:40.00, u:'L'},
+  'Leite Condensado':     {p:15.00, u:'kg'},
+  'Chocolate Meio Amargo':{p:38.00, u:'kg'},
+  'Creme de Confeiteiro': {p:25.00, u:'kg'},
+  'Limão Siciliano':      {p:18.00, u:'kg'},
+};
+
+// ================================================================
+// DADOS DOS PRATOS
+// ================================================================
+const cats = [
+
+  // ── TOASTS E COMBOS ────────────────────────────────────────────
+  { nome:'TOASTS E COMBOS', tabLabel:'TOASTS', sub:'Preparados com Pão Artesanal Italiano', pratos:[
+
+    { id:'toast-abacate-bacon', nome:'Toast Abacate e Bacon',
+      desc:'Creme de abacate, bacon crocante, ovo caipira, cheddar, vinagrete e cebolinha',
+      prep:'Tostar o pão italiano na chapa com manteiga. Espalhar o creme de abacate com tempero. Fritar o ovo e cozinhar o bacon até crocante. Montar o toast com cheddar, vinagrete e finalizar com cebolinha fresca. Servir quente.',
+      ings:[
+        {n:'Creme de Abacate',  q:0.050},  // 50g → R$0,56
+        {n:'Vinagrete',         q:0.056},  // 56g → R$1,95
+        {n:'Manteiga',          q:0.027},  // 27g → R$0,78
+        {n:'Cheddar',           q:0.032},  // 32g → R$2,09
+        {n:'Ovo Caipira',       q:2},      // 2un → R$2,00
+        {n:'Bacon',             q:0.040},  // 40g → R$1,12
+        {n:'Cebolinha',         q:0.001},  // 1g  → R$0,02
+        {n:'Pão Italiano',      q:1},      // 1un → R$4,80
+      ], pv:35.00, mv:45 },
+
+    { id:'toast-caprese', nome:'Toast Caprese',
+      desc:'Mussarela de búfala fresca, tomate cereja, manjericão e redução balsâmica',
+      prep:'Tostar o pão italiano com azeite. Dispor a mussarela de búfala em fatias sobre o pão quente. Colocar os tomates cereja cortados ao meio. Finalizar com manjericão fresco, flor de sal e redução de balsâmico.',
+      ings:[
+        {n:'Pão Italiano',       q:1},
+        {n:'Mussarela de Búfala',q:0.060},
+        {n:'Tomate Cereja',      q:0.080},
+        {n:'Manjericão',         q:0.005},
+        {n:'Azeite Extravirgem', q:0.015},
+        {n:'Molho Balsâmico',    q:0.015},
+      ], pv:32.00, mv:40 },
+
+    { id:'toast-peito-peru', nome:'Toast Peito de Peru & Cream Cheese',
+      desc:'Cream cheese temperado, peito de peru defumado, tomate e alface crocante',
+      prep:'Tostar o pão italiano. Espalhar o cream cheese temperado com ervas. Dispor as fatias de peito de peru. Finalizar com tomate, alface americana e pimenta-do-reino.',
+      ings:[
+        {n:'Pão Italiano',   q:1},
+        {n:'Cream Cheese',   q:0.050},
+        {n:'Peito de Peru',  q:0.060},
+        {n:'Tomate',         q:0.060},
+        {n:'Alface Americana',q:0.030},
+        {n:'Manteiga',       q:0.015},
+      ], pv:28.00, mv:42 },
+
+    { id:'combo-cafe-manha', nome:'Combo Café da Manhã',
+      desc:'Pão artesanal com manteiga + ovo mexido + suco natural 300ml',
+      prep:'Tostar o pão artesanal. Mexer os ovos com manteiga e cebolinha. Servir com suco natural da estação.',
+      ings:[
+        {n:'Pão Italiano',   q:1},
+        {n:'Manteiga',       q:0.020},
+        {n:'Ovo Caipira',    q:2},
+        {n:'Cebolinha',      q:0.005},
+        {n:'Polpa de Fruta', q:0.200},
+      ], pv:32.00, mv:40 },
+  ]},
+
+  // ── MONTE SUA SALADA ───────────────────────────────────────────
+  { nome:'MONTE SUA SALADA', tabLabel:'SALADAS', sub:'Frescas, Crocantes e Personalizadas', pratos:[
+
+    { id:'salada-classica', nome:'Salada Clássica',
+      desc:'Mix de folhas, tomate cereja, cenoura, pepino e molho da casa',
+      prep:'Higienizar e centrifugar as folhas. Cortar os vegetais em fatias finas. Temperar com azeite, limão e sal. Servir com molho balsâmico à parte.',
+      ings:[
+        {n:'Mix de Folhas',    q:0.080},
+        {n:'Tomate Cereja',    q:0.060},
+        {n:'Cenoura',          q:0.040},
+        {n:'Pepino',           q:0.040},
+        {n:'Azeite Extravirgem',q:0.015},
+        {n:'Limão',            q:0.020},
+      ], pv:22.00, mv:40 },
+
+    { id:'salada-premium', nome:'Salada Premium com Palmito',
+      desc:'Mix de folhas, palmito, manga, parmesão lascado e molho balsâmico',
+      prep:'Dispor o mix de folhas como base. Adicionar o palmito em fatias, manga em cubos e lascas de parmesão. Finalizar com redução balsâmica e fio de azeite.',
+      ings:[
+        {n:'Mix de Folhas',    q:0.080},
+        {n:'Palmito',          q:0.050},
+        {n:'Manga',            q:0.060},
+        {n:'Parmesão',         q:0.030},
+        {n:'Molho Balsâmico',  q:0.020},
+        {n:'Azeite Extravirgem',q:0.015},
+      ], pv:38.00, mv:35 },
+
+    { id:'salada-proteica', nome:'Salada Proteica com Frango',
+      desc:'Mix de folhas, frango grelhado, ovo caipira, tomate cereja e molho Caesar',
+      prep:'Temperar o frango com ervas e grelhar na chapa. Fatiar e dispor sobre o mix de folhas. Adicionar ovo cozido, tomate cereja e finalizar com molho Caesar artesanal.',
+      ings:[
+        {n:'Mix de Folhas',    q:0.080},
+        {n:'Frango Grelhado',  q:0.120},
+        {n:'Ovo Caipira',      q:1},
+        {n:'Tomate Cereja',    q:0.060},
+        {n:'Molho Caesar',     q:0.030},
+        {n:'Parmesão',         q:0.020},
+      ], pv:42.00, mv:38 },
+
+    { id:'salada-vegana', nome:'Salada Vegana da Estação',
+      desc:'Rúcula, beterraba assada, castanha, chia e vinagrete de limão',
+      prep:'Assar a beterraba. Higienizar a rúcula. Montar com beterraba em cubos, castanhas e sementes de chia. Finalizar com vinagrete de limão-siciliano e mel.',
+      ings:[
+        {n:'Rúcula',           q:0.060},
+        {n:'Beterraba',        q:0.080},
+        {n:'Castanha do Pará', q:0.020},
+        {n:'Chia',             q:0.010},
+        {n:'Limão Siciliano',  q:0.015},
+        {n:'Mel',              q:0.010},
+        {n:'Azeite Extravirgem',q:0.015},
+      ], pv:35.00, mv:32 },
+  ]},
+
+  // ── CAFÉ ───────────────────────────────────────────────────────
+  { nome:'CAFÉ', tabLabel:'CAFÉ', sub:'Grãos Selecionados — Torrefação Especial', pratos:[
+
+    { id:'cafe-espresso', nome:'Café Espresso',
+      desc:'Blend especial de grãos arábica — curto e encorpado',
+      prep:'Moer os grãos na hora. Extrair o espresso com 9 bar de pressão por 25-30 segundos. Servir em xícara pré-aquecida.',
+      ings:[
+        {n:'Café Moído', q:0.007},
+      ], pv:7.00, mv:35 },
+
+    { id:'cappuccino', nome:'Cappuccino Cremoso',
+      desc:'Espresso duplo com leite vaporizado e espuma cremosa de leite',
+      prep:'Extrair espresso duplo. Vaporizar o leite a 65°C formando microespuma. Verter o leite sobre o espresso com técnica de latte art.',
+      ings:[
+        {n:'Café Moído',    q:0.014},
+        {n:'Leite Integral',q:0.150},
+      ], pv:14.00, mv:42 },
+
+    { id:'cafe-latte', nome:'Café Latte',
+      desc:'Espresso com leite vaporizado suave — grande e aveludado',
+      prep:'Extrair espresso simples. Vaporizar 250ml de leite. Verter suavemente formando camadas.',
+      ings:[
+        {n:'Café Moído',    q:0.010},
+        {n:'Leite Integral',q:0.250},
+      ], pv:16.00, mv:40 },
+
+    { id:'chocolate-quente', nome:'Chocolate Quente Belga',
+      desc:'Chocolate meio amargo belga derretido com leite vaporizado e canela',
+      prep:'Derreter o chocolate com creme de leite em banho-maria. Vaporizar o leite. Misturar e servir quente com canela.',
+      ings:[
+        {n:'Chocolate Meio Amargo',q:0.030},
+        {n:'Leite Integral',       q:0.200},
+        {n:'Creme de Leite',       q:0.020},
+        {n:'Canela',               q:0.002},
+      ], pv:18.00, mv:35 },
+  ]},
+
+  // ── TORTAS E DOCES ─────────────────────────────────────────────
+  { nome:'TORTAS E DOCES', tabLabel:'DOCES', sub:'Feitos Artesanalmente no Bistrô', pratos:[
+
+    { id:'torta-limao', nome:'Torta de Limão',
+      desc:'Base crocante de biscoito, creme de limão e merengue suíço maçaricado',
+      prep:'Preparar a base com biscoito triturado e manteiga. Fazer o curd de limão. Cobrir com merengue suíço e maçaricar na hora.',
+      ings:[
+        {n:'Farinha de Trigo',  q:0.060},
+        {n:'Manteiga',          q:0.040},
+        {n:'Açúcar',            q:0.050},
+        {n:'Limão Siciliano',   q:0.080},
+        {n:'Ovos',              q:2},
+        {n:'Leite Condensado',  q:0.100},
+      ], pv:18.00, mv:35 },
+
+    { id:'brownie-chocolate', nome:'Brownie de Chocolate',
+      desc:'Brownie úmido com chocolate meio amargo e castanhas — servido morno',
+      prep:'Derreter manteiga e chocolate. Incorporar ovos e açúcar. Adicionar farinha e castanhas. Assar a 180°C por 20min. Servir morno com sorvete opcional.',
+      ings:[
+        {n:'Chocolate Meio Amargo',q:0.050},
+        {n:'Manteiga',             q:0.040},
+        {n:'Açúcar',               q:0.060},
+        {n:'Ovos',                 q:2},
+        {n:'Farinha de Trigo',     q:0.030},
+        {n:'Castanha do Pará',     q:0.020},
+      ], pv:16.00, mv:30 },
+
+    { id:'cheesecake-frutas', nome:'Cheesecake de Frutas Vermelhas',
+      desc:'Cheesecake cremoso com base de biscoito e calda de morango',
+      prep:'Preparar base com biscoito triturado. Bater cream cheese com leite condensado e ovos. Assar em banho-maria. Gelar. Servir com calda de morango aquecida.',
+      ings:[
+        {n:'Cream Cheese',    q:0.120},
+        {n:'Leite Condensado',q:0.080},
+        {n:'Ovos',            q:2},
+        {n:'Farinha de Trigo',q:0.040},
+        {n:'Morango',         q:0.080},
+        {n:'Açúcar',          q:0.030},
+      ], pv:20.00, mv:32 },
+  ]},
+
+  // ── LANCHES E CHAPA ────────────────────────────────────────────
+  { nome:'LANCHES, SANDUÍCHE E CHAPA', tabLabel:'LANCHES', sub:'Artesanais na Chapa', pratos:[
+
+    { id:'xfrango-especial', nome:'X-Frango Especial',
+      desc:'Frango grelhado, cheddar derretido, alface, tomate, maionese e pão artesanal',
+      prep:'Grelhar o filé de frango temperado na chapa. Derreter o cheddar sobre o frango. Montar no pão artesanal grelhado com alface, tomate e maionese.',
+      ings:[
+        {n:'Frango Grelhado',   q:0.150},
+        {n:'Cheddar',           q:0.040},
+        {n:'Alface Americana',  q:0.030},
+        {n:'Tomate',            q:0.050},
+        {n:'Maionese',          q:0.020},
+        {n:'Pão Artesanal',     q:0.120},
+        {n:'Manteiga',          q:0.015},
+      ], pv:35.00, mv:38 },
+
+    { id:'bauru-artesanal', nome:'Bauru Artesanal',
+      desc:'Rosbife, queijo minas derretido, tomate, pepino em conserva e pão francês',
+      prep:'Grelhar o pão na chapa com manteiga. Dispor o rosbife e derreter o queijo por cima. Adicionar tomate, pepino e mostarda.',
+      ings:[
+        {n:'Peito de Peru',    q:0.100},
+        {n:'Queijo Minas',     q:0.060},
+        {n:'Tomate',           q:0.050},
+        {n:'Pepino',           q:0.030},
+        {n:'Mostarda Dijon',   q:0.010},
+        {n:'Pão Artesanal',    q:0.120},
+        {n:'Manteiga',         q:0.015},
+      ], pv:30.00, mv:35 },
+
+    { id:'club-sandwich', nome:'Club Sandwich',
+      desc:'3 camadas: frango grelhado, bacon, ovo, queijo, alface e tomate',
+      prep:'Tostar 3 fatias de pão. Grelhar o frango e o bacon. Montar em 3 andares com ovo cozido, queijo, alface e tomate. Fixar com palito.',
+      ings:[
+        {n:'Frango Grelhado',  q:0.120},
+        {n:'Bacon',            q:0.040},
+        {n:'Ovo Caipira',      q:1},
+        {n:'Queijo Minas',     q:0.040},
+        {n:'Alface Americana', q:0.030},
+        {n:'Tomate',           q:0.050},
+        {n:'Maionese',         q:0.020},
+        {n:'Pão de Forma',     q:0.090},
+      ], pv:38.00, mv:35 },
+  ]},
+
+  // ── PÃO DE QUEIJO ──────────────────────────────────────────────
+  { nome:'PÃO DE QUEIJO', tabLabel:'PÃO QJ', sub:'Receita Mineira Artesanal', pratos:[
+
+    { id:'pao-queijo-tradicional', nome:'Pão de Queijo Tradicional (4 un)',
+      desc:'Receita artesanal com polvilho e queijo meia cura — crocante por fora, macio por dentro',
+      prep:'Misturar polvilho azedo e doce com queijo ralado, ovos, leite quente e manteiga. Modelar as bolinhas. Assar a 180°C por 25 minutos até dourar.',
+      ings:[
+        {n:'Polvilho',       q:0.100},
+        {n:'Queijo Meia Cura',q:0.080},
+        {n:'Ovos',           q:1},
+        {n:'Leite Integral', q:0.060},
+        {n:'Manteiga',       q:0.020},
+      ], pv:12.00, mv:50 },
+
+    { id:'pao-queijo-recheado', nome:'Pão de Queijo Recheado (2 un)',
+      desc:'Pão de queijo artesanal recheado com cream cheese e ervas',
+      prep:'Preparar a massa padrão de pão de queijo. Rechear cada unidade com cream cheese e ervas finas. Assar até dourar e servir quente.',
+      ings:[
+        {n:'Polvilho',       q:0.080},
+        {n:'Queijo Meia Cura',q:0.060},
+        {n:'Cream Cheese',   q:0.060},
+        {n:'Ovos',           q:1},
+        {n:'Leite Integral', q:0.050},
+        {n:'Manteiga',       q:0.015},
+      ], pv:16.00, mv:40 },
+  ]},
+
+  // ── FRUTAS E BRUNCH ────────────────────────────────────────────
+  { nome:'FRUTAS E BRUNCH', tabLabel:'BRUNCH', sub:'Opções Leves e Saudáveis', pratos:[
+
+    { id:'salada-frutas', nome:'Salada de Frutas do Bistrô',
+      desc:'Seleção de frutas frescas da estação com iogurte grego e mel',
+      prep:'Higienizar e cortar as frutas da estação em cubos uniformes. Servir em tigela com iogurte grego e fio de mel.',
+      ings:[
+        {n:'Morango',      q:0.060},
+        {n:'Manga',        q:0.060},
+        {n:'Mamão',        q:0.080},
+        {n:'Kiwi',         q:0.040},
+        {n:'Uva',          q:0.040},
+        {n:'Iogurte Grego',q:0.080},
+        {n:'Mel',          q:0.015},
+      ], pv:22.00, mv:42 },
+
+    { id:'acai-bowl', nome:'Açaí Bowl 500ml',
+      desc:'Açaí batido com banana, granola crocante, frutas e mel',
+      prep:'Bater o açaí congelado com a banana até consistência cremosa. Servir no bowl com granola, frutas frescas e fio de mel.',
+      ings:[
+        {n:'Açaí',         q:0.200},
+        {n:'Banana',       q:0.060},
+        {n:'Granola',      q:0.050},
+        {n:'Morango',      q:0.040},
+        {n:'Mel',          q:0.015},
+      ], pv:28.00, mv:38 },
+
+    { id:'granola-iogurte', nome:'Granola com Iogurte e Frutas',
+      desc:'Iogurte grego cremoso, granola artesanal, frutas e chia',
+      prep:'Dispor o iogurte grego na base. Cobrir com granola artesanal. Adicionar frutas frescas e sementes de chia. Finalizar com mel.',
+      ings:[
+        {n:'Iogurte Grego', q:0.150},
+        {n:'Granola',       q:0.060},
+        {n:'Morango',       q:0.040},
+        {n:'Banana',        q:0.040},
+        {n:'Chia',          q:0.010},
+        {n:'Mel',           q:0.015},
+      ], pv:22.00, mv:40 },
+  ]},
+
+  // ── SMOTHIES E BEBIDAS ─────────────────────────────────────────
+  { nome:'SMOTHIES E BEBIDAS', tabLabel:'DRINKS', sub:'Vitaminas, Sucos e Smoothies Naturais', pratos:[
+
+    { id:'smothie-verde', nome:'Smothie Verde Detox',
+      desc:'Espinafre, maçã verde, banana, limão, chia e leite de coco',
+      prep:'Bater todos os ingredientes no liquidificador com leite de coco gelado até textura homogênea. Servir imediatamente.',
+      ings:[
+        {n:'Espinafre',      q:0.040},
+        {n:'Maçã',           q:0.080},
+        {n:'Banana',         q:0.060},
+        {n:'Limão',          q:0.020},
+        {n:'Chia',           q:0.010},
+        {n:'Leite de Coco',  q:0.200},
+      ], pv:18.00, mv:45 },
+
+    { id:'vitamina-frutas', nome:'Vitamina de Frutas Tropicais',
+      desc:'Mamão, manga, abacaxi, banana e iogurte — cremosa e nutritiva',
+      prep:'Bater as frutas com iogurte natural e leite. Servir gelado.',
+      ings:[
+        {n:'Mamão',          q:0.080},
+        {n:'Manga',          q:0.060},
+        {n:'Abacaxi',        q:0.060},
+        {n:'Banana',         q:0.050},
+        {n:'Iogurte Natural',q:0.080},
+        {n:'Leite Integral', q:0.100},
+      ], pv:16.00, mv:42 },
+
+    { id:'suco-laranja', nome:'Suco de Laranja Natural 300ml',
+      desc:'Laranjas frescas espremidas na hora — vitamina C pura',
+      prep:'Espremer 4 laranjas na hora do pedido. Servir sem açúcar ou adoçar levemente conforme preferência.',
+      ings:[
+        {n:'Suco de Laranja', q:0.300},
+      ], pv:12.00, mv:50 },
+
+    { id:'smothie-morango', nome:'Smothie de Morango com Iogurte',
+      desc:'Morango fresco, iogurte grego, mel e granola — cremoso e refrescante',
+      prep:'Bater morango com iogurte grego e mel até cremoso. Servir com granola por cima.',
+      ings:[
+        {n:'Morango',        q:0.120},
+        {n:'Iogurte Grego',  q:0.100},
+        {n:'Mel',            q:0.020},
+        {n:'Granola',        q:0.020},
+        {n:'Leite Integral', q:0.050},
+      ], pv:18.00, mv:40 },
+  ]},
+];
+
+// ================================================================
+// UTILITÁRIOS
+// ================================================================
+const F2 = v => v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const FR = v => 'R$ ' + F2(v);
+const FP = v => F2(v*100) + '%';
+
+function calcCusto(p){
+  return p.ings.reduce((s,i)=>{
+    const ref=precos[i.n]; return s+(ref?i.q*ref.p:0);
+  },0);
+}
+function cmvCls(c){ return c<=0.28?'ok':c<=0.34?'alerta':'ruim'; }
+
+function pratoById(id){
+  for(const c of cats) for(const p of c.pratos) if(p.id===id) return p;
+  return null;
+}
+
+// ================================================================
+// RESUMO GLOBAL
+// ================================================================
+function atualizarResumo(){
+  let totCusto=0,totRec=0,totPorcoes=0;
+  for(const c of cats) for(const p of c.pratos){
+    const cu=calcCusto(p); const mv=p.mv||0;
+    totCusto+=cu*mv; totRec+=p.pv*mv; totPorcoes+=mv;
+  }
+  const cmvP=totRec>0?totCusto/totRec:0;
+  const elC=document.getElementById('cmv-pond');
+  elC.textContent=FP(cmvP); elC.className='val '+cmvCls(cmvP);
+  document.getElementById('rec-total').textContent=FR(totRec);
+  document.getElementById('cus-total').textContent=FR(totCusto);
+  document.getElementById('luc-total').textContent=FR(totRec-totCusto);
+  document.getElementById('porcoes-total').textContent=totPorcoes.toLocaleString('pt-BR');
+  const metaFatR=parseFloat(document.getElementById('meta-fat-global')?.value)||50000;
+  const ticketMR=parseFloat(document.getElementById('meta-ticket-global')?.value)||48;
+  const pessoasR=Math.round(metaFatR/ticketMR)||1;
+  document.getElementById('ticket-med').textContent=FR(totRec/Math.max(1,pessoasR));
+  const al=document.getElementById('alerta-cmv');
+  al.classList.toggle('visivel',cmvP>0.285);
+}
+
+// ================================================================
+// RENDERIZAÇÃO
+// ================================================================
+function render(){
+  const tabsEl=document.getElementById('tabs');
+  tabsEl.innerHTML=cats.map((c,i)=>
+    `<div class="tab${i===0?' ativo':''}" onclick="trocarTab(${i})">${c.tabLabel||c.nome.split(' ')[0]}</div>`
+  ).join('');
+
+  const cont=document.getElementById('conteudo');
+  cont.innerHTML='';
+
+  cats.forEach((cat,ci)=>{
+    const div=document.createElement('div');
+    div.className='categoria'+(ci===0?' ativo':'');
+    div.id='cat-'+ci;
+
+    let h=`<div class="titulo-cat">${cat.nome}</div>`;
+    if(cat.sub) h+=`<div class="sub-cat">${cat.sub}</div>`;
+    h+=`<table class="main"><thead><tr>
+      <th style="width:32%">Item</th>
+      <th class="r" style="width:11%">Custo / Porção</th>
+      <th class="r" style="width:12%">Preço Venda</th>
+      <th class="r" style="width:9%">CMV%</th>
+      <th class="r hide-mob" style="width:10%">Margem</th>
+      <th class="r" style="width:12%">Meta Porções/mês</th>
+      <th class="r hide-mob" style="width:11%">Receita Est./mês</th>
+      <th style="width:8%">Ficha</th>
+    </tr></thead><tbody>`;
+
+    cat.pratos.forEach(p=>{
+      const cu=calcCusto(p);
+      const cmv=p.pv>0?cu/p.pv:0;
+      const mg=p.pv-cu;
+      const recEst=p.pv*p.mv;
+      const locked=!!p.mvLocked;
+      const lockStyle=locked?'border-color:#f0b429;color:#f0b429;font-weight:800;':'';
+      h+=`<tr>
+        <td>
+          <div class="nm" onclick="abrirFicha('${p.id}')">${p.nome}</div>
+          <div class="dsc">${p.desc}</div>
+        </td>
+        <td class="r">R$ <span id="cu-${p.id}">${F2(cu)}</span></td>
+        <td class="r">R$ <input type="number" class="n preco" id="pv-${p.id}"
+          value="${p.pv.toFixed(2)}" step="0.50" min="0"
+          oninput="atuPV('${p.id}',this.value)"></td>
+        <td class="r"><span class="badge ${cmvCls(cmv)}" id="bc-${p.id}">${FP(cmv)}</span></td>
+        <td class="r hide-mob" id="mg-${p.id}">R$ ${F2(mg)}</td>
+        <td class="r">
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:4px">
+            <input type="number" class="n meta" id="mv-${p.id}"
+              value="${p.mv}" step="1" min="0" style="${lockStyle}"
+              oninput="lockManual('${p.id}',this.value)">
+            <button id="lb-${p.id}" onclick="toggleLock('${p.id}')"
+              title="${locked?'Desbloquear':'Fixar este valor'}"
+              style="background:none;border:none;cursor:pointer;font-size:13px;padding:0;line-height:1;opacity:${locked?1:0.3}">${locked?'🔒':'🔓'}</button>
+          </div>
+        </td>
+        <td class="r hide-mob" id="re-${p.id}">R$ ${F2(recEst)}</td>
+        <td><button class="btn-ft" onclick="abrirFicha('${p.id}')">Ficha</button></td>
+      </tr>`;
+    });
+
+    let catCu=0,catRec=0,catPMes=0;
+    cat.pratos.forEach(p=>{ catCu+=calcCusto(p)*p.mv; catRec+=p.pv*p.mv; catPMes+=p.mv; });
+    const catCmv=catRec>0?catCu/catRec:0;
+    h+=`</tbody><tfoot class="rod"><tr>
+      <td>${cat.pratos.length} itens — <small>CMV ponderado da categoria</small></td>
+      <td></td><td></td>
+      <td class="r"><span class="badge ${cmvCls(catCmv)}" id="catcmv-${ci}">${FP(catCmv)}</span></td>
+      <td class="r hide-mob"></td>
+      <td class="r" id="catpm-${ci}">${catPMes} porções</td>
+      <td class="r hide-mob" id="catrec-${ci}">R$ ${F2(catRec)}</td>
+      <td></td>
+    </tr></tfoot></table>`;
+
+    div.innerHTML=h; cont.appendChild(div);
+  });
+  atualizarResumo();
+}
+
+function trocarTab(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('ativo',j===i));
+  document.querySelectorAll('.categoria').forEach((c,j)=>c.classList.toggle('ativo',j===i));
+}
+
+// ================================================================
+// ATUALIZAÇÃO EM TEMPO REAL
+// ================================================================
+function atuPV(id,val){
+  const p=pratoById(id); if(!p) return;
+  p.pv=parseFloat(val)||0;
+  recalcPrato(id); atualizarResumo(); recalcRodapesCats();
+}
+
+function lockManual(id,val){
+  const p=pratoById(id); if(!p) return;
+  p.mv=Math.max(0,parseInt(val)||0);
+  p.mvLocked=true;
+  const inp=document.getElementById('mv-'+id);
+  const btn=document.getElementById('lb-'+id);
+  if(inp){ inp.style.borderColor='#f0b429'; inp.style.color='#f0b429'; inp.style.fontWeight='800'; }
+  if(btn){ btn.textContent='🔒'; btn.style.opacity='1'; }
+  const re=document.getElementById('re-'+id);
+  if(re) re.textContent='R$ '+F2(p.pv*p.mv);
+  aplicarMetaGlobal();
+}
+
+function toggleLock(id){
+  const p=pratoById(id); if(!p) return;
+  p.mvLocked=!p.mvLocked;
+  const inp=document.getElementById('mv-'+id);
+  const btn=document.getElementById('lb-'+id);
+  if(p.mvLocked){
+    if(inp){ inp.style.borderColor='#f0b429'; inp.style.color='#f0b429'; inp.style.fontWeight='800'; }
+    if(btn){ btn.textContent='🔒'; btn.style.opacity='1'; }
+  } else {
+    if(inp){ inp.style.borderColor=''; inp.style.color=''; inp.style.fontWeight=''; }
+    if(btn){ btn.textContent='🔓'; btn.style.opacity='0.3'; }
+    aplicarMetaGlobal();
+  }
+}
+
+function desbloquearTodos(){
+  cats.forEach(c=>c.pratos.forEach(p=>{
+    p.mvLocked=false;
+    const inp=document.getElementById('mv-'+p.id);
+    const btn=document.getElementById('lb-'+p.id);
+    if(inp){ inp.style.borderColor=''; inp.style.color=''; inp.style.fontWeight=''; }
+    if(btn){ btn.textContent='🔓'; btn.style.opacity='0.3'; }
+  }));
+  aplicarMetaGlobal();
+}
+
+function recalcPrato(id){
+  const p=pratoById(id); if(!p) return;
+  const cu=calcCusto(p);
+  const cmv=p.pv>0?cu/p.pv:0;
+  const mg=p.pv-cu;
+  const re=p.pv*p.mv;
+  const setCu=document.getElementById('cu-'+id);
+  const setBc=document.getElementById('bc-'+id);
+  const setMg=document.getElementById('mg-'+id);
+  const setRe=document.getElementById('re-'+id);
+  if(setCu) setCu.textContent=F2(cu);
+  if(setBc){ setBc.textContent=FP(cmv); setBc.className='badge '+cmvCls(cmv); }
+  if(setMg) setMg.textContent='R$ '+F2(mg);
+  if(setRe) setRe.textContent='R$ '+F2(re);
+}
+
+function recalcTudo(){
+  cats.forEach((_,ci)=>{ cats[ci].pratos.forEach(p=>recalcPrato(p.id)); recalcRodapeCategoria(ci); });
+  atualizarResumo();
+}
+
+function recalcRodapesCats(){
+  cats.forEach((_,ci)=>recalcRodapeCategoria(ci));
+}
+
+function recalcRodapeCategoria(ci){
+  const cat=cats[ci];
+  let catCu=0,catRec=0,catPMes=0;
+  cat.pratos.forEach(p=>{ catCu+=calcCusto(p)*p.mv; catRec+=p.pv*p.mv; catPMes+=p.mv; });
+  const catCmv=catRec>0?catCu/catRec:0;
+  const elCmv=document.getElementById('catcmv-'+ci);
+  const elPm=document.getElementById('catpm-'+ci);
+  const elRec=document.getElementById('catrec-'+ci);
+  if(elCmv){ elCmv.textContent=FP(catCmv); elCmv.className='badge '+cmvCls(catCmv); }
+  if(elPm) elPm.textContent=catPMes+' porções';
+  if(elRec) elRec.textContent='R$ '+F2(catRec);
+}
+
+// ================================================================
+// MODAL FICHA TÉCNICA
+// ================================================================
+function abrirFicha(id){
+  const p=pratoById(id); if(!p) return;
+  const cu=calcCusto(p);
+  const cmv=p.pv>0?cu/p.pv:0;
+  const mg=p.pv-cu;
+  const recM=p.pv*p.mv;
+
+  let linhas='';
+  p.ings.forEach(ing=>{
+    const ref=precos[ing.n];
+    const pu=ref?ref.p:0;
+    const un=ref?ref.u:'?';
+    const tot=ing.q*pu;
+    let qStr;
+    if(Number.isInteger(ing.q)&&ing.q>=1){ qStr=ing.q+' un'; }
+    else if(un==='L'){ qStr=(ing.q*1000).toFixed(0)+' ml'; }
+    else { const g=ing.q*1000; qStr=g>=1000?F2(g/1000)+' kg':g.toFixed(0)+' g'; }
+
+    const k=id+'__'+ing.n.replace(/[\s()]/g,'_');
+    linhas+=`<tr>
+      <td>${ing.n}</td>
+      <td class="r">
+        <input type="number" class="qtd-in" id="ftq-${k}" value="${ing.q}" step="0.001" min="0"
+          onchange="atuFTQtd('${id}','${ing.n}',this.value)">
+        <small style="color:#999">${un}</small>
+      </td>
+      <td class="r">
+        <input type="number" class="preco-in" id="ftp-${k}" value="${pu.toFixed(2)}" step="0.01" min="0"
+          onchange="atuFTPreco('${id}','${ing.n}',this.value)">
+        <small style="color:#999">/${un}</small>
+      </td>
+      <td class="r" id="ftt-${k}">R$ ${F2(tot)}</td>
+    </tr>`;
+  });
+
+  const html=`
+    <div class="mhdr">
+      <div><div class="mtit">${p.nome}</div><div class="msub">Ficha Técnica — edite quantidades e preços diretamente</div></div>
+      <button class="btn-x" onclick="fecharOverlay('ov-ficha')">×</button>
+    </div>
+    <div class="mbody">
+      <div class="ft-resumo">
+        <div class="ft-res-item"><div class="lbl">Custo / Porção</div><div class="val" id="ft-cu-${id}">R$ ${F2(cu)}</div></div>
+        <div class="ft-res-item"><div class="lbl">Preço de Venda</div>
+          <div class="val">R$ <input type="number" id="ft-pv-${id}" value="${p.pv.toFixed(2)}" step="0.50"
+            onchange="atuPrecoFicha('${id}',this.value)" style="width:70px;font-size:15px;font-weight:700;border:1px solid #ccc;border-radius:3px;padding:2px 5px;"></div>
+        </div>
+        <div class="ft-res-item"><div class="lbl">Margem de Contribuição</div><div class="val" id="ft-mg-${id}">R$ ${F2(mg)}</div></div>
+        <div class="ft-res-item"><div class="lbl">CMV%</div><div class="val ${cmvCls(cmv)}" id="ft-cmv-${id}">${FP(cmv)}</div></div>
+      </div>
+      <div class="mgrid">
+        <div>
+          <div class="slbl">Modo de Preparo</div>
+          <div class="preparo">${p.prep}</div>
+        </div>
+        <div>
+          <div class="slbl">Meta de Vendas</div>
+          <div style="background:#f0f8f0;border:1px solid var(--cor-borda);border-radius:6px;padding:12px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <label style="font-size:12px;flex:1;">Porções/mês</label>
+              <input type="number" style="width:70px;border:1px solid #ccc;border-radius:3px;padding:4px 8px;font-size:15px;font-weight:700;text-align:right;"
+                id="ft-mv-${id}" value="${p.mv}" step="1" min="0"
+                onchange="atuMetaFicha('${id}',this.value)">
+            </div>
+            <div style="font-size:11px;color:#888;">Receita estimada/mês</div>
+            <div style="font-size:18px;font-weight:700;color:var(--cor-primaria)" id="ft-rem-${id}">R$ ${F2(recM)}</div>
+            <hr style="margin:10px 0;border:none;border-top:1px solid var(--cor-borda);">
+            <div style="font-size:11px;color:#888;">CMV deste item</div>
+            <div class="barra-cont" style="margin-top:4px">
+              <div class="barra-fill" style="width:${Math.min(100,cmv/0.35*100)}%;background:${cmv<=0.28?'#27ae60':cmv<=0.34?'#e67e22':'#e74c3c'}"></div>
+            </div>
+            <div style="font-size:11px;color:#555;margin-top:3px;">Opera a <strong>${FP(cmv)}</strong> de CMV</div>
+          </div>
+        </div>
+      </div>
+      <div class="slbl" style="margin-bottom:8px">Ingredientes — edite quantidade e preço de compra</div>
+      <table class="ft">
+        <thead><tr>
+          <th>Ingrediente</th>
+          <th class="r">Qtde / Porção</th>
+          <th class="r">Preço Compra</th>
+          <th class="r">Custo Total</th>
+        </tr></thead>
+        <tbody>${linhas}</tbody>
+        <tfoot><tr class="tot-row">
+          <td colspan="3"><strong>CUSTO TOTAL DA PORÇÃO</strong></td>
+          <td class="r" id="ft-tot-${id}">R$ ${F2(cu)}</td>
+        </tr></tfoot>
+      </table>
+    </div>
+    <div class="mftr">
+      <span class="inf">Alterações aplicadas em tempo real ao CMV global.</span>
+      <button class="btn-save" onclick="fecharOverlay('ov-ficha')">Fechar</button>
+    </div>`;
+
+  document.getElementById('mod-ficha').innerHTML=html;
+  document.getElementById('ov-ficha').classList.add('aberto');
+}
+
+function atuFTQtd(pratoId,ingNome,val){
+  const p=pratoById(pratoId); if(!p) return;
+  const ing=p.ings.find(i=>i.n===ingNome); if(!ing) return;
+  ing.q=parseFloat(val)||0;
+  const ref=precos[ingNome];
+  const tot=ing.q*(ref?ref.p:0);
+  const k=pratoId+'__'+ingNome.replace(/[\s()]/g,'_');
+  const el=document.getElementById('ftt-'+k); if(el) el.textContent='R$ '+F2(tot);
+  _recalcFicha(pratoId);
+}
+function atuFTPreco(pratoId,ingNome,val){
+  val=parseFloat(val)||0;
+  if(precos[ingNome]) precos[ingNome].p=val;
+  const p=pratoById(pratoId); if(!p) return;
+  const ing=p.ings.find(i=>i.n===ingNome); if(!ing) return;
+  const k=pratoId+'__'+ingNome.replace(/[\s()]/g,'_');
+  const el=document.getElementById('ftt-'+k); if(el) el.textContent='R$ '+F2(ing.q*val);
+  _recalcFicha(pratoId); recalcTudo();
+}
+function atuPrecoFicha(pratoId,val){
+  const p=pratoById(pratoId); if(!p) return;
+  p.pv=parseFloat(val)||0;
+  _recalcFicha(pratoId);
+  const inp=document.getElementById('pv-'+pratoId); if(inp) inp.value=p.pv.toFixed(2);
+  recalcTudo();
+}
+function atuMetaFicha(pratoId,val){
+  const p=pratoById(pratoId); if(!p) return;
+  p.mv=parseInt(val)||0;
+  const remEl=document.getElementById('ft-rem-'+pratoId);
+  if(remEl) remEl.textContent='R$ '+F2(p.pv*p.mv);
+  const inp=document.getElementById('mv-'+pratoId); if(inp) inp.value=p.mv;
+  recalcTudo();
+}
+function _recalcFicha(pratoId){
+  const p=pratoById(pratoId); if(!p) return;
+  const cu=calcCusto(p);
+  const cmv=p.pv>0?cu/p.pv:0;
+  const mg=p.pv-cu;
+  const el1=document.getElementById('ft-cu-'+pratoId);
+  const el2=document.getElementById('ft-mg-'+pratoId);
+  const el3=document.getElementById('ft-cmv-'+pratoId);
+  const el4=document.getElementById('ft-tot-'+pratoId);
+  if(el1) el1.textContent='R$ '+F2(cu);
+  if(el2) el2.textContent='R$ '+F2(mg);
+  if(el3){ el3.textContent=FP(cmv); el3.className='val '+cmvCls(cmv); }
+  if(el4) el4.textContent='R$ '+F2(cu);
+  recalcPrato(pratoId); atualizarResumo(); recalcRodapesCats();
+}
+
+// ================================================================
+// MODAL PREÇOS GLOBAIS
+// ================================================================
+function abrirPrecos(){
+  const lista=document.getElementById('lista-ing');
+  lista.innerHTML=Object.keys(precos).map(n=>{
+    const p=precos[n];
+    return `<div class="ing-row">
+      <label>${n}</label><span class="un">${p.u}</span>
+      <input type="number" id="gp-${n.replace(/[\s()]/g,'_')}" value="${p.p.toFixed(2)}" step="0.01" min="0">
+    </div>`;
+  }).join('');
+  document.getElementById('ov-precos').classList.add('aberto');
+}
+function salvarPrecos(){
+  for(const n of Object.keys(precos)){
+    const inp=document.getElementById('gp-'+n.replace(/[\s()]/g,'_'));
+    if(inp) precos[n].p=parseFloat(inp.value)||precos[n].p;
+  }
+  fecharOverlay('ov-precos'); recalcTudo();
+}
+
+// ================================================================
+// BALANCEAR MIX
+// ================================================================
+function abrirBalancear(){
+  const targetRev=parseFloat(document.getElementById('meta-fat-global')?.value)||50000;
+  const ticketAlvo=parseFloat(document.getElementById('meta-ticket-global')?.value)||48;
+  const targetPessoas=Math.round(targetRev/ticketAlvo);
+  const targetCMV=parseFloat(document.getElementById('meta-cmv-global')?.value)/100||0.28;
+
+  let recAtual=0;
+  cats.forEach(c=>c.pratos.forEach(p=>{ recAtual+=p.pv*p.mv; }));
+  if(recAtual<=0){ alert('Configure os preços e metas nas abas primeiro.'); return; }
+
+  let alpha=0,lo=-3,hi=8;
+  for(let i=0;i<80;i++){
+    alpha=(lo+hi)/2;
+    let tR=0,tC=0;
+    const scale=targetRev/recAtual;
+    cats.forEach(c=>c.pratos.forEach(p=>{
+      const cmv=p.pv>0?calcCusto(p)/p.pv:0;
+      const adj=Math.max(0.05,1+alpha*(targetCMV-cmv)/(targetCMV||0.28));
+      const n=Math.max(1,Math.round(p.mv*scale*adj));
+      tR+=p.pv*n; tC+=calcCusto(p)*n;
+    }));
+    if(tR>0&&tC/tR>targetCMV) hi=alpha; else lo=alpha;
+  }
+
+  const scale=targetRev/recAtual;
+  const todos=[];
+  let totRec=0,totCu=0,totN=0;
+  cats.forEach(cat=>cat.pratos.forEach(p=>{
+    const cu=calcCusto(p);
+    const cmvP=p.pv>0?cu/p.pv:0;
+    const adj=Math.max(0.05,1+alpha*(targetCMV-cmvP)/(targetCMV||0.28));
+    const nSug=Math.max(1,Math.round(p.mv*scale*adj));
+    const recSug=p.pv*nSug; const cuSug=cu*nSug;
+    totRec+=recSug; totCu+=cuSug; totN+=nSug;
+    todos.push({cat:cat.nome,p,cu,cmvP,nAtual:p.mv,nSug,recSug,cuSug});
+  }));
+
+  const cmvFinal=totRec>0?totCu/totRec:0;
+  const ticketReal=totRec/targetPessoas;
+  const mcTotal=totRec-totCu;
+  const sorted=[...todos].sort((a,b)=>b.recSug-a.recSug);
+
+  const linhas=sorted.map(({cat,p,cu,cmvP,nAtual,nSug,recSug})=>{
+    const pct=totRec>0?recSug/totRec*100:0;
+    const var_=nAtual>0?((nSug-nAtual)/nAtual*100):0;
+    const varCls=var_>=0?'color:#2ecc71':'color:#e74c3c';
+    return `<tr>
+      <td><div style="font-weight:600;font-size:12px">${p.nome}</div><div style="font-size:9px;color:#aaa">${cat.split(' ')[0]}</div></td>
+      <td class="r">R$ ${F2(p.pv)}</td>
+      <td class="r">R$ ${F2(cu)}</td>
+      <td class="r"><span class="badge ${cmvCls(cmvP)}">${FP(cmvP)}</span></td>
+      <td class="r">${nAtual}</td>
+      <td class="r" style="font-weight:700;color:#1a4a20">${nSug}</td>
+      <td class="r" style="${varCls}">${var_>=0?'▲':'▼'}${Math.abs(var_).toFixed(0)}%</td>
+      <td class="r" style="font-weight:600">R$ ${F2(recSug)}</td>
+      <td class="r" style="font-size:10px;color:#888">${pct.toFixed(1)}%</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('bal-body').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px">
+      <div style="background:var(--cor-primaria);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:9px;color:#aaa;text-transform:uppercase">Receita Calculada</div>
+        <div style="font-size:20px;font-weight:700;color:var(--cor-accent)">R$ ${F2(totRec)}</div>
+        <div style="font-size:9px;color:#888">meta: R$ ${F2(targetRev)}</div>
+      </div>
+      <div style="background:var(--cor-primaria);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:9px;color:#aaa;text-transform:uppercase">Ticket Médio/Pessoa</div>
+        <div style="font-size:20px;font-weight:700;color:#f0b429">R$ ${F2(ticketReal)}</div>
+        <div style="font-size:9px;color:#aaa">meta: R$ ${F2(ticketAlvo)}</div>
+      </div>
+      <div style="background:var(--cor-primaria);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:9px;color:#aaa;text-transform:uppercase">CMV Resultante</div>
+        <div style="font-size:20px;font-weight:700" class="${cmvCls(cmvFinal)}">${FP(cmvFinal)}</div>
+        <div style="font-size:9px;color:#888">meta: ${(targetCMV*100).toFixed(0)}%</div>
+      </div>
+      <div style="background:var(--cor-primaria);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:9px;color:#aaa;text-transform:uppercase">Margem de Contribuição</div>
+        <div style="font-size:20px;font-weight:700;color:#2ecc71">R$ ${F2(mcTotal)}</div>
+      </div>
+      <div style="background:var(--cor-primaria);border-radius:8px;padding:12px;text-align:center">
+        <div style="font-size:9px;color:#aaa;text-transform:uppercase">Total Porções/mês</div>
+        <div style="font-size:20px;font-weight:700;color:#ddd">${totN.toLocaleString('pt-BR')}</div>
+        <div style="font-size:9px;color:#888">${targetPessoas} pessoas</div>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;">
+      <thead><tr style="background:#edf5ed;">
+        <th style="padding:7px 10px;font-size:10px;text-transform:uppercase;border:1px solid var(--cor-borda)">Item</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">Preço</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">Custo</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">CMV%</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">Atual</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">Sugerido</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">Var.</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">Receita</th>
+        <th class="r" style="padding:7px 10px;font-size:10px;border:1px solid var(--cor-borda)">% Total</th>
+      </tr></thead>
+      <tbody>${linhas}</tbody>
+      <tfoot><tr style="background:var(--cor-primaria);color:#fff;font-weight:700">
+        <td colspan="5" style="padding:7px 10px">TOTAL — ${totN} porções</td>
+        <td class="r" style="padding:7px 10px">${totN}</td><td></td>
+        <td class="r" style="padding:7px 10px">R$ ${F2(totRec)}</td>
+        <td class="r" style="padding:7px 10px"><span class="badge ${cmvCls(cmvFinal)}">${FP(cmvFinal)}</span></td>
+      </tr></tfoot>
+    </table></div>
+    <div style="margin-top:14px;display:flex;justify-content:flex-end">
+      <button onclick="_aplicarMixBalancear(${JSON.stringify(todos.map(d=>({id:d.p.id,n:d.nSug})))})"
+        style="background:var(--cor-primaria);color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer">
+        ✅ Aplicar este mix ao cardápio
+      </button>
+    </div>`;
+
+  document.getElementById('ov-bal').classList.add('aberto');
+}
+
+function _aplicarMixBalancear(lista){
+  lista.forEach(({id,n})=>{
+    const p=pratoById(id); if(!p) return;
+    p.mv=n;
+    const inp=document.getElementById('mv-'+id); if(inp) inp.value=n;
+  });
+  recalcTudo(); atualizarResumo(); recalcRodapesCats();
+  fecharOverlay('ov-bal');
+}
+
+// ================================================================
+// UTILITÁRIOS OVERLAY
+// ================================================================
+function fecharOverlay(id){ document.getElementById(id).classList.remove('aberto'); }
+['ov-ficha','ov-precos','ov-bal'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){
+    if(e.target===this) this.classList.remove('aberto');
+  });
+});
+
+// ================================================================
+// META GLOBAL — Pareto + Regra de Pessoas
+// ================================================================
+let _metaTimer=null;
+function _guardarMixBase(){ cats.forEach(c=>c.pratos.forEach(p=>{ p.mv0=p.mv; })); }
+
+const CAT_RATIO = {
+  'TOASTS E COMBOS':               0.35,
+  'MONTE SUA SALADA':              0.25,
+  'CAFÉ':                          0.55,
+  'TORTAS E DOCES':                0.20,
+  'LANCHES, SANDUÍCHE E CHAPA':    0.22,
+  'PÃO DE QUEIJO':                 0.40,
+  'FRUTAS E BRUNCH':               0.18,
+  'SMOTHIES E BEBIDAS':            0.30,
+};
+
+function aplicarMetaGlobal(){
+  clearTimeout(_metaTimer);
+  const el=document.getElementById('meta-status');
+  if(el){ el.textContent='⏳ calculando...'; el.style.color='#e67e22'; }
+  _metaTimer=setTimeout(()=>_executarMetaGlobal(),500);
+}
+
+function _executarMetaGlobal(){
+  const metaFat=parseFloat(document.getElementById('meta-fat-global')?.value)||50000;
+  const ticketM=parseFloat(document.getElementById('meta-ticket-global')?.value)||48;
+  const metaCMV=parseFloat(document.getElementById('meta-cmv-global')?.value)/100||0.28;
+
+  const pessoas=Math.max(1,Math.round(metaFat/ticketM));
+  const elPes=document.getElementById('pessoas-calc');
+  if(elPes) elPes.textContent=pessoas.toLocaleString('pt-BR');
+
+  let recTravada=0;
+  cats.forEach(c=>c.pratos.forEach(p=>{ if(p.mvLocked) recTravada+=p.pv*p.mv; }));
+  const metaLivre=metaFat-recTravada;
+
+  const qtdBase={};
+  cats.forEach(cat=>{
+    const ratio=CAT_RATIO[cat.nome]??0.25;
+    const totalCat=Math.max(cat.pratos.length,Math.round(pessoas*ratio));
+    const livres=cat.pratos.filter(p=>!p.mvLocked);
+    if(livres.length===0) return;
+    const cmvs=livres.map(p=>p.pv>0?calcCusto(p)/p.pv:0.28);
+    const avgC=cmvs.reduce((s,c)=>s+c,0)/cmvs.length||0.28;
+    const pesos=cmvs.map(cmv=>Math.max(0.1,1+2.5*(avgC-cmv)/avgC));
+    const somaP=pesos.reduce((s,w)=>s+w,0);
+    livres.forEach((p,i)=>{
+      qtdBase[p.id]=Math.max(1,Math.round(totalCat*pesos[i]/somaP));
+    });
+  });
+
+  let recBaseL=0;
+  cats.forEach(c=>c.pratos.forEach(p=>{ if(!p.mvLocked) recBaseL+=p.pv*(qtdBase[p.id]||1); }));
+  if(recBaseL<=0) return;
+
+  const scale=metaLivre/recBaseL;
+
+  let totRev=0,totCost=0,totN=0;
+  cats.forEach(c=>c.pratos.forEach(p=>{
+    let n;
+    if(p.mvLocked){ n=p.mv; }
+    else{
+      n=Math.max(1,Math.round((qtdBase[p.id]||1)*scale));
+      p.mv=n;
+      const inp=document.getElementById('mv-'+p.id);
+      if(inp) inp.value=n;
+    }
+    totRev+=p.pv*n; totCost+=calcCusto(p)*n; totN+=n;
+    const re=document.getElementById('re-'+p.id);
+    if(re) re.textContent='R$ '+F2(p.pv*n);
+  }));
+
+  recalcTudo(); atualizarResumo(); recalcRodapesCats();
+  if(document.getElementById('cat-cons')?.classList.contains('ativo')) renderConsolidado();
+
+  const cmvFinal=totRev>0?totCost/totRev:0;
+  const diffPct=(totRev-metaFat)/metaFat*100;
+  const nTrav=cats.reduce((s,c)=>s+c.pratos.filter(p=>p.mvLocked).length,0);
+  const el=document.getElementById('meta-status');
+  if(el){
+    const travInfo=nTrav>0?` · 🔒 ${nTrav} fixados`:'';
+    el.textContent=`✅ ${pessoas} pessoas · ${totN} porções · CMV ${FP(cmvFinal)}${travInfo} · Δ${diffPct>0?'+':''}${diffPct.toFixed(1)}%`;
+    el.style.color=Math.abs(diffPct)<3?'#2ecc71':'#e67e22';
+    setTimeout(()=>{ if(el){ el.textContent='↵ recalcula ao digitar'; el.style.color='#aaa'; }},7000);
+  }
+}
+
+// ================================================================
+// EXPORTAR EXCEL
+// ================================================================
+function exportarExcel(){
+  if(typeof XLSX==='undefined'){ alert('Biblioteca carregando. Tente em 2s.'); return; }
+  const wb=XLSX.utils.book_new();
+  const hoje=new Date().toLocaleDateString('pt-BR');
+  const metaFat=parseFloat(document.getElementById('meta-fat-global')?.value)||50000;
+  const metaTicket=parseFloat(document.getElementById('meta-ticket-global')?.value)||48;
+  const metaCMV=parseFloat(document.getElementById('meta-cmv-global')?.value)||28;
+
+  const info=[
+    ['BUTIQUIM BISTRÔ — Cardápio & Engenharia de Menu'],
+    [`Exportado em: ${hoje}`],
+    [`Meta Faturamento: R$ ${F2(metaFat)}   |   Ticket Médio: R$ ${F2(metaTicket)}   |   CMV Máx.: ${metaCMV}%`],
+    [],
+  ];
+  const headers=['Categoria','Item','Descrição','Custo/Porção (R$)','Preço Venda (R$)','CMV (%)','Margem (R$)','Meta/mês','Receita Est. (R$)','Custo Est. (R$)','Margem Est. (R$)'];
+  const linhas=[];
+  let totR=0,totC=0,totN=0;
+
+  cats.forEach(cat=>{
+    let primo=true;
+    let cr=0,cc=0,cn=0;
+    cat.pratos.forEach(p=>{
+      const cu=calcCusto(p);
+      const cmvP=p.pv>0?cu/p.pv:0;
+      const mg=p.pv-cu;
+      const recM=p.pv*p.mv;
+      const cuM=cu*p.mv;
+      cr+=recM; cc+=cuM; cn+=p.mv;
+      totR+=recM; totC+=cuM; totN+=p.mv;
+      linhas.push([primo?cat.nome:'',p.nome,p.desc,parseFloat(cu.toFixed(2)),parseFloat(p.pv.toFixed(2)),parseFloat((cmvP*100).toFixed(2)),parseFloat(mg.toFixed(2)),p.mv,parseFloat(recM.toFixed(2)),parseFloat(cuM.toFixed(2)),parseFloat((recM-cuM).toFixed(2))]);
+      primo=false;
+    });
+    const catCmv=cr>0?cc/cr:0;
+    linhas.push([`SUBTOTAL — ${cat.nome}`,'','','','',parseFloat((catCmv*100).toFixed(2)),parseFloat((cr-cc).toFixed(2)),cn,parseFloat(cr.toFixed(2)),parseFloat(cc.toFixed(2)),parseFloat((cr-cc).toFixed(2))]);
+    linhas.push([]);
+  });
+  const cmvG=totR>0?totC/totR:0;
+  linhas.push(['TOTAL GERAL','','','','',parseFloat((cmvG*100).toFixed(2)),parseFloat((totR-totC).toFixed(2)),totN,parseFloat(totR.toFixed(2)),parseFloat(totC.toFixed(2)),parseFloat((totR-totC).toFixed(2))]);
+
+  const ws1=XLSX.utils.aoa_to_sheet([...info,headers,...linhas]);
+  ws1['!cols']=[{wch:28},{wch:30},{wch:42},{wch:16},{wch:16},{wch:10},{wch:18},{wch:14},{wch:18},{wch:16},{wch:18}];
+  XLSX.utils.book_append_sheet(wb,ws1,'Cardápio Completo');
+
+  // Aba Resumo por Categoria
+  const resH=[['BUTIQUIM BISTRÔ — Resumo por Categoria'],[`Meta: R$ ${F2(metaFat)}`],[],['Categoria','Qtde Itens','CMV Pond. (%)','Receita Est. (R$)','Custo Est. (R$)','Margem (R$)','% Receita Total']];
+  let totRr=0; cats.forEach(c=>c.pratos.forEach(p=>{ totRr+=p.pv*p.mv; }));
+  const resL=cats.map(cat=>{
+    let cr=0,cc=0;
+    cat.pratos.forEach(p=>{ const cu=calcCusto(p); cr+=p.pv*p.mv; cc+=cu*p.mv; });
+    return [cat.nome,cat.pratos.length,parseFloat(((cr>0?cc/cr:0)*100).toFixed(2)),parseFloat(cr.toFixed(2)),parseFloat(cc.toFixed(2)),parseFloat((cr-cc).toFixed(2)),parseFloat((totRr>0?cr/totRr*100:0).toFixed(1))];
+  });
+  const ws2=XLSX.utils.aoa_to_sheet([...resH,...resL]);
+  ws2['!cols']=[{wch:30},{wch:12},{wch:16},{wch:18},{wch:16},{wch:18},{wch:14}];
+  XLSX.utils.book_append_sheet(wb,ws2,'Resumo por Categoria');
+
+  // Aba Ingredientes
+  const ingH=[['Ingrediente','Unidade','Preço de Compra (R$)']];
+  const ingL=Object.entries(precos).map(([n,v])=>[n,v.u,parseFloat(v.p.toFixed(2))]);
+  const ws3=XLSX.utils.aoa_to_sheet([...ingH,...ingL]);
+  ws3['!cols']=[{wch:30},{wch:10},{wch:20}];
+  XLSX.utils.book_append_sheet(wb,ws3,'Preços de Ingredientes');
+
+  XLSX.writeFile(wb,`ButiquimBistro_Cardapio_${hoje.replace(/\//g,'-')}.xlsx`);
+}
+
+// ================================================================
+// ABA CARDÁPIO CONSOLIDADO
+// ================================================================
+function renderAbaConsolidado(){
+  if(!document.getElementById('tab-cons')){
+    const t=document.createElement('div');
+    t.className='tab'; t.id='tab-cons';
+    t.textContent='📋 Consolidado';
+    t.onclick=()=>abrirAbaConsolidado();
+    document.getElementById('tabs').appendChild(t);
+  }
+  if(!document.getElementById('cat-cons')){
+    const d=document.createElement('div');
+    d.className='categoria'; d.id='cat-cons';
+    document.getElementById('conteudo').appendChild(d);
+  }
+}
+
+function abrirAbaConsolidado(){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('ativo'));
+  document.getElementById('tab-cons').classList.add('ativo');
+  document.querySelectorAll('.categoria').forEach(c=>c.classList.remove('ativo'));
+  document.getElementById('cat-cons').classList.add('ativo');
+  renderConsolidado();
+}
+
+function renderConsolidado(){
+  let totCusto=0,totRec=0,totPorcoes=0;
+  cats.forEach(c=>c.pratos.forEach(p=>{ totCusto+=calcCusto(p)*p.mv; totRec+=p.pv*p.mv; totPorcoes+=p.mv; }));
+  const cmvGlobal=totRec>0?totCusto/totRec:0;
+
+  let secoes='';
+  cats.forEach(cat=>{
+    let linhas='';
+    let catCu=0,catRec=0,catP=0;
+    cat.pratos.forEach(p=>{
+      const cu=calcCusto(p);
+      const cmvP=p.pv>0?cu/p.pv:0;
+      const mg=p.pv-cu;
+      const recM=p.pv*p.mv;
+      const cuM=cu*p.mv;
+      const pctRec=totRec>0?recM/totRec*100:0;
+      catCu+=cuM; catRec+=recM; catP+=p.mv;
+      linhas+=`<tr>
+        <td><div style="font-weight:600;color:#1a4a20;cursor:pointer" onclick="abrirFicha('${p.id}')">${p.nome}</div><div style="font-size:10px;color:#aaa">${p.desc}</div></td>
+        <td class="r">R$ ${F2(p.pv)}</td>
+        <td class="r" style="color:#888">R$ ${F2(cu)}</td>
+        <td class="r"><span class="badge ${cmvCls(cmvP)}">${FP(cmvP)}</span></td>
+        <td class="r" style="color:#27ae60;font-weight:600">R$ ${F2(mg)}</td>
+        <td class="r">${p.mv}</td>
+        <td class="r" style="font-weight:600">R$ ${F2(recM)}</td>
+        <td class="r" style="font-size:11px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <div style="background:#eee;border-radius:3px;height:7px;width:60px">
+              <div style="background:${cmvP<=0.28?'#f0b429':'#e74c3c'};height:100%;border-radius:3px;width:${Math.min(100,pctRec*4)}%"></div>
+            </div>
+            ${pctRec.toFixed(1)}%
+          </div>
+        </td>
+        <td><button class="btn-ft" onclick="abrirFicha('${p.id}')">Ficha</button></td>
+      </tr>`;
+    });
+    const catCmv=catRec>0?catCu/catRec:0;
+    secoes+=`<div style="margin-bottom:28px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <div style="font-size:15px;font-weight:700;color:#1a4a20">${cat.nome}</div>
+        ${cat.sub?`<div style="font-size:11px;color:#aaa">${cat.sub}</div>`:''}
+        <span class="badge ${cmvCls(catCmv)}" style="margin-left:auto">${FP(catCmv)} CMV</span>
+        <span style="font-size:11px;color:#888">R$ ${F2(catRec)}/mês</span>
+      </div>
+      <table class="main"><thead><tr>
+        <th style="width:28%">Item</th>
+        <th class="r" style="width:9%">Preço</th>
+        <th class="r" style="width:9%">Custo</th>
+        <th class="r" style="width:8%">CMV%</th>
+        <th class="r" style="width:10%">Margem</th>
+        <th class="r" style="width:8%">Meta/mês</th>
+        <th class="r" style="width:11%">Receita Est.</th>
+        <th class="r" style="width:11%">% Total</th>
+        <th style="width:7%"></th>
+      </tr></thead>
+      <tbody>${linhas}</tbody>
+      <tfoot class="rod"><tr>
+        <td><strong>${cat.pratos.length} itens</strong></td><td></td><td></td>
+        <td class="r"><span class="badge ${cmvCls(catCmv)}">${FP(catCmv)}</span></td>
+        <td></td>
+        <td class="r"><strong>${catP}</strong></td>
+        <td class="r"><strong>R$ ${F2(catRec)}</strong></td>
+        <td class="r">${totRec>0?F2(catRec/totRec*100):'0'}%</td>
+        <td></td>
+      </tr></tfoot></table>
+    </div>`;
+  });
+
+  const todosOrd=[];
+  cats.forEach(cat=>cat.pratos.forEach(p=>{ todosOrd.push({nome:p.nome,rec:p.pv*p.mv,cu:calcCusto(p),cmvP:p.pv>0?calcCusto(p)/p.pv:0}); }));
+  todosOrd.sort((a,b)=>b.rec-a.rec);
+  const maxRec=todosOrd[0]?.rec||1;
+  const topBars=todosOrd.slice(0,10).map(d=>`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="width:200px;font-size:11px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${d.nome}</div>
+      <div style="flex:1;background:#f0ece6;border-radius:4px;height:22px;position:relative">
+        <div style="position:absolute;left:0;top:0;height:100%;border-radius:4px;background:${d.cmvP<=0.28?'#f0b429':'#c0392b'};width:${d.rec/maxRec*100}%"></div>
+        <div style="position:absolute;left:8px;top:3px;font-size:11px;font-weight:600;color:#fff;z-index:1">R$ ${F2(d.rec)}</div>
+      </div>
+      <span class="badge ${cmvCls(d.cmvP)}" style="min-width:55px;text-align:center">${FP(d.cmvP)}</span>
+    </div>`).join('');
+
+  document.getElementById('cat-cons').innerHTML=`
+    <div style="background:var(--cor-primaria);border-radius:10px;padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px">
+      <div style="text-align:center"><div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px">Itens no Cardápio</div><div style="font-size:28px;font-weight:700;color:var(--cor-accent)">${cats.reduce((s,c)=>s+c.pratos.length,0)}</div></div>
+      <div style="text-align:center"><div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px">Receita Est./mês</div><div style="font-size:28px;font-weight:700;color:var(--cor-accent)">R$ ${F2(totRec)}</div></div>
+      <div style="text-align:center"><div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px">Custo Est./mês</div><div style="font-size:28px;font-weight:700;color:#ddd">R$ ${F2(totCusto)}</div></div>
+      <div style="text-align:center"><div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px">Margem de Contribuição</div><div style="font-size:28px;font-weight:700;color:#2ecc71">R$ ${F2(totRec-totCusto)}</div></div>
+      <div style="text-align:center"><div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px">CMV Ponderado</div><div style="font-size:28px;font-weight:700" class="${cmvCls(cmvGlobal)}">${FP(cmvGlobal)}</div></div>
+      <div style="text-align:center"><div style="font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1px">Total Porções/mês</div><div style="font-size:28px;font-weight:700;color:#ddd">${totPorcoes}</div></div>
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:20px 24px;box-shadow:var(--sombra);margin-bottom:24px">
+      <div style="font-size:13px;font-weight:700;color:#1a4a20;margin-bottom:14px">🏆 Top 10 Itens por Receita Estimada/mês <span style="font-size:10px;font-weight:400;color:#888">(🟡 CMV ≤28% · 🔴 CMV >28%)</span></div>
+      ${topBars}
+    </div>
+    ${secoes}`;
+}
+
+// INIT
+render();
+_guardarMixBase();
+renderAbaConsolidado();
+</script>
+</body>
+</html>
