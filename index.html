@@ -329,107 +329,6 @@ async function verificarSenha(){
 
 <script>
 // ================================================================
-// PREÇOS DE INGREDIENTES (R$/kg, R$/L ou R$/un) — Base: Fichas Técnicas Butiquim Bistrô
-// ================================================================
-let precos = {
-  // Proteínas
-  'Frango Grelhado':      {p:22.00, u:'kg'},
-  'Peito de Peru':        {p:38.00, u:'kg'},
-  'Presunto':             {p:36.00, u:'kg'},
-  'Bacon':                {p:27.89, u:'kg'},
-  'Atum':                 {p:52.00, u:'kg'},
-  'Salmão Defumado':      {p:85.00, u:'kg'},
-  // Laticínios
-  'Queijo Minas':         {p:32.00, u:'kg'},
-  'Cheddar':              {p:65.30, u:'kg'},
-  'Mussarela':            {p:36.00, u:'kg'},
-  'Mussarela de Búfala':  {p:85.00, u:'kg'},
-  'Cream Cheese':         {p:38.00, u:'kg'},
-  'Parmesão':             {p:62.00, u:'kg'},
-  'Manteiga':             {p:28.90, u:'kg'},
-  'Iogurte Natural':      {p:12.00, u:'kg'},
-  'Iogurte Grego':        {p:32.00, u:'kg'},
-  'Creme de Leite':       {p:18.00, u:'kg'},
-  'Leite Integral':       {p: 5.00, u:'L'},
-  // Ovos
-  'Ovo Caipira':          {p: 1.00, u:'un'},
-  // Pães
-  'Pão Italiano':         {p: 4.80, u:'un'},
-  'Pão de Queijo':        {p: 2.50, u:'un'},
-  'Pão Artesanal':        {p:18.00, u:'kg'},
-  'Pão de Forma':         {p: 8.00, u:'kg'},
-  // Vegetais e Saladas
-  'Alface Americana':     {p: 8.00, u:'kg'},
-  'Alface Crespa':        {p: 8.00, u:'kg'},
-  'Rúcula':               {p:25.00, u:'kg'},
-  'Mix de Folhas':        {p:22.00, u:'kg'},
-  'Tomate':               {p: 6.00, u:'kg'},
-  'Tomate Cereja':        {p:16.00, u:'kg'},
-  'Pepino':               {p: 5.00, u:'kg'},
-  'Cenoura':              {p: 4.00, u:'kg'},
-  'Beterraba':            {p: 4.00, u:'kg'},
-  'Cebolinha':            {p:20.00, u:'kg'},
-  'Manjericão':           {p:30.00, u:'kg'},
-  'Espinafre':            {p:18.00, u:'kg'},
-  'Palmito':              {p:32.00, u:'kg'},
-  'Cebola Roxa':          {p: 6.00, u:'kg'},
-  'Milho':                {p: 6.00, u:'kg'},
-  // Frutas
-  'Banana':               {p: 5.00, u:'kg'},
-  'Morango':              {p:22.00, u:'kg'},
-  'Manga':                {p:12.00, u:'kg'},
-  'Abacaxi':              {p: 8.00, u:'kg'},
-  'Mamão':                {p: 6.00, u:'kg'},
-  'Melão':                {p: 8.00, u:'kg'},
-  'Kiwi':                 {p:25.00, u:'kg'},
-  'Açaí':                 {p:28.00, u:'kg'},
-  'Maçã':                 {p:10.00, u:'kg'},
-  'Uva':                  {p:20.00, u:'kg'},
-  // Grãos e Cereais
-  'Granola':              {p:20.00, u:'kg'},
-  'Aveia':                {p:12.00, u:'kg'},
-  'Chia':                 {p:35.00, u:'kg'},
-  'Linhaça':              {p:15.00, u:'kg'},
-  'Castanha do Pará':     {p:55.00, u:'kg'},
-  'Nozes':                {p:65.00, u:'kg'},
-  'Mel':                  {p:38.00, u:'kg'},
-  // Pastagens/Bases
-  'Creme de Abacate':     {p:11.26, u:'kg'},
-  'Vinagrete':            {p:34.78, u:'kg'},
-  'Guacamole':            {p:18.00, u:'kg'},
-  'Hummus':               {p:22.00, u:'kg'},
-  // Bebidas base
-  'Leite de Amêndoa':     {p:22.00, u:'L'},
-  'Leite de Coco':        {p:15.00, u:'L'},
-  'Suco de Laranja':      {p: 8.00, u:'L'},
-  'Polpa de Fruta':       {p:15.00, u:'kg'},
-  // Cafés
-  'Café Moído':           {p:52.00, u:'kg'},
-  'Chocolate em Pó':      {p:38.00, u:'kg'},
-  'Calda de Chocolate':   {p:28.00, u:'kg'},
-  'Canela':               {p:60.00, u:'kg'},
-  // Molhos e Condimentos
-  'Azeite Extravirgem':   {p:52.00, u:'L'},
-  'Molho Balsâmico':      {p:42.00, u:'L'},
-  'Limão':                {p: 8.00, u:'kg'},
-  'Mostarda Dijon':       {p:25.00, u:'kg'},
-  'Maionese':             {p:15.00, u:'kg'},
-  'Molho Caesar':         {p:28.00, u:'kg'},
-  // Pão de Queijo
-  'Polvilho':             {p:10.00, u:'kg'},
-  'Queijo Meia Cura':     {p:52.00, u:'kg'},
-  // Tortas e Doces
-  'Farinha de Trigo':     {p: 5.00, u:'kg'},
-  'Açúcar':              {p: 5.00, u:'kg'},
-  'Ovos':                 {p: 0.80, u:'un'},
-  'Manteiga de Garrafa':  {p:40.00, u:'L'},
-  'Leite Condensado':     {p:15.00, u:'kg'},
-  'Chocolate Meio Amargo':{p:38.00, u:'kg'},
-  'Creme de Confeiteiro': {p:25.00, u:'kg'},
-  'Limão Siciliano':      {p:18.00, u:'kg'},
-};
-
-// ================================================================
 // DADOS DOS PRATOS
 // ================================================================
 const cats = [
@@ -1955,7 +1854,6 @@ function calcCusto(p){
     const price=ref?ref.p:(i.p||0);
     return s+i.q*price;
   },0);
-},0);
 }
 function cmvCls(c){ return c<=0.28?'ok':c<=0.34?'alerta':'ruim'; }
 
