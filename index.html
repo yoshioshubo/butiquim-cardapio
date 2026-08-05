@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -433,348 +433,1515 @@ let precos = {
 // DADOS DOS PRATOS
 // ================================================================
 const cats = [
-
-  // ── TOASTS E COMBOS ────────────────────────────────────────────
-  { nome:'TOASTS E COMBOS', tabLabel:'TOASTS', sub:'Preparados com Pão Artesanal Italiano', pratos:[
-
-    { id:'toast-abacate-bacon', nome:'Toast Abacate e Bacon',
-      desc:'Creme de abacate, bacon crocante, ovo caipira, cheddar, vinagrete e cebolinha',
-      prep:'Tostar o pão italiano na chapa com manteiga. Espalhar o creme de abacate com tempero. Fritar o ovo e cozinhar o bacon até crocante. Montar o toast com cheddar, vinagrete e finalizar com cebolinha fresca. Servir quente.',
+  { nome:'Entradas', tabLabel:'ENTRADAS', sub:'Petiscos e Entradas da Casa', pratos:[
+    { id:'balde-de-batata', nome:'Balde de Batata', desc:'Batata Congelada, Maionese de Pesto, Sal',prep:'',
+      custoFT:3.29, pv:11.75, mv:30,
       ings:[
-        {n:'Creme de Abacate',  q:0.050},  // 50g → R$0,56
-        {n:'Vinagrete',         q:0.056},  // 56g → R$1,95
-        {n:'Manteiga',          q:0.027},  // 27g → R$0,78
-        {n:'Cheddar',           q:0.032},  // 32g → R$2,09
-        {n:'Ovo Caipira',       q:2},      // 2un → R$2,00
-        {n:'Bacon',             q:0.040},  // 40g → R$1,12
-        {n:'Cebolinha',         q:0.001},  // 1g  → R$0,02
-        {n:'Pão Italiano',      q:1},      // 1un → R$4,80
-      ], pv:35.00, mv:45 },
-
-    { id:'toast-caprese', nome:'Toast Caprese',
-      desc:'Mussarela de búfala fresca, tomate cereja, manjericão e redução balsâmica',
-      prep:'Tostar o pão italiano com azeite. Dispor a mussarela de búfala em fatias sobre o pão quente. Colocar os tomates cereja cortados ao meio. Finalizar com manjericão fresco, flor de sal e redução de balsâmico.',
+        {n:'Batata Congelada', q:0.144, u:'kg', p:19},
+        {n:'Maionese de Pesto', q:0.04, u:'kg', p:13.5764},
+        {n:'Sal', q:0.005, u:'kg', p:2.59}
+      ]},
+    { id:'til-pias-crocantes', nome:'Tilápias Crocantes', desc:'Tilápia, Panko, Ovo, Farinha de Trigo',prep:'',
+      custoFT:9.15, pv:32.68, mv:30,
       ings:[
-        {n:'Pão Italiano',       q:1},
-        {n:'Mussarela de Búfala',q:0.060},
-        {n:'Tomate Cereja',      q:0.080},
-        {n:'Manjericão',         q:0.005},
-        {n:'Azeite Extravirgem', q:0.015},
-        {n:'Molho Balsâmico',    q:0.015},
-      ], pv:32.00, mv:40 },
-
-    { id:'toast-peito-peru', nome:'Toast Peito de Peru & Cream Cheese',
-      desc:'Cream cheese temperado, peito de peru defumado, tomate e alface crocante',
-      prep:'Tostar o pão italiano. Espalhar o cream cheese temperado com ervas. Dispor as fatias de peito de peru. Finalizar com tomate, alface americana e pimenta-do-reino.',
+        {n:'Tilápia', q:0.132, u:'kg', p:49.4318},
+        {n:'Panko', q:0.101, u:'kg', p:22.8},
+        {n:'Ovo', q:0.3, u:'Und', p:0.5},
+        {n:'Farinha de Trigo', q:0.035, u:'kg', p:4.48},
+        {n:'Sal', q:0.005, u:'kg', p:2.59}
+      ]},
+    { id:'torresmo-da-casa', nome:'Torresmo da Casa', desc:'Torresmo, Limão Cravo',prep:'',
+      custoFT:5.9, pv:21.07, mv:30,
       ings:[
-        {n:'Pão Italiano',   q:1},
-        {n:'Cream Cheese',   q:0.050},
-        {n:'Peito de Peru',  q:0.060},
-        {n:'Tomate',         q:0.060},
-        {n:'Alface Americana',q:0.030},
-        {n:'Manteiga',       q:0.015},
-      ], pv:28.00, mv:42 },
-
-    { id:'combo-cafe-manha', nome:'Combo Café da Manhã',
-      desc:'Pão artesanal com manteiga + ovo mexido + suco natural 300ml',
-      prep:'Tostar o pão artesanal. Mexer os ovos com manteiga e cebolinha. Servir com suco natural da estação.',
+        {n:'Torresmo', q:0.2, u:'kg', p:27.9},
+        {n:'Limão Cravo', q:0.08, u:'kg', p:4}
+      ]},
+    { id:'coxinha-sem-massa', nome:'Coxinha sem massa', desc:'Frango Desfiado, Requeijão Balde, Leite, Maisena',prep:'',
+      custoFT:38.43, pv:137.25, mv:30,
       ings:[
-        {n:'Pão Italiano',   q:1},
-        {n:'Manteiga',       q:0.020},
-        {n:'Ovo Caipira',    q:2},
-        {n:'Cebolinha',      q:0.005},
-        {n:'Polpa de Fruta', q:0.200},
-      ], pv:32.00, mv:40 },
+        {n:'Frango Desfiado', q:0.6, u:'kg', p:32.9001},
+        {n:'Requeijão Balde', q:0.3, u:'kg', p:33.83},
+        {n:'Leite', q:0.2, u:'L', p:4.69},
+        {n:'Maisena', q:0.04, u:'kg', p:19},
+        {n:'Panko', q:0.3, u:'kg', p:22.8}
+      ]},
   ]},
-
-  // ── MONTE SUA SALADA ───────────────────────────────────────────
-  { nome:'MONTE SUA SALADA', tabLabel:'SALADAS', sub:'Frescas, Crocantes e Personalizadas', pratos:[
-
-    { id:'salada-classica', nome:'Salada Clássica',
-      desc:'Mix de folhas, tomate cereja, cenoura, pepino e molho da casa',
-      prep:'Higienizar e centrifugar as folhas. Cortar os vegetais em fatias finas. Temperar com azeite, limão e sal. Servir com molho balsâmico à parte.',
+  { nome:'Menu Almoço', tabLabel:'ALMOÇO', sub:'Pratos Principais do Almoço', pratos:[
+    { id:'parmegiana-do-bistr-filet-mignon', nome:'Parmegiana do Bistrô Filet Mignon', desc:'Arroz Preparado, Molho de Tomate, Batata Frita, Filet Mignon',prep:'',
+      custoFT:19.64, pv:70.14, mv:30,
       ings:[
-        {n:'Mix de Folhas',    q:0.080},
-        {n:'Tomate Cereja',    q:0.060},
-        {n:'Cenoura',          q:0.040},
-        {n:'Pepino',           q:0.040},
-        {n:'Azeite Extravirgem',q:0.015},
-        {n:'Limão',            q:0.020},
-      ], pv:22.00, mv:40 },
-
-    { id:'salada-premium', nome:'Salada Premium com Palmito',
-      desc:'Mix de folhas, palmito, manga, parmesão lascado e molho balsâmico',
-      prep:'Dispor o mix de folhas como base. Adicionar o palmito em fatias, manga em cubos e lascas de parmesão. Finalizar com redução balsâmica e fio de azeite.',
+        {n:'Arroz Preparado', q:0.315, u:'kg', p:7.2426},
+        {n:'Molho de Tomate', q:0.08, u:'kg', p:7.9145},
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417},
+        {n:'Filet Mignon', q:0.16, u:'kg', p:90},
+        {n:'Mussarela Fatiada', q:0.02, u:'kg', p:46},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'parmegiana-do-bistr-til-pia-milanesa', nome:'Parmegiana do Bistrô Tilápia Milanesa', desc:'Arroz Preparado, Molho de Tomate, Batata Frita, Tilápia',prep:'',
+      custoFT:13.14, pv:46.93, mv:30,
       ings:[
-        {n:'Mix de Folhas',    q:0.080},
-        {n:'Palmito',          q:0.050},
-        {n:'Manga',            q:0.060},
-        {n:'Parmesão',         q:0.030},
-        {n:'Molho Balsâmico',  q:0.020},
-        {n:'Azeite Extravirgem',q:0.015},
-      ], pv:38.00, mv:35 },
-
-    { id:'salada-proteica', nome:'Salada Proteica com Frango',
-      desc:'Mix de folhas, frango grelhado, ovo caipira, tomate cereja e molho Caesar',
-      prep:'Temperar o frango com ervas e grelhar na chapa. Fatiar e dispor sobre o mix de folhas. Adicionar ovo cozido, tomate cereja e finalizar com molho Caesar artesanal.',
+        {n:'Arroz Preparado', q:0.315, u:'kg', p:7.2426},
+        {n:'Molho de Tomate', q:0.08, u:'kg', p:7.9145},
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417},
+        {n:'Tilápia', q:0.16, u:'kg', p:49.4318},
+        {n:'Mussarela Fatiada', q:0.02, u:'kg', p:46},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'cavalo-contra-fil', nome:'À Cavalo Contra Filé', desc:'Arroz a Dodó, Vinagrete, Contrafilé, Ovo',prep:'',
+      custoFT:13.35, pv:47.68, mv:30,
       ings:[
-        {n:'Mix de Folhas',    q:0.080},
-        {n:'Frango Grelhado',  q:0.120},
-        {n:'Ovo Caipira',      q:1},
-        {n:'Tomate Cereja',    q:0.060},
-        {n:'Molho Caesar',     q:0.030},
-        {n:'Parmesão',         q:0.020},
-      ], pv:42.00, mv:38 },
-
-    { id:'salada-vegana', nome:'Salada Vegana da Estação',
-      desc:'Rúcula, beterraba assada, castanha, chia e vinagrete de limão',
-      prep:'Assar a beterraba. Higienizar a rúcula. Montar com beterraba em cubos, castanhas e sementes de chia. Finalizar com vinagrete de limão-siciliano e mel.',
+        {n:'Arroz a Dodó', q:0.16, u:'kg', p:14.1397},
+        {n:'Vinagrete', q:0.035, u:'kg', p:34.7827},
+        {n:'Contrafilé', q:0.16, u:'kg', p:56},
+        {n:'Ovo', q:1, u:'Und', p:0.5},
+        {n:'Feijão Preparado', q:0.111, u:'kg', p:3.462},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'cavalo-filet-mignon', nome:'Á Cavalo Filet Mignon', desc:'Arroz a Dodó, Vinagrete, Filet Mignon, Ovo',prep:'',
+      custoFT:18.79, pv:67.11, mv:30,
       ings:[
-        {n:'Rúcula',           q:0.060},
-        {n:'Beterraba',        q:0.080},
-        {n:'Castanha do Pará', q:0.020},
-        {n:'Chia',             q:0.010},
-        {n:'Limão Siciliano',  q:0.015},
-        {n:'Mel',              q:0.010},
-        {n:'Azeite Extravirgem',q:0.015},
-      ], pv:35.00, mv:32 },
+        {n:'Arroz a Dodó', q:0.16, u:'kg', p:14.1397},
+        {n:'Vinagrete', q:0.035, u:'kg', p:34.7827},
+        {n:'Filet Mignon', q:0.16, u:'kg', p:90},
+        {n:'Ovo', q:1, u:'Und', p:0.5},
+        {n:'Feijão Preparado', q:0.111, u:'kg', p:3.462},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'fettuccine-na-fonduta-de-canastra-e-mignon', nome:'Fettuccine na Fonduta de Canastra e Mignon', desc:'Fettuccine, Filet Mignon, Molho Madeira, Manteiga',prep:'',
+      custoFT:18.9, pv:67.5, mv:30,
+      ings:[
+        {n:'Fettuccine', q:0.16, u:'kg', p:18.8571},
+        {n:'Filet Mignon', q:0.16, u:'kg', p:90},
+        {n:'Molho Madeira', q:0.005, u:'kg', p:58.26},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9},
+        {n:'Queijo Canastra', q:0.02, u:'kg', p:50},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30},
+        {n:'Salsinha', q:0.001, u:'kg', p:19.9}
+      ]},
+    { id:'famoso-pf-frango', nome:'Famoso PF Frango', desc:'Arroz Preparado, Feijão Preparado, Farofa de Cebola, Couve',prep:'',
+      custoFT:10.27, pv:36.68, mv:30,
+      ings:[
+        {n:'Arroz Preparado', q:0.315, u:'kg', p:7.2426},
+        {n:'Feijão Preparado', q:0.12, u:'kg', p:3.462},
+        {n:'Farofa de Cebola', q:0.04, u:'kg', p:5.65},
+        {n:'Couve', q:0.14, u:'kg', p:18},
+        {n:'Alho', q:0.005, u:'kg', p:18},
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417},
+        {n:'Banha', q:0.005, u:'kg', p:14},
+        {n:'Frango', q:0.15, u:'kg', p:21.9835}
+      ]},
+    { id:'famoso-pf-contra-fil', nome:'Famoso PF Contra Filé', desc:'Arroz Preparado, Feijão Preparado, Farofa de Cebola, Couve',prep:'',
+      custoFT:15.89, pv:56.75, mv:30,
+      ings:[
+        {n:'Arroz Preparado', q:0.315, u:'kg', p:7.2426},
+        {n:'Feijão Preparado', q:0.12, u:'kg', p:3.462},
+        {n:'Farofa de Cebola', q:0.04, u:'kg', p:5.65},
+        {n:'Couve', q:0.14, u:'kg', p:18},
+        {n:'Alho', q:0.005, u:'kg', p:18},
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417},
+        {n:'Banha', q:0.005, u:'kg', p:14},
+        {n:'Contrafilé', q:0.16, u:'kg', p:56}
+      ]},
+    { id:'mineiro', nome:'Mineiro', desc:'Lombo, Ovo, Arroz Preparado, Farofa de Cebola',prep:'',
+      custoFT:11.98, pv:42.79, mv:30,
+      ings:[
+        {n:'Lombo', q:0.15, u:'kg', p:41.5},
+        {n:'Ovo', q:1, u:'Und', p:0.5},
+        {n:'Arroz Preparado', q:0.101, u:'kg', p:7.2426},
+        {n:'Farofa de Cebola', q:0.055, u:'kg', p:5.65},
+        {n:'Couve Preparada', q:0.05, u:'kg', p:46.8333},
+        {n:'Feijão da Roça', q:0.111, u:'kg', p:16.6036},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'fettuccine-ao-limone-da-fazenda', nome:'Fettuccine ao Limone da Fazenda', desc:'Bacon Preparado, Pernil Desfiado, Água, Manteiga',prep:'',
+      custoFT:17.52, pv:62.57, mv:30,
+      ings:[
+        {n:'Bacon Preparado', q:0.015, u:'kg', p:37.1867},
+        {n:'Pernil Desfiado', q:0.15, u:'kg', p:43.1667},
+        {n:'Água', q:0.12, u:'L', p:0.03},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9},
+        {n:'Limão Taiti', q:0.08, u:'kg', p:5},
+        {n:'Sal', q:0.005, u:'kg', p:2.59},
+        {n:'Milho Crocante', q:0.015, u:'kg', p:53},
+        {n:'Queijo Canastra', q:0.03, u:'kg', p:50},
+        {n:'Limão Siciliano', q:0.19, u:'kg', p:17},
+        {n:'Creme de Leite', q:0.25, u:'kg', p:16.45}
+      ]},
+    { id:'fettuccine-ao-limone-da-ro-a', nome:'Fettuccine ao Limone da Roça', desc:'Pernil Desfiado, Fettuccine, Cebolinha, Queijo Canastra',prep:'',
+      custoFT:11.12, pv:39.71, mv:30,
+      ings:[
+        {n:'Pernil Desfiado', q:0.15, u:'kg', p:43.1667},
+        {n:'Fettuccine', q:0.16, u:'kg', p:18.8571},
+        {n:'Cebolinha', q:0.001, u:'kg', p:20},
+        {n:'Queijo Canastra', q:0.03, u:'kg', p:50},
+        {n:'Milho Crocante', q:0.002, u:'kg', p:53}
+      ]},
+    { id:'estrogonofe-frango', nome:'Estrogonofe Frango', desc:'Cebola, Mostarda, Bebida Alcoólica Mista, Ketchup',prep:'',
+      custoFT:9.39, pv:33.54, mv:30,
+      ings:[
+        {n:'Cebola', q:0.003, u:'kg', p:5},
+        {n:'Mostarda', q:0.012, u:'kg', p:6.33},
+        {n:'Bebida Alcoólica Mista', q:0.042, u:'L', p:50},
+        {n:'Ketchup', q:0.04, u:'kg', p:10.9},
+        {n:'Cogumelo', q:0.05, u:'kg', p:68.76},
+        {n:'Sal', q:0.03, u:'kg', p:2.59},
+        {n:'Azeite', q:0.01, u:'L', p:78},
+        {n:'Creme de Leite', q:0.15, u:'kg', p:16.45},
+        {n:'Frango', q:0.15, u:'kg', p:21.9835}
+      ]},
+    { id:'estrogonofe-mignon', nome:'Estrogonofe Mignon', desc:'Cebola, Mostarda, Bebida Alcoólica Mista, Ketchup',prep:'',
+      custoFT:22.89, pv:81.75, mv:30,
+      ings:[
+        {n:'Cebola', q:0.003, u:'kg', p:5},
+        {n:'Mostarda', q:0.012, u:'kg', p:6.33},
+        {n:'Bebida Alcoólica Mista', q:0.042, u:'L', p:50},
+        {n:'Ketchup', q:0.04, u:'kg', p:10.9},
+        {n:'Cogumelo', q:0.05, u:'kg', p:68.76},
+        {n:'Sal', q:0.03, u:'kg', p:2.59},
+        {n:'Azeite', q:0.01, u:'L', p:78},
+        {n:'Creme de Leite', q:0.15, u:'kg', p:16.45},
+        {n:'Filet Mignon', q:0.15, u:'kg', p:90}
+      ]},
+    { id:'salm-o-mineiro', nome:'Salmão Mineiro', desc:'Salmão, Purê de Abobora, Arroz de Ervas, Legumes Salteados',prep:'',
+      custoFT:19.97, pv:71.32, mv:30,
+      ings:[
+        {n:'Salmão', q:0.16, u:'kg', p:93.9434},
+        {n:'Purê de Abobora', q:0.105, u:'kg', p:14.2392},
+        {n:'Arroz de Ervas', q:0.07, u:'kg', p:9.4217},
+        {n:'Legumes Salteados', q:0.15, u:'kg', p:17.8913},
+        {n:'Castanha', q:0.003, u:'kg', p:32}
+      ]},
+    { id:'veggie', nome:'Veggie', desc:'Arroz Preparado, Feijão Preparado, Farofa de Cebola, Couve Preparada',prep:'',
+      custoFT:14.88, pv:53.14, mv:30,
+      ings:[
+        {n:'Arroz Preparado', q:0.315, u:'kg', p:7.2426},
+        {n:'Feijão Preparado', q:0.12, u:'kg', p:3.462},
+        {n:'Farofa de Cebola', q:0.04, u:'kg', p:5.65},
+        {n:'Couve Preparada', q:0.14, u:'kg', p:46.8333},
+        {n:'Cebola', q:0.035, u:'kg', p:5},
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417},
+        {n:'Bife de Brócolis', q:1, u:'Und', p:3.8595}
+      ]},
+    { id:'prato-kids-frango-grelhado', nome:'Prato Kids Frango Grelhado', desc:'Arroz Preparado, Feijão Preparado, Frango',prep:'',
+      custoFT:3.4, pv:12.14, mv:30,
+      ings:[
+        {n:'Arroz Preparado', q:0.109, u:'kg', p:7.2426},
+        {n:'Feijão Preparado', q:0.12, u:'kg', p:3.462},
+        {n:'Frango', q:0.1, u:'kg', p:21.9835}
+      ]},
+    { id:'prato-kids-til-pia-empanada', nome:'Prato Kids Tilápia Empanada', desc:'Arroz Preparado, Feijão Preparado, Tilápia Empanada',prep:'',
+      custoFT:7.4, pv:26.43, mv:30,
+      ings:[
+        {n:'Arroz Preparado', q:0.109, u:'kg', p:7.2426},
+        {n:'Feijão Preparado', q:0.12, u:'kg', p:3.462},
+        {n:'Tilápia Empanada', q:0.134, u:'kg', p:46.2443}
+      ]},
+    { id:'piamontese-crocante-de-frango', nome:'Piamontese Crocante de Frango', desc:'Arroz Piamontese, Batata Frita, Crocante de Frango',prep:'',
+      custoFT:14.37, pv:51.32, mv:30,
+      ings:[
+        {n:'Arroz Piamontese', q:0.235, u:'kg', p:34.9661},
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417},
+        {n:'Crocante de Frango', q:1, u:'Und', p:4.779}
+      ]},
+    { id:'piamontese-filet-mignon', nome:'Piamontese Filet Mignon', desc:'Arroz Piamontese, Batata Palha, Filet Mignon',prep:'',
+      custoFT:23.36, pv:83.43, mv:30,
+      ings:[
+        {n:'Arroz Piamontese', q:0.235, u:'kg', p:34.9661},
+        {n:'Batata Palha', q:0.035, u:'kg', p:21.1946},
+        {n:'Filet Mignon', q:0.16, u:'kg', p:90}
+      ]},
+    { id:'piamontese-til-pia', nome:'Piamontese Tilápia', desc:'Arroz Piamontese, Batata Palha, Tilápia',prep:'',
+      custoFT:16.87, pv:60.25, mv:30,
+      ings:[
+        {n:'Arroz Piamontese', q:0.235, u:'kg', p:34.9661},
+        {n:'Batata Palha', q:0.035, u:'kg', p:21.1946},
+        {n:'Tilápia', q:0.16, u:'kg', p:49.4318}
+      ]},
+    { id:'feijoada-do-bistr', nome:'Feijoada do Bistrô', desc:'Arroz Preparado, Couve Preparada, Farofa de Cebola, Vinagrete',prep:'',
+      custoFT:14.48, pv:51.71, mv:30,
+      ings:[
+        {n:'Arroz Preparado', q:0.18, u:'kg', p:7.2426},
+        {n:'Couve Preparada', q:0.04, u:'kg', p:46.8333},
+        {n:'Farofa de Cebola', q:0.05, u:'kg', p:5.65},
+        {n:'Vinagrete', q:0.087, u:'kg', p:34.7827},
+        {n:'Laranja', q:0.01, u:'kg', p:4},
+        {n:'Feijoada', q:0.356, u:'kg', p:22.1934},
+        {n:'Cebolinha', q:0.001, u:'kg', p:20},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'fettuccine-na-fonduta-de-canastra-e-salm-o', nome:'Fettuccine na Fonduta de Canastra e Salmão', desc:'Fettuccine, Salmão, Molho Madeira, Manteiga',prep:'',
+      custoFT:19.53, pv:69.75, mv:30,
+      ings:[
+        {n:'Fettuccine', q:0.16, u:'kg', p:18.8571},
+        {n:'Salmão', q:0.16, u:'kg', p:93.9434},
+        {n:'Molho Madeira', q:0.005, u:'kg', p:58.26},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9},
+        {n:'Queijo Canastra', q:0.02, u:'kg', p:50},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30},
+        {n:'Salsinha', q:0.001, u:'kg', p:19.9}
+      ]},
+    { id:'fettuccine-na-fonduta-de-canastra-e-til-pia', nome:'Fettuccine na Fonduta de Canastra e Tilápia', desc:'Fettuccine, Tilápia, Molho Madeira, Manteiga',prep:'',
+      custoFT:12.41, pv:44.32, mv:30,
+      ings:[
+        {n:'Fettuccine', q:0.16, u:'kg', p:18.8571},
+        {n:'Tilápia', q:0.16, u:'kg', p:49.4318},
+        {n:'Molho Madeira', q:0.005, u:'kg', p:58.26},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9},
+        {n:'Queijo Canastra', q:0.02, u:'kg', p:50},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30},
+        {n:'Salsinha', q:0.001, u:'kg', p:19.9}
+      ]},
   ]},
-
-  // ── CAFÉ ───────────────────────────────────────────────────────
-  { nome:'CAFÉ', tabLabel:'CAFÉ', sub:'Grãos Selecionados — Torrefação Especial', pratos:[
-
-    { id:'cafe-espresso', nome:'Café Espresso',
-      desc:'Blend especial de grãos arábica — curto e encorpado',
-      prep:'Moer os grãos na hora. Extrair o espresso com 9 bar de pressão por 25-30 segundos. Servir em xícara pré-aquecida.',
+  { nome:'Monte Sua Salada', tabLabel:'SALADAS', sub:'Saladas Frescas — Monte a Sua', pratos:[
+    { id:'salada-da-casa', nome:'Salada da Casa', desc:'Alface Crespa Roxa, Tomate Cereja, Crouton, Mostarda e Mel',prep:'',
+      custoFT:2.58, pv:9.21, mv:30,
       ings:[
-        {n:'Café Moído', q:0.007},
-      ], pv:7.00, mv:35 },
-
-    { id:'cappuccino', nome:'Cappuccino Cremoso',
-      desc:'Espresso duplo com leite vaporizado e espuma cremosa de leite',
-      prep:'Extrair espresso duplo. Vaporizar o leite a 65°C formando microespuma. Verter o leite sobre o espresso com técnica de latte art.',
+        {n:'Alface Crespa Roxa', q:0.135, u:'kg', p:11.96},
+        {n:'Tomate Cereja', q:0.025, u:'kg', p:26.67},
+        {n:'Crouton', q:0.006, u:'kg', p:13.518},
+        {n:'Mostarda e Mel', q:0.012, u:'kg', p:17.8339}
+      ]},
+    { id:'salada-caesar', nome:'Salada Caesar', desc:'Alface Americana, Crouton, Parmesão, Molho Caesar',prep:'',
+      custoFT:6.39, pv:22.82, mv:30,
       ings:[
-        {n:'Café Moído',    q:0.014},
-        {n:'Leite Integral',q:0.150},
-      ], pv:14.00, mv:42 },
-
-    { id:'cafe-latte', nome:'Café Latte',
-      desc:'Espresso com leite vaporizado suave — grande e aveludado',
-      prep:'Extrair espresso simples. Vaporizar 250ml de leite. Verter suavemente formando camadas.',
+        {n:'Alface Americana', q:0.137, u:'kg', p:14.4},
+        {n:'Crouton', q:0.017, u:'kg', p:13.518},
+        {n:'Parmesão', q:0.032, u:'kg', p:105.86},
+        {n:'Molho Caesar', q:0.035, u:'kg', p:22.9952}
+      ]},
+    { id:'salada-brasileira', nome:'Salada Brasileira', desc:'Alface Roxa, Cenoura, Beterraba, Pepino',prep:'',
+      custoFT:35.24, pv:125.86, mv:30,
       ings:[
-        {n:'Café Moído',    q:0.010},
-        {n:'Leite Integral',q:0.250},
-      ], pv:16.00, mv:40 },
-
-    { id:'chocolate-quente', nome:'Chocolate Quente Belga',
-      desc:'Chocolate meio amargo belga derretido com leite vaporizado e canela',
-      prep:'Derreter o chocolate com creme de leite em banho-maria. Vaporizar o leite. Misturar e servir quente com canela.',
+        {n:'Alface Roxa', q:0.07, u:'kg', p:11.96},
+        {n:'Cenoura', q:0.01, u:'kg', p:5},
+        {n:'Beterraba', q:0.014, u:'kg', p:4},
+        {n:'Pepino', q:0.02, u:'kg', p:4},
+        {n:'Tomate Cereja', q:0.026, u:'kg', p:26.67},
+        {n:'Azeite', q:0.012, u:'L', p:78},
+        {n:'Sal', q:0.001, u:'kg', p:2.59},
+        {n:'Salsa Desidratada', q:0.001, u:'kg', p:30}
+      ]},
+    { id:'salada-caprese', nome:'Salada Caprese', desc:'Alface Americana, Rúcula, Tomate Seco, Cream Cheese',prep:'',
+      custoFT:4.47, pv:15.96, mv:30,
       ings:[
-        {n:'Chocolate Meio Amargo',q:0.030},
-        {n:'Leite Integral',       q:0.200},
-        {n:'Creme de Leite',       q:0.020},
-        {n:'Canela',               q:0.002},
-      ], pv:18.00, mv:35 },
+        {n:'Alface Americana', q:0.105, u:'kg', p:14.4},
+        {n:'Rúcula', q:0.003, u:'kg', p:10.4},
+        {n:'Tomate Seco', q:0.027, u:'kg', p:27.22},
+        {n:'Cream Cheese', q:0.04, u:'kg', p:36.9},
+        {n:'Pesto', q:0.027, u:'kg', p:26.6581}
+      ]},
+    { id:'salada-de-parma', nome:'Salada de Parma', desc:'Alface Crespa Roxa, Rúcula, Presunto Parma, Crouton',prep:'',
+      custoFT:7.19, pv:25.68, mv:30,
+      ings:[
+        {n:'Alface Crespa Roxa', q:0.135, u:'kg', p:11.96},
+        {n:'Rúcula', q:0.139, u:'kg', p:10.4},
+        {n:'Presunto Parma', q:0.017, u:'kg', p:73.55},
+        {n:'Crouton', q:0.029, u:'kg', p:13.518},
+        {n:'Parmesão', q:0.02, u:'kg', p:105.86},
+        {n:'Aceto Balsâmico', q:0.01, u:'kg', p:37.5}
+      ]},
+    { id:'salada-de-gr-o-de-bico', nome:'Salada de Grão de Bico', desc:'Grão de Bico Cozido, Cenoura, Tomate Cereja, Cebola Roxa',prep:'',
+      custoFT:2.58, pv:9.21, mv:30,
+      ings:[
+        {n:'Grão de Bico Cozido', q:0.15, u:'kg', p:4.022},
+        {n:'Cenoura', q:0.03, u:'kg', p:5},
+        {n:'Tomate Cereja', q:0.022, u:'kg', p:26.67},
+        {n:'Cebola Roxa', q:0.02, u:'kg', p:13.33},
+        {n:'Cebolinha', q:0.003, u:'kg', p:20},
+        {n:'Azeitona', q:0.02, u:'kg', p:27.22},
+        {n:'Azeite de Ervas', q:0.013, u:'kg', p:21.4995},
+        {n:'Limão Taiti', q:0.016, u:'kg', p:5},
+        {n:'Sal', q:0.005, u:'kg', p:2.59}
+      ]},
+    { id:'salada-peito-de-frango', nome:'Salada + Peito de Frango', desc:'Salada Caprese, Frango',prep:'',
+      custoFT:7.77, pv:27.75, mv:30,
+      ings:[
+        {n:'Salada Caprese', q:0.001, u:'kg', p:4.4739},
+        {n:'Frango', q:0.15, u:'kg', p:21.9835}
+      ]},
+    { id:'salada-contrafil', nome:'Salada + Contrafilé', desc:'Salada Caprese, Contrafilé',prep:'',
+      custoFT:13.43, pv:47.96, mv:30,
+      ings:[
+        {n:'Salada Caprese', q:0.001, u:'kg', p:4.4739},
+        {n:'Contrafilé', q:0.16, u:'kg', p:56}
+      ]},
+    { id:'salada-filet-mignon', nome:'Salada + Filet Mignon', desc:'Salada Caprese, Filet Mignon',prep:'',
+      custoFT:18.87, pv:67.39, mv:30,
+      ings:[
+        {n:'Salada Caprese', q:0.001, u:'kg', p:4.4739},
+        {n:'Filet Mignon', q:0.16, u:'kg', p:90}
+      ]},
+    { id:'salada-til-pia', nome:'Salada + Tilápia', desc:'Salada Caprese, Tilápia',prep:'',
+      custoFT:11.89, pv:42.46, mv:30,
+      ings:[
+        {n:'Salada Caprese', q:0.001, u:'kg', p:4.4739},
+        {n:'Tilápia', q:0.15, u:'kg', p:49.4318}
+      ]},
+    { id:'salada-salm-o', nome:'Salada + Salmão', desc:'Salada Caprese, Salmão',prep:'',
+      custoFT:19.5, pv:69.64, mv:30,
+      ings:[
+        {n:'Salada Caprese', q:0.001, u:'kg', p:4.4739},
+        {n:'Salmão', q:0.16, u:'kg', p:93.9434}
+      ]},
+    { id:'salada-bife-de-br-colis', nome:'Salada + Bife de Brócolis', desc:'Salada Caprese, Bife de Brócolis',prep:'',
+      custoFT:8.33, pv:29.75, mv:30,
+      ings:[
+        {n:'Salada Caprese', q:0.001, u:'kg', p:4.4739},
+        {n:'Bife de Brócolis', q:1, u:'Und', p:3.8595}
+      ]},
+    { id:'arroz-piamontese', nome:'Arroz Piamontese', desc:'Arroz Piamontese',prep:'',
+      custoFT:8.22, pv:29.36, mv:30,
+      ings:[
+        {n:'Arroz Piamontese', q:0.235, u:'kg', p:34.9661}
+      ]},
+    { id:'arroz-a-dod', nome:'Arroz a Dodó', desc:'Arroz a Dodó',prep:'',
+      custoFT:1.7, pv:6.07, mv:30,
+      ings:[
+        {n:'Arroz a Dodó', q:0.12, u:'kg', p:14.1397}
+      ]},
+    { id:'feij-o', nome:'Feijão', desc:'Feijão Preparado',prep:'',
+      custoFT:0.42, pv:5, mv:30,
+      ings:[
+        {n:'Feijão Preparado', q:0.12, u:'kg', p:3.462}
+      ]},
+    { id:'salada-da-casa-pequena', nome:'Salada da Casa Pequena', desc:'Alface, Tomate Cereja, Mostarda, Crouton',prep:'',
+      custoFT:1.26, pv:5, mv:30,
+      ings:[
+        {n:'Alface', q:0.028, u:'kg', p:11.42},
+        {n:'Tomate Cereja', q:0.024, u:'kg', p:26.67},
+        {n:'Mostarda', q:0.031, u:'kg', p:6.33},
+        {n:'Crouton', q:0.008, u:'kg', p:13.518}
+      ]},
+    { id:'farofa-de-cebola', nome:'Farofa de Cebola', desc:'Farofa de Cebola',prep:'',
+      custoFT:0.23, pv:5, mv:30,
+      ings:[
+        {n:'Farofa de Cebola', q:0.04, u:'kg', p:5.65}
+      ]},
+    { id:'batata-frita', nome:'Batata Frita', desc:'Batata Frita',prep:'',
+      custoFT:1.37, pv:5, mv:30,
+      ings:[
+        {n:'Batata Frita', q:0.05, u:'kg', p:27.417}
+      ]},
+    { id:'ovo-frito', nome:'Ovo Frito', desc:'Ovo, Manteiga, Sal, Pimenta do Reino',prep:'',
+      custoFT:0.95, pv:5, mv:30,
+      ings:[
+        {n:'Ovo', q:1, u:'Und', p:0.5},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9},
+        {n:'Sal', q:0.005, u:'kg', p:2.59},
+        {n:'Pimenta do Reino', q:0.003, u:'kg', p:97}
+      ]},
   ]},
-
-  // ── TORTAS E DOCES ─────────────────────────────────────────────
-  { nome:'TORTAS E DOCES', tabLabel:'DOCES', sub:'Feitos Artesanalmente no Bistrô', pratos:[
-
-    { id:'torta-limao', nome:'Torta de Limão',
-      desc:'Base crocante de biscoito, creme de limão e merengue suíço maçaricado',
-      prep:'Preparar a base com biscoito triturado e manteiga. Fazer o curd de limão. Cobrir com merengue suíço e maçaricar na hora.',
+  { nome:'Café', tabLabel:'CAFÉ', sub:'Cafés Especiais e Bebidas Quentes', pratos:[
+    { id:'cappuccino-tradicional', nome:'Cappuccino Tradicional', desc:'Leite, Pó de Cappuccino, Canela, Biscoitinho do Café',prep:'',
+      custoFT:2.55, pv:9.11, mv:30,
       ings:[
-        {n:'Farinha de Trigo',  q:0.060},
-        {n:'Manteiga',          q:0.040},
-        {n:'Açúcar',            q:0.050},
-        {n:'Limão Siciliano',   q:0.080},
-        {n:'Ovos',              q:2},
-        {n:'Leite Condensado',  q:0.100},
-      ], pv:18.00, mv:35 },
-
-    { id:'brownie-chocolate', nome:'Brownie de Chocolate',
-      desc:'Brownie úmido com chocolate meio amargo e castanhas — servido morno',
-      prep:'Derreter manteiga e chocolate. Incorporar ovos e açúcar. Adicionar farinha e castanhas. Assar a 180°C por 20min. Servir morno com sorvete opcional.',
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Pó de Cappuccino', q:0.03, u:'kg', p:60},
+        {n:'Canela', q:0.005, u:'kg', p:32},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'cappuccino-italiano', nome:'Cappuccino Italiano', desc:'Grão de Café, Leite, Cacau 100%, Canela',prep:'',
+      custoFT:2.83, pv:10.11, mv:30,
       ings:[
-        {n:'Chocolate Meio Amargo',q:0.050},
-        {n:'Manteiga',             q:0.040},
-        {n:'Açúcar',               q:0.060},
-        {n:'Ovos',                 q:2},
-        {n:'Farinha de Trigo',     q:0.030},
-        {n:'Castanha do Pará',     q:0.020},
-      ], pv:16.00, mv:30 },
-
-    { id:'cheesecake-frutas', nome:'Cheesecake de Frutas Vermelhas',
-      desc:'Cheesecake cremoso com base de biscoito e calda de morango',
-      prep:'Preparar base com biscoito triturado. Bater cream cheese com leite condensado e ovos. Assar em banho-maria. Gelar. Servir com calda de morango aquecida.',
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Leite', q:0.08, u:'L', p:4.69},
+        {n:'Cacau 100%', q:0.005, u:'kg', p:75.6},
+        {n:'Canela', q:0.005, u:'kg', p:32},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'cappuccino-gelado', nome:'Cappuccino Gelado', desc:'Leite, Pó de Cappuccino Gelado, Gelo',prep:'',
+      custoFT:3.78, pv:13.5, mv:30,
       ings:[
-        {n:'Cream Cheese',    q:0.120},
-        {n:'Leite Condensado',q:0.080},
-        {n:'Ovos',            q:2},
-        {n:'Farinha de Trigo',q:0.040},
-        {n:'Morango',         q:0.080},
-        {n:'Açúcar',          q:0.030},
-      ], pv:20.00, mv:32 },
+        {n:'Leite', q:0.15, u:'L', p:4.69},
+        {n:'Pó de Cappuccino Gelado', q:0.03, u:'kg', p:90},
+        {n:'Gelo', q:0.15, u:'kg', p:2.5}
+      ]},
+    { id:'cappuccino-brasileiro', nome:'Cappuccino Brasileiro', desc:'Grão de Café, Brigadeiro Cobertura, Leite, Cacau 100%',prep:'',
+      custoFT:3.47, pv:12.39, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Brigadeiro Cobertura', q:0.03, u:'kg', p:24.4482},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Cacau 100%', q:0.003, u:'kg', p:75.6},
+        {n:'Canela', q:0.003, u:'kg', p:32},
+        {n:'Chantilly', q:0.003, u:'kg', p:8.5183},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'cappuccino-de-ovo-maltine', nome:'Cappuccino de Ovo Maltine', desc:'Ovomaltine, Pó de Cappuccino, Leite, Gelo',prep:'',
+      custoFT:2.33, pv:8.32, mv:30,
+      ings:[
+        {n:'Ovomaltine', q:0.015, u:'kg', p:59.33},
+        {n:'Pó de Cappuccino', q:0.015, u:'kg', p:60},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Gelo', q:0.03, u:'kg', p:2.5}
+      ]},
+    { id:'chocolate-quente', nome:'Chocolate Quente', desc:'Leite, Pó de Chocolate Europeu, Biscoitinho do Café',prep:'',
+      custoFT:2.54, pv:9.07, mv:30,
+      ings:[
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Pó de Chocolate Europeu', q:0.03, u:'kg', p:65},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'mocha', nome:'Mocha', desc:'Nutella, Leite, Grão de café',prep:'',
+      custoFT:6.34, pv:22.64, mv:30,
+      ings:[
+        {n:'Nutella', q:0.04, u:'kg', p:50.96},
+        {n:'Leite', q:0.15, u:'L', p:4.69},
+        {n:'Grão de café', q:0.04, u:'kg', p:90}
+      ]},
+    { id:'ch', nome:'Chá', desc:'Chá Und, Biscoitinho do Café',prep:'',
+      custoFT:1.72, pv:6.14, mv:30,
+      ings:[
+        {n:'Chá Und', q:1, u:'Und', p:1.6},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'chai-latte', nome:'Chai Latte', desc:'Leite, Pó de Chai, Biscoitinho do Café',prep:'',
+      custoFT:4.04, pv:14.43, mv:30,
+      ings:[
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Pó de Chai', q:0.03, u:'kg', p:115},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'caf-com-leite', nome:'Café Com Leite', desc:'Grão de Café, Leite, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:2.26, pv:8.07, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Leite', q:0.05, u:'L', p:4.69},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'caf-clever', nome:'Café Clever', desc:'Café, Filtro Clever, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:3.07, pv:10.96, mv:30,
+      ings:[
+        {n:'Café', q:0.02, u:'kg', p:100},
+        {n:'Filtro Clever', q:1, u:'Und', p:0.85},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'caf-koar', nome:'Café Koar', desc:'Café, Filtro Koar, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:2.82, pv:10.07, mv:30,
+      ings:[
+        {n:'Café', q:0.02, u:'kg', p:100},
+        {n:'Filtro Koar', q:1, u:'Und', p:0.6},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'caf-prensa-francesa', nome:'Café Prensa Francesa', desc:'Café, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:2.22, pv:7.93, mv:30,
+      ings:[
+        {n:'Café', q:0.02, u:'kg', p:100},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'drip-coffee', nome:'Drip Coffee', desc:'Drip Coffe, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:2.72, pv:9.71, mv:30,
+      ings:[
+        {n:'Drip Coffe', q:1, u:'Und', p:2.5},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'expresso', nome:'Expresso', desc:'Grão de Café, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:2.02, pv:7.21, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'expresso-duplo', nome:'Expresso Duplo', desc:'Grão de Café, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:3.82, pv:13.64, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.04, u:'kg', p:90},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'expresso-carioca', nome:'Expresso Carioca', desc:'Grão de Café, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:2.02, pv:7.21, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'expresso-con-panna', nome:'Expresso Con Panna', desc:'Grão de Café, Biscoitinho do Café, Água com Gás, Chantilly',prep:'',
+      custoFT:3.85, pv:13.75, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.04, u:'kg', p:90},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5},
+        {n:'Chantilly', q:0.003, u:'kg', p:8.5183}
+      ]},
+    { id:'descafeinado', nome:'Descafeinado', desc:'Descafeinado, Biscoitinho do Café, Água com Gás',prep:'',
+      custoFT:5.11, pv:18.25, mv:30,
+      ings:[
+        {n:'Descafeinado', q:1, u:'Und', p:4.89},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182},
+        {n:'Água com Gás', q:0.03, u:'L', p:3.5}
+      ]},
+    { id:'expresso-t-nica', nome:'Expresso Tônica', desc:'Laranja Suco, Açúcar Refinado, Xarope, Tônica',prep:'',
+      custoFT:5.98, pv:21.36, mv:30,
+      ings:[
+        {n:'Laranja Suco', q:0.1, u:'Und', p:7.9},
+        {n:'Açúcar Refinado', q:0.03, u:'kg', p:3.49},
+        {n:'Xarope', q:0.02, u:'L', p:74},
+        {n:'Tônica', q:1, u:'Und', p:3.21},
+        {n:'Laranja', q:0.1, u:'kg', p:4}
+      ]},
+    { id:'caramel-latte', nome:'Caramel Latte', desc:'Grão de Café, Calda de caramelo, Gelo, Leite',prep:'',
+      custoFT:6.31, pv:22.54, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.04, u:'kg', p:90},
+        {n:'Calda de caramelo', q:0.02, u:'kg', p:12.3358},
+        {n:'Gelo', q:0.1, u:'kg', p:2.5},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Xarope', q:0.01, u:'L', p:74},
+        {n:'Granulê Chocolate Meio Amargo', q:0.01, u:'kg', p:100}
+      ]},
+    { id:'iced-mocha', nome:'Iced Mocha', desc:'Grão de Café, Nutella, Leite, Gelo',prep:'',
+      custoFT:6.36, pv:22.71, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.04, u:'kg', p:90},
+        {n:'Nutella', q:0.04, u:'kg', p:50.96},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Gelo', q:0.1, u:'kg', p:2.5}
+      ]},
+    { id:'iced-vanilla-latte', nome:'Iced Vanilla Latte', desc:'Grão de Café, Gelo, Leite, Xarope',prep:'',
+      custoFT:5.8, pv:20.71, mv:30,
+      ings:[
+        {n:'Grão de Café', q:0.04, u:'kg', p:90},
+        {n:'Gelo', q:0.1, u:'kg', p:2.5},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Xarope', q:0.02, u:'L', p:74}
+      ]},
+    { id:'milkshake-pistache', nome:'Milkshake Pistache', desc:'Pasta de Pistache, Sorvete, Leite, Chantilly',prep:'',
+      custoFT:5.4, pv:19.29, mv:30,
+      ings:[
+        {n:'Pasta de Pistache', q:0.07, u:'kg', p:43},
+        {n:'Sorvete', q:0.15, u:'kg', p:13},
+        {n:'Leite', q:0.075, u:'L', p:4.69},
+        {n:'Chantilly', q:0.01, u:'kg', p:8.5183}
+      ]},
+    { id:'milkshake-nutella', nome:'Milkshake Nutella', desc:'Nutella, Sorvete, Leite, Chantilly',prep:'',
+      custoFT:5.95, pv:21.25, mv:30,
+      ings:[
+        {n:'Nutella', q:0.07, u:'kg', p:50.96},
+        {n:'Sorvete', q:0.15, u:'kg', p:13},
+        {n:'Leite', q:0.075, u:'L', p:4.69},
+        {n:'Chantilly', q:0.01, u:'kg', p:8.5183}
+      ]},
+    { id:'milshake-caramelo', nome:'Milshake Caramelo', desc:'Pasta de Caramelo, Sorvete, Leite, Chantilly',prep:'',
+      custoFT:5.4, pv:19.29, mv:30,
+      ings:[
+        {n:'Pasta de Caramelo', q:0.07, u:'kg', p:43},
+        {n:'Sorvete', q:0.15, u:'kg', p:13},
+        {n:'Leite', q:0.075, u:'L', p:4.69},
+        {n:'Chantilly', q:0.01, u:'kg', p:8.5183}
+      ]},
+    { id:'adicional-aveia', nome:'Adicional Aveia', desc:'Leite de Aveia',prep:'',
+      custoFT:1.26, pv:5, mv:30,
+      ings:[
+        {n:'Leite de Aveia', q:0.1, u:'L', p:12.61}
+      ]},
   ]},
-
-  // ── LANCHES E CHAPA ────────────────────────────────────────────
-  { nome:'LANCHES, SANDUÍCHE E CHAPA', tabLabel:'LANCHES', sub:'Artesanais na Chapa', pratos:[
-
-    { id:'xfrango-especial', nome:'X-Frango Especial',
-      desc:'Frango grelhado, cheddar derretido, alface, tomate, maionese e pão artesanal',
-      prep:'Grelhar o filé de frango temperado na chapa. Derreter o cheddar sobre o frango. Montar no pão artesanal grelhado com alface, tomate e maionese.',
+  { nome:'Tortas e Doces', tabLabel:'DOCES', sub:'Confeitaria Artesanal do Bistrô', pratos:[
+    { id:'torta-de-ninho-com-nutella', nome:'Torta de Ninho com Nutella', desc:'Leite em Pó, Leite Condensado, Creme de Leite, Chocolate Branco',prep:'',
+      custoFT:47.34, pv:169.07, mv:30,
       ings:[
-        {n:'Frango Grelhado',   q:0.150},
-        {n:'Cheddar',           q:0.040},
-        {n:'Alface Americana',  q:0.030},
-        {n:'Tomate',            q:0.050},
-        {n:'Maionese',          q:0.020},
-        {n:'Pão Artesanal',     q:0.120},
-        {n:'Manteiga',          q:0.015},
-      ], pv:35.00, mv:38 },
-
-    { id:'bauru-artesanal', nome:'Bauru Artesanal',
-      desc:'Rosbife, queijo minas derretido, tomate, pepino em conserva e pão francês',
-      prep:'Grelhar o pão na chapa com manteiga. Dispor o rosbife e derreter o queijo por cima. Adicionar tomate, pepino e mostarda.',
+        {n:'Leite em Pó', q:0.305, u:'kg', p:39.75},
+        {n:'Leite Condensado', q:0.395, u:'kg', p:14.41},
+        {n:'Creme de Leite', q:0.4, u:'kg', p:16.45},
+        {n:'Chocolate Branco', q:0.16, u:'kg', p:48.45},
+        {n:'Manteiga', q:0.2, u:'kg', p:28.9},
+        {n:'Gelatina em Pó Incolor', q:0.01, u:'kg', p:272.91},
+        {n:'Biscoito de Maisena', q:0.24, u:'kg', p:19.35},
+        {n:'Nutella', q:0.04, u:'kg', p:50.96}
+      ]},
+    { id:'torta-de-doce-de-leite', nome:'Torta de Doce de Leite', desc:'Biscoito Racheiro, Manteiga, Cream Cheese, Açúcar Refinado',prep:'',
+      custoFT:43.61, pv:155.75, mv:30,
       ings:[
-        {n:'Peito de Peru',    q:0.100},
-        {n:'Queijo Minas',     q:0.060},
-        {n:'Tomate',           q:0.050},
-        {n:'Pepino',           q:0.030},
-        {n:'Mostarda Dijon',   q:0.010},
-        {n:'Pão Artesanal',    q:0.120},
-        {n:'Manteiga',         q:0.015},
-      ], pv:30.00, mv:35 },
-
-    { id:'club-sandwich', nome:'Club Sandwich',
-      desc:'3 camadas: frango grelhado, bacon, ovo, queijo, alface e tomate',
-      prep:'Tostar 3 fatias de pão. Grelhar o frango e o bacon. Montar em 3 andares com ovo cozido, queijo, alface e tomate. Fixar com palito.',
+        {n:'Biscoito Racheiro', q:0.3, u:'kg', p:14},
+        {n:'Manteiga', q:0.12, u:'kg', p:28.9},
+        {n:'Cream Cheese', q:0.45, u:'kg', p:36.9},
+        {n:'Açúcar Refinado', q:0.15, u:'kg', p:3.49},
+        {n:'Limão Taiti', q:0.1, u:'kg', p:5},
+        {n:'Doce de Leite', q:0.55, u:'kg', p:23.9},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Creme de Leite', q:0.04, u:'kg', p:16.45},
+        {n:'Farofa de Coco', q:0.1, u:'kg', p:40.4212}
+      ]},
+    { id:'brigadeiro-branco', nome:'Brigadeiro Branco', desc:'Massa Brigadeiro Branco, Confeito Branco',prep:'',
+      custoFT:0.63, pv:5, mv:30,
       ings:[
-        {n:'Frango Grelhado',  q:0.120},
-        {n:'Bacon',            q:0.040},
-        {n:'Ovo Caipira',      q:1},
-        {n:'Queijo Minas',     q:0.040},
-        {n:'Alface Americana', q:0.030},
-        {n:'Tomate',           q:0.050},
-        {n:'Maionese',         q:0.020},
-        {n:'Pão de Forma',     q:0.090},
-      ], pv:38.00, mv:35 },
+        {n:'Massa Brigadeiro Branco', q:0.02, u:'kg', p:24.6564},
+        {n:'Confeito Branco', q:0.007, u:'kg', p:19}
+      ]},
+    { id:'brigadeiro-duo', nome:'Brigadeiro Duo', desc:'Massa Brigadeiro Branco, Massa Brigadeiro Chocolate, Leite em pó',prep:'',
+      custoFT:0.61, pv:5, mv:30,
+      ings:[
+        {n:'Massa Brigadeiro Branco', q:0.01, u:'kg', p:24.6564},
+        {n:'Massa Brigadeiro Chocolate', q:0.01, u:'kg', p:32.3242},
+        {n:'Leite em pó', q:0.001, u:'kg', p:39.75}
+      ]},
+    { id:'brigadeiro-ninho-c-nutella', nome:'Brigadeiro Ninho c/ Nutella', desc:'Massa Brigadeiro Branco, Leite em pó, Nutella',prep:'',
+      custoFT:0.74, pv:5, mv:30,
+      ings:[
+        {n:'Massa Brigadeiro Branco', q:0.02, u:'kg', p:24.6564},
+        {n:'Leite em pó', q:0.001, u:'kg', p:39.75},
+        {n:'Nutella', q:0.004, u:'kg', p:50.96}
+      ]},
+    { id:'brigadeiro-chocolate', nome:'Brigadeiro Chocolate', desc:'Massa Brigadeiro Chocolate, Granulê chocolate meio amargo',prep:'',
+      custoFT:0.95, pv:5, mv:30,
+      ings:[
+        {n:'Massa Brigadeiro Chocolate', q:0.02, u:'kg', p:32.3242},
+        {n:'Granulê chocolate meio amargo', q:0.003, u:'kg', p:100}
+      ]},
+    { id:'brigadeiro-xerem-de-amendoim', nome:'Brigadeiro Xerem de Amendoim', desc:'Massa Brigadeiro Chocolate, Xerem de amendoim, Nutella',prep:'',
+      custoFT:0.91, pv:5, mv:30,
+      ings:[
+        {n:'Massa Brigadeiro Chocolate', q:0.02, u:'kg', p:32.3242},
+        {n:'Xerem de amendoim', q:0.002, u:'kg', p:32},
+        {n:'Nutella', q:0.004, u:'kg', p:50.96}
+      ]},
+    { id:'indecente-de-chocolate', nome:'Indecente de Chocolate', desc:'Chocolate Meio Amargo, Chocolate ao Leite, Manteiga, Creme de Leite',prep:'',
+      custoFT:84.28, pv:301, mv:30,
+      ings:[
+        {n:'Chocolate Meio Amargo', q:0.71, u:'kg', p:51.15},
+        {n:'Chocolate ao Leite', q:0.165, u:'kg', p:46.4},
+        {n:'Manteiga', q:0.305, u:'kg', p:28.9},
+        {n:'Creme de Leite', q:0.48, u:'kg', p:16.45},
+        {n:'Leite em Pó', q:0.195, u:'kg', p:39.75},
+        {n:'Mel', q:0.025, u:'kg', p:35},
+        {n:'Açúcar de Confeiteiro', q:0.01, u:'kg', p:21.25},
+        {n:'Óreo Triturado', q:0.36, u:'kg', p:41}
+      ]},
+    { id:'torta-absurda', nome:'Torta Absurda', desc:'Açúcar Refinado, Ovo, Óleo, Cacau 100%',prep:'',
+      custoFT:55.58, pv:198.5, mv:30,
+      ings:[
+        {n:'Açúcar Refinado', q:0.41, u:'kg', p:3.49},
+        {n:'Ovo', q:4, u:'Und', p:0.5},
+        {n:'Óleo', q:0.097, u:'kg', p:8.55},
+        {n:'Cacau 100%', q:0.1, u:'kg', p:75.6},
+        {n:'Farinha de Trigo', q:0.135, u:'kg', p:4.48},
+        {n:'Chocolate Meio Amargo', q:0.2, u:'kg', p:51.15},
+        {n:'Creme de Leite', q:0.15, u:'kg', p:16.45},
+        {n:'Chantilly', q:0.4, u:'kg', p:8.5183},
+        {n:'Gelatina em Pó Incolor', q:0.018, u:'kg', p:272.91},
+        {n:'Chocolate Branco', q:0.2, u:'kg', p:48.45},
+        {n:'Creme de Leite', q:0.1, u:'kg', p:16.45},
+        {n:'Maracujá', q:0.18, u:'kg', p:60}
+      ]},
+    { id:'cookie-tradicional-duo', nome:'Cookie Tradicional Duo', desc:'Chocolate Branco, Chocolate ao leite, Cookie Tradicional',prep:'',
+      custoFT:4.61, pv:16.46, mv:30,
+      ings:[
+        {n:'Chocolate Branco', q:0.02, u:'kg', p:48.45},
+        {n:'Chocolate ao leite', q:0.02, u:'kg', p:46.4},
+        {n:'Cookie Tradicional', q:0.2, u:'kg', p:13.5476}
+      ]},
+    { id:'cookie-tradicional-chocolate', nome:'Cookie Tradicional Chocolate', desc:'Chocolate ao leite, Cookie Tradicional',prep:'',
+      custoFT:4.57, pv:16.32, mv:30,
+      ings:[
+        {n:'Chocolate ao leite', q:0.04, u:'kg', p:46.4},
+        {n:'Cookie Tradicional', q:0.2, u:'kg', p:13.5476}
+      ]},
+    { id:'cookie-especial-kinder', nome:'Cookie Especial Kinder', desc:'Kinder, Chocolate Branco, Cookie especial',prep:'',
+      custoFT:12.45, pv:44.46, mv:30,
+      ings:[
+        {n:'Kinder', q:0.07, u:'kg', p:81.39},
+        {n:'Chocolate Branco', q:0.07, u:'kg', p:48.45},
+        {n:'Cookie especial', q:0.2, u:'kg', p:16.8118}
+      ]},
+    { id:'cookie-especial-kit-kat', nome:'Cookie Especial Kit Kat', desc:'Kit Kat, Chocolate ao leite, Cookie especial',prep:'',
+      custoFT:12.43, pv:44.39, mv:30,
+      ings:[
+        {n:'Kit Kat', q:0.07, u:'kg', p:96.38},
+        {n:'Chocolate ao leite', q:0.05, u:'kg', p:46.4},
+        {n:'Cookie especial', q:0.2, u:'kg', p:16.8118}
+      ]},
+    { id:'cookie-especial-red-velvet', nome:'Cookie Especial Red Velvet', desc:'Chocolate Branco, Cookie Tradicional, Cream Cheese',prep:'',
+      custoFT:5.75, pv:20.54, mv:30,
+      ings:[
+        {n:'Chocolate Branco', q:0.04, u:'kg', p:48.45},
+        {n:'Cookie Tradicional', q:0.2, u:'kg', p:13.5476},
+        {n:'Cream Cheese', q:0.03, u:'kg', p:36.9}
+      ]},
+    { id:'cookie-especial-duo-black', nome:'Cookie Especial Duo Black', desc:'Chocolate ao leite, Chocolate branco, Cookie especial',prep:'',
+      custoFT:7.16, pv:25.57, mv:30,
+      ings:[
+        {n:'Chocolate ao leite', q:0.04, u:'kg', p:46.4},
+        {n:'Chocolate branco', q:0.04, u:'kg', p:48.45},
+        {n:'Cookie especial', q:0.2, u:'kg', p:16.8118}
+      ]},
+    { id:'cookie-especial-black', nome:'Cookie Especial Black', desc:'Chocolate meio amargo, Cookie Especial',prep:'',
+      custoFT:6.94, pv:24.79, mv:30,
+      ings:[
+        {n:'Chocolate meio amargo', q:0.07, u:'kg', p:51.15},
+        {n:'Cookie Especial', q:0.2, u:'kg', p:16.8118}
+      ]},
+    { id:'cookie-especial-ferreiro', nome:'Cookie Especial Ferreiro', desc:'Chocolate ao leite, Cookie Especial, Nutella, Xerem de Amendoim',prep:'',
+      custoFT:6.56, pv:23.43, mv:30,
+      ings:[
+        {n:'Chocolate ao leite', q:0.04, u:'kg', p:46.4},
+        {n:'Cookie Especial', q:0.2, u:'kg', p:16.8118},
+        {n:'Nutella', q:0.02, u:'kg', p:50.96},
+        {n:'Xerem de Amendoim', q:0.01, u:'kg', p:32}
+      ]},
+    { id:'broa-cremosa-com-queijo', nome:'Broa Cremosa com Queijo', desc:'Ovo, Fubá, Açúcar Cristal, Margarina',prep:'',
+      custoFT:24.16, pv:86.29, mv:30,
+      ings:[
+        {n:'Ovo', q:3, u:'Und', p:0.5},
+        {n:'Fubá', q:0.19, u:'kg', p:4.5},
+        {n:'Açúcar Cristal', q:0.485, u:'kg', p:2.49},
+        {n:'Margarina', q:0.1, u:'kg', p:9.33},
+        {n:'Fermento Químico', q:0.012, u:'kg', p:41.95},
+        {n:'Parmesão', q:0.15, u:'kg', p:105.86},
+        {n:'Leite', q:0.7, u:'L', p:4.69}
+      ]},
+    { id:'pasteizinhos-de-chuva', nome:'Pasteizinhos de Chuva', desc:'Ovo, Açúcar Refinado, Óleo, Vinagre',prep:'',
+      custoFT:16.62, pv:59.36, mv:30,
+      ings:[
+        {n:'Ovo', q:3, u:'Und', p:0.5},
+        {n:'Açúcar Refinado', q:0.21, u:'kg', p:3.49},
+        {n:'Óleo', q:0.36, u:'kg', p:8.55},
+        {n:'Vinagre', q:0.015, u:'L', p:16},
+        {n:'Fermento Químico', q:0.012, u:'kg', p:41.95},
+        {n:'Farinha de Trigo', q:0.4, u:'kg', p:4.48},
+        {n:'Doce de Leite', q:0.3, u:'kg', p:23.9},
+        {n:'Canela', q:0.05, u:'kg', p:32}
+      ]},
+    { id:'bolo-de-cenoura-caseirinho', nome:'Bolo de Cenoura Caseirinho', desc:'Brigadeiro Cobertura, Bolo de Cenoura, Granulê Chocolate Meio Amargo',prep:'',
+      custoFT:5.08, pv:18.14, mv:30,
+      ings:[
+        {n:'Brigadeiro Cobertura', q:0.12, u:'kg', p:24.4482},
+        {n:'Bolo de Cenoura', q:1, u:'Und', p:1.1474},
+        {n:'Granulê Chocolate Meio Amargo', q:0.01, u:'kg', p:100}
+      ]},
+    { id:'brownie-e-sorvete', nome:'Brownie e Sorvete', desc:'Brownie, Calda de Caramelo, Sorvete',prep:'',
+      custoFT:4.29, pv:15.32, mv:30,
+      ings:[
+        {n:'Brownie', q:0.112, u:'kg', p:29.6647},
+        {n:'Calda de Caramelo', q:0.01, u:'kg', p:12.3358},
+        {n:'Sorvete', q:0.065, u:'kg', p:13}
+      ]},
+    { id:'bolo-de-amora-com-lim-o', nome:'Bolo de Amora com limão', desc:'Limão siciliano, Leite, Manteiga, Açúcar Cristal',prep:'',
+      custoFT:31.73, pv:113.32, mv:30,
+      ings:[
+        {n:'Limão siciliano', q:0.24, u:'kg', p:17},
+        {n:'Leite', q:0.28, u:'L', p:4.69},
+        {n:'Manteiga', q:0.23, u:'kg', p:28.9},
+        {n:'Açúcar Cristal', q:0.23, u:'kg', p:2.49},
+        {n:'Ovo', q:4, u:'Und', p:0.5},
+        {n:'Farinha de Trigo', q:0.36, u:'kg', p:4.48},
+        {n:'Extrato de Baunilha', q:0.01, u:'kg', p:333},
+        {n:'Fermento', q:0.022, u:'kg', p:41.5},
+        {n:'Limão Taiti', q:0.08, u:'kg', p:5},
+        {n:'Cream Cheese', q:0.1, u:'kg', p:36.9},
+        {n:'Açúcar de Confeiteiro', q:0.08, u:'kg', p:21.25},
+        {n:'Amora Congelada', q:0.25, u:'kg', p:21.9}
+      ]},
+    { id:'sobremesa-de-mineiro', nome:'Sobremesa de Mineiro', desc:'Doce de Leite, Queijo Canastra',prep:'',
+      custoFT:3.83, pv:13.68, mv:30,
+      ings:[
+        {n:'Doce de Leite', q:0.066, u:'kg', p:23.9},
+        {n:'Queijo Canastra', q:0.045, u:'kg', p:50}
+      ]},
   ]},
-
-  // ── PÃO DE QUEIJO ──────────────────────────────────────────────
-  { nome:'PÃO DE QUEIJO', tabLabel:'PÃO QJ', sub:'Receita Mineira Artesanal', pratos:[
-
-    { id:'pao-queijo-tradicional', nome:'Pão de Queijo Tradicional (4 un)',
-      desc:'Receita artesanal com polvilho e queijo meia cura — crocante por fora, macio por dentro',
-      prep:'Misturar polvilho azedo e doce com queijo ralado, ovos, leite quente e manteiga. Modelar as bolinhas. Assar a 180°C por 25 minutos até dourar.',
+  { nome:'Lanches, Sanduíche e Chapa', tabLabel:'LANCHES', sub:'Lanches, Tapiocas, Quiches e Chapa', pratos:[
+    { id:'torta-de-frango-com-catupiry-da-v-gra-a', nome:'Torta de Frango com Catupiry da Vó Graça', desc:'Farinha de Trigo, Margarina, Ovo, Sal',prep:'',
+      custoFT:54.17, pv:193.46, mv:30,
       ings:[
-        {n:'Polvilho',       q:0.100},
-        {n:'Queijo Meia Cura',q:0.080},
-        {n:'Ovos',           q:1},
-        {n:'Leite Integral', q:0.060},
-        {n:'Manteiga',       q:0.020},
-      ], pv:12.00, mv:50 },
-
-    { id:'pao-queijo-recheado', nome:'Pão de Queijo Recheado (2 un)',
-      desc:'Pão de queijo artesanal recheado com cream cheese e ervas',
-      prep:'Preparar a massa padrão de pão de queijo. Rechear cada unidade com cream cheese e ervas finas. Assar até dourar e servir quente.',
+        {n:'Farinha de Trigo', q:1.2, u:'kg', p:4.48},
+        {n:'Margarina', q:0.6, u:'kg', p:9.33},
+        {n:'Ovo', q:5, u:'Und', p:0.5},
+        {n:'Sal', q:0.02, u:'kg', p:2.59},
+        {n:'Frango Desfiado', q:0.8, u:'kg', p:32.9001},
+        {n:'Requeijão balde', q:0.4, u:'kg', p:33.83},
+        {n:'Molho de Tomate', q:0.1, u:'kg', p:7.9145}
+      ]},
+    { id:'queijo-quente-misto', nome:'Queijo Quente - Misto', desc:'Pão Petrópolis, Mussarela Fatiada, Presunto, Requeijão Balde',prep:'',
+      custoFT:7.34, pv:26.21, mv:30,
       ings:[
-        {n:'Polvilho',       q:0.080},
-        {n:'Queijo Meia Cura',q:0.060},
-        {n:'Cream Cheese',   q:0.060},
-        {n:'Ovos',           q:1},
-        {n:'Leite Integral', q:0.050},
-        {n:'Manteiga',       q:0.015},
-      ], pv:16.00, mv:40 },
+        {n:'Pão Petrópolis', q:0.09, u:'kg', p:26},
+        {n:'Mussarela Fatiada', q:0.05, u:'kg', p:46},
+        {n:'Presunto', q:0.026, u:'kg', p:22},
+        {n:'Requeijão Balde', q:0.05, u:'kg', p:33.83},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9}
+      ]},
+    { id:'tapioca-empanada-no-parmes-o-queijo-canastra', nome:'Tapioca Empanada no Parmesão - Queijo Canastra', desc:'Tapioca, Parmesão, Queijo Canastra, Mussarela',prep:'',
+      custoFT:10.04, pv:35.86, mv:30,
+      ings:[
+        {n:'Tapioca', q:0.157, u:'kg', p:8.75},
+        {n:'Parmesão', q:0.036, u:'kg', p:105.86},
+        {n:'Queijo Canastra', q:0.041, u:'kg', p:50},
+        {n:'Mussarela', q:0.061, u:'kg', p:46}
+      ]},
+    { id:'tapioca-empanada-no-parmes-o-frango', nome:'Tapioca Empanada no Parmesão - Frango', desc:'Tapioca, Parmesão, Cream Cheese, Rúcula',prep:'',
+      custoFT:8.79, pv:31.39, mv:30,
+      ings:[
+        {n:'Tapioca', q:0.157, u:'kg', p:8.75},
+        {n:'Parmesão', q:0.036, u:'kg', p:105.86},
+        {n:'Cream Cheese', q:0.075, u:'kg', p:36.9},
+        {n:'Rúcula', q:0.002, u:'kg', p:10.4},
+        {n:'Tomate Seco', q:0.03, u:'kg', p:27.22}
+      ]},
+    { id:'quiche-alho-por-com-queijo', nome:'Quiche - Alho Poró Com Queijo', desc:'Massa Quiche, Recheio Quiche, Alho Poró',prep:'',
+      custoFT:2.76, pv:9.86, mv:30,
+      ings:[
+        {n:'Massa Quiche', q:0.1, u:'kg', p:6.5342},
+        {n:'Recheio Quiche', q:0.09, u:'kg', p:21.574},
+        {n:'Alho Poró', q:0.01, u:'kg', p:16}
+      ]},
+    { id:'croque-caipira', nome:'Croque Caipira', desc:'Pão Petrópolis, Manteiga, Bacon Preparado, Molho Branco',prep:'',
+      custoFT:17.39, pv:62.11, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.09, u:'kg', p:26},
+        {n:'Manteiga', q:0.035, u:'kg', p:28.9},
+        {n:'Bacon Preparado', q:0.057, u:'kg', p:37.1867},
+        {n:'Molho Branco', q:0.154, u:'kg', p:23.256},
+        {n:'Frango Desfiado', q:0.046, u:'kg', p:32.9001},
+        {n:'Leite', q:0.022, u:'L', p:4.69},
+        {n:'Sal', q:0.001, u:'kg', p:2.59},
+        {n:'Mussarela', q:0.1, u:'kg', p:46},
+        {n:'Parmesão', q:0.02, u:'kg', p:105.86}
+      ]},
+    { id:'sandu-che-de-salpic-o', nome:'Sanduíche de Salpicão', desc:'Pão Italiano, Manteiga, Cenoura, Frango Desfiado',prep:'',
+      custoFT:9.49, pv:33.89, mv:30,
+      ings:[
+        {n:'Pão Italiano', q:1, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.032, u:'kg', p:28.9},
+        {n:'Cenoura', q:0.01, u:'kg', p:5},
+        {n:'Frango Desfiado', q:0.08, u:'kg', p:32.9001},
+        {n:'Maionese', q:0.03, u:'kg', p:10.96},
+        {n:'Pesto', q:0.005, u:'kg', p:26.6581},
+        {n:'Cebolete', q:0.001, u:'kg', p:10},
+        {n:'Alface Americana', q:0.013, u:'kg', p:14.4},
+        {n:'Batata Palha', q:0.02, u:'kg', p:21.1946}
+      ]},
+    { id:'misto-quente-perfeito', nome:'Misto Quente Perfeito', desc:'Croissant Oui Uai, Presunto Parma, Queijo Canastra',prep:'',
+      custoFT:10.47, pv:37.39, mv:30,
+      ings:[
+        {n:'Croissant Oui Uai', q:1, u:'Und', p:6.5},
+        {n:'Presunto Parma', q:0.02, u:'kg', p:73.55},
+        {n:'Queijo Canastra', q:0.05, u:'kg', p:50}
+      ]},
+    { id:'sandu-che-de-parma', nome:'Sanduíche de Parma', desc:'Pão Italiano, Manteiga, Cream Cheese, Presunto Parma',prep:'',
+      custoFT:6.27, pv:22.39, mv:30,
+      ings:[
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.013, u:'kg', p:28.9},
+        {n:'Cream Cheese', q:0.035, u:'kg', p:36.9},
+        {n:'Presunto Parma', q:0.02, u:'kg', p:73.55},
+        {n:'Tomate Seco', q:0.015, u:'kg', p:27.22},
+        {n:'Pesto', q:0.01, u:'kg', p:26.6581},
+        {n:'Rúcula', q:0.005, u:'kg', p:10.4}
+      ]},
+    { id:'croissant-oui-uai-queijo', nome:'Croissant Oui Uai - Queijo', desc:'Croissant Oui Uai, Pesto, Mussarela, Tomate Confit',prep:'',
+      custoFT:10.98, pv:39.21, mv:30,
+      ings:[
+        {n:'Croissant Oui Uai', q:1, u:'Und', p:6.5},
+        {n:'Pesto', q:0.01, u:'kg', p:26.6581},
+        {n:'Mussarela', q:0.06, u:'kg', p:46},
+        {n:'Tomate Confit', q:0.044, u:'kg', p:32.924}
+      ]},
+    { id:'croissant-oui-uai-parma', nome:'Croissant Oui Uai - Parma', desc:'Croissant Oui Uai, Presunto Parma, Tomate Seco, Cream Cheese',prep:'',
+      custoFT:11.02, pv:39.36, mv:30,
+      ings:[
+        {n:'Croissant Oui Uai', q:1, u:'Und', p:6.5},
+        {n:'Presunto Parma', q:0.024, u:'kg', p:73.55},
+        {n:'Tomate Seco', q:0.036, u:'kg', p:27.22},
+        {n:'Cream Cheese', q:0.048, u:'kg', p:36.9}
+      ]},
+    { id:'canastr-o-franc-s', nome:'Canastrão Francês', desc:'Pão Petrópolis, Queijo Canastra, Presunto, Molho Branco',prep:'',
+      custoFT:11.6, pv:41.43, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.07, u:'kg', p:26},
+        {n:'Queijo Canastra', q:0.067, u:'kg', p:50},
+        {n:'Presunto', q:0.047, u:'kg', p:22},
+        {n:'Molho Branco', q:0.134, u:'kg', p:23.256},
+        {n:'Parmesão', q:0.008, u:'kg', p:105.86},
+        {n:'Ovo Caipira', q:1, u:'Und', p:1},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9},
+        {n:'Azeite', q:0.005, u:'L', p:78}
+      ]},
+    { id:'p-o-italiano-na-chapa-manteiga', nome:'Pão Italiano na Chapa - Manteiga', desc:'Pão Italiano, Manteiga',prep:'',
+      custoFT:2.98, pv:10.64, mv:30,
+      ings:[
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.02, u:'kg', p:28.9}
+      ]},
+    { id:'p-o-italiano-na-chapa-requeij-o', nome:'Pão Italiano na Chapa - Requeijão', desc:'Pão Italiano, Requeijão Balde',prep:'',
+      custoFT:4.09, pv:14.61, mv:30,
+      ings:[
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Requeijão Balde', q:0.05, u:'kg', p:33.83}
+      ]},
+    { id:'p-o-petropolis-manteiga', nome:'Pão Petropolis - Manteiga', desc:'Pão Petrópolis, Manteiga',prep:'',
+      custoFT:1.75, pv:6.25, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Manteiga', q:0.02, u:'kg', p:28.9}
+      ]},
+    { id:'p-o-petropolis-requeij-o', nome:'Pão Petropolis - Requeijão', desc:'Pão Petrópolis, Requeijão Balde',prep:'',
+      custoFT:2.86, pv:10.21, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Requeijão Balde', q:0.05, u:'kg', p:33.83}
+      ]},
+    { id:'croissant-manteiga', nome:'Croissant - Manteiga', desc:'Croissant Oui Uai, Manteiga',prep:'',
+      custoFT:7.08, pv:25.29, mv:30,
+      ings:[
+        {n:'Croissant Oui Uai', q:1, u:'Und', p:6.5},
+        {n:'Manteiga', q:0.02, u:'kg', p:28.9}
+      ]},
+    { id:'croissant-requeij-o', nome:'Croissant - Requeijão', desc:'Croissant Oui Uai, Requeijão Balde',prep:'',
+      custoFT:8.19, pv:29.25, mv:30,
+      ings:[
+        {n:'Croissant Oui Uai', q:1, u:'Und', p:6.5},
+        {n:'Requeijão Balde', q:0.05, u:'kg', p:33.83}
+      ]},
+    { id:'ovos-mexidos-com-parmes-o', nome:'Ovos Mexidos com Parmesão', desc:'Ovo, Parmesão, Manteiga',prep:'',
+      custoFT:3.79, pv:13.54, mv:30,
+      ings:[
+        {n:'Ovo', q:2, u:'Und', p:0.5},
+        {n:'Parmesão', q:0.025, u:'kg', p:105.86},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9}
+      ]},
+    { id:'bacon', nome:'Bacon', desc:'Bacon Preparado',prep:'',
+      custoFT:1.12, pv:5, mv:30,
+      ings:[
+        {n:'Bacon Preparado', q:0.03, u:'kg', p:37.1867}
+      ]},
+    { id:'goiabada', nome:'Goiabada', desc:'Goiabada',prep:'',
+      custoFT:0.32, pv:5, mv:30,
+      ings:[
+        {n:'Goiabada', q:0.025, u:'kg', p:12.8}
+      ]},
+    { id:'cream-cheese', nome:'Cream Cheese', desc:'Cream Cheese',prep:'',
+      custoFT:1.11, pv:5, mv:30,
+      ings:[
+        {n:'Cream Cheese', q:0.03, u:'kg', p:36.9}
+      ]},
+    { id:'cogumelos-salteados', nome:'Cogumelos Salteados', desc:'Cogumelo, Manteiga',prep:'',
+      custoFT:3.58, pv:12.79, mv:30,
+      ings:[
+        {n:'Cogumelo', q:0.05, u:'kg', p:68.76},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9}
+      ]},
+    { id:'ovo-caipira-mexidos-na-manteiga-com-parmes-o', nome:'Ovo Caipira Mexidos na Manteiga com Parmesão', desc:'Ovo Caipira, Parmesão, Manteiga',prep:'',
+      custoFT:4.79, pv:17.11, mv:30,
+      ings:[
+        {n:'Ovo Caipira', q:2, u:'Und', p:1},
+        {n:'Parmesão', q:0.025, u:'kg', p:105.86},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9}
+      ]},
+    { id:'p-o-com-ovo', nome:'Pão com Ovo', desc:'Pão Petrópolis, Ovo',prep:'',
+      custoFT:1.67, pv:5.96, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Ovo', q:1, u:'Und', p:0.5}
+      ]},
+    { id:'omelete', nome:'Omelete', desc:'Ovo, Sal, Manteiga',prep:'',
+      custoFT:1.15, pv:5, mv:30,
+      ings:[
+        {n:'Ovo', q:2, u:'Und', p:0.5},
+        {n:'Sal', q:0.003, u:'kg', p:2.59},
+        {n:'Manteiga', q:0.005, u:'kg', p:28.9}
+      ]},
   ]},
-
-  // ── FRUTAS E BRUNCH ────────────────────────────────────────────
-  { nome:'FRUTAS E BRUNCH', tabLabel:'BRUNCH', sub:'Opções Leves e Saudáveis', pratos:[
-
-    { id:'salada-frutas', nome:'Salada de Frutas do Bistrô',
-      desc:'Seleção de frutas frescas da estação com iogurte grego e mel',
-      prep:'Higienizar e cortar as frutas da estação em cubos uniformes. Servir em tigela com iogurte grego e fio de mel.',
+  { nome:'Pão de Queijo', tabLabel:'PÃO QJ', sub:'Receita Artesanal Mineira', pratos:[
+    { id:'p-o-de-queijo-recheado-pernil-bacon-canastra-e-couve', nome:'Pão de Queijo Recheado - Pernil, Bacon, Canastra e Couve', desc:'Pão de Queijo Unidade, Pernil Desfiado, Queijo Canastra, Bacon',prep:'',
+      custoFT:6.27, pv:22.39, mv:30,
       ings:[
-        {n:'Morango',      q:0.060},
-        {n:'Manga',        q:0.060},
-        {n:'Mamão',        q:0.080},
-        {n:'Kiwi',         q:0.040},
-        {n:'Uva',          q:0.040},
-        {n:'Iogurte Grego',q:0.080},
-        {n:'Mel',          q:0.015},
-      ], pv:22.00, mv:42 },
-
-    { id:'acai-bowl', nome:'Açaí Bowl 500ml',
-      desc:'Açaí batido com banana, granola crocante, frutas e mel',
-      prep:'Bater o açaí congelado com a banana até consistência cremosa. Servir no bowl com granola, frutas frescas e fio de mel.',
+        {n:'Pão de Queijo Unidade', q:1, u:'Und', p:2.4524},
+        {n:'Pernil Desfiado', q:0.03, u:'kg', p:43.1667},
+        {n:'Queijo Canastra', q:0.041, u:'kg', p:50},
+        {n:'Bacon', q:0.015, u:'kg', p:27.89},
+        {n:'Couve', q:0.003, u:'kg', p:18}
+      ]},
+    { id:'p-o-de-queijo-recheado-catupiry', nome:'Pão de Queijo Recheado - Catupiry', desc:'Pão de Queijo Unidade, Requeijão Bisnaga',prep:'',
+      custoFT:5.65, pv:20.18, mv:30,
       ings:[
-        {n:'Açaí',         q:0.200},
-        {n:'Banana',       q:0.060},
-        {n:'Granola',      q:0.050},
-        {n:'Morango',      q:0.040},
-        {n:'Mel',          q:0.015},
-      ], pv:28.00, mv:38 },
-
-    { id:'granola-iogurte', nome:'Granola com Iogurte e Frutas',
-      desc:'Iogurte grego cremoso, granola artesanal, frutas e chia',
-      prep:'Dispor o iogurte grego na base. Cobrir com granola artesanal. Adicionar frutas frescas e sementes de chia. Finalizar com mel.',
+        {n:'Pão de Queijo Unidade', q:1, u:'Und', p:2.4524},
+        {n:'Requeijão Bisnaga', q:0.05, u:'kg', p:63.9}
+      ]},
+    { id:'p-o-de-queijo-recheado-doce-de-leite', nome:'Pão de Queijo Recheado - Doce de Leite', desc:'Pão de Queijo Unidade, Doce de Leite',prep:'',
+      custoFT:3.65, pv:13.04, mv:30,
       ings:[
-        {n:'Iogurte Grego', q:0.150},
-        {n:'Granola',       q:0.060},
-        {n:'Morango',       q:0.040},
-        {n:'Banana',        q:0.040},
-        {n:'Chia',          q:0.010},
-        {n:'Mel',           q:0.015},
-      ], pv:22.00, mv:40 },
+        {n:'Pão de Queijo Unidade', q:1, u:'Und', p:2.4524},
+        {n:'Doce de Leite', q:0.05, u:'kg', p:23.9}
+      ]},
+    { id:'p-o-de-queijo-por-o-6-unidades', nome:'Pão de Queijo Porção - 6 Unidades', desc:'Pão de Queijo Porção, Goiabada, Cream Cheese',prep:'',
+      custoFT:5.12, pv:18.29, mv:30,
+      ings:[
+        {n:'Pão de Queijo Porção', q:6, u:'Und', p:0.6131},
+        {n:'Goiabada', q:0.026, u:'kg', p:12.8},
+        {n:'Cream Cheese', q:0.03, u:'kg', p:36.9}
+      ]},
+    { id:'p-o-de-queijo-unidade', nome:'Pão de Queijo Unidade', desc:'Pão de Queijo Unidade',prep:'',
+      custoFT:2.45, pv:8.75, mv:30,
+      ings:[
+        {n:'Pão de Queijo Unidade', q:1, u:'Und', p:2.4524}
+      ]},
   ]},
-
-  // ── SMOTHIES E BEBIDAS ─────────────────────────────────────────
-  { nome:'SMOTHIES E BEBIDAS', tabLabel:'DRINKS', sub:'Vitaminas, Sucos e Smoothies Naturais', pratos:[
-
-    { id:'smothie-verde', nome:'Smothie Verde Detox',
-      desc:'Espinafre, maçã verde, banana, limão, chia e leite de coco',
-      prep:'Bater todos os ingredientes no liquidificador com leite de coco gelado até textura homogênea. Servir imediatamente.',
+  { nome:'Frutas e Brunch', tabLabel:'BRUNCH', sub:'Brunchs Frescos e Nutritivos', pratos:[
+    { id:'berries-iogurt', nome:'Berries Iogurt', desc:'Morango Congelado, Amora Congelada, Iogurte Natural, Granola',prep:'',
+      custoFT:10.49, pv:37.46, mv:30,
       ings:[
-        {n:'Espinafre',      q:0.040},
-        {n:'Maçã',           q:0.080},
-        {n:'Banana',         q:0.060},
-        {n:'Limão',          q:0.020},
-        {n:'Chia',           q:0.010},
-        {n:'Leite de Coco',  q:0.200},
-      ], pv:18.00, mv:45 },
-
-    { id:'vitamina-frutas', nome:'Vitamina de Frutas Tropicais',
-      desc:'Mamão, manga, abacaxi, banana e iogurte — cremosa e nutritiva',
-      prep:'Bater as frutas com iogurte natural e leite. Servir gelado.',
+        {n:'Morango Congelado', q:0.1, u:'kg', p:13.5},
+        {n:'Amora Congelada', q:0.1, u:'kg', p:21.9},
+        {n:'Iogurte Natural', q:0.17, u:'kg', p:17.5},
+        {n:'Granola', q:0.08, u:'kg', p:27},
+        {n:'Coco', q:0.015, u:'kg', p:110},
+        {n:'Chia', q:0.005, u:'kg', p:32}
+      ]},
+    { id:'parma', nome:'Parma', desc:'Pão Italiano, Manteiga, Presunto Parma, Ovo',prep:'',
+      custoFT:9.49, pv:33.89, mv:30,
       ings:[
-        {n:'Mamão',          q:0.080},
-        {n:'Manga',          q:0.060},
-        {n:'Abacaxi',        q:0.060},
-        {n:'Banana',         q:0.050},
-        {n:'Iogurte Natural',q:0.080},
-        {n:'Leite Integral', q:0.100},
-      ], pv:16.00, mv:42 },
-
-    { id:'suco-laranja', nome:'Suco de Laranja Natural 300ml',
-      desc:'Laranjas frescas espremidas na hora — vitamina C pura',
-      prep:'Espremer 4 laranjas na hora do pedido. Servir sem açúcar ou adoçar levemente conforme preferência.',
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.05, u:'kg', p:28.9},
+        {n:'Presunto Parma', q:0.02, u:'kg', p:73.55},
+        {n:'Ovo', q:2, u:'Und', p:0.5},
+        {n:'Parmesão', q:0.03, u:'kg', p:105.86}
+      ]},
+    { id:'mineiro', nome:'Mineiro', desc:'Queijo Canastra, Pão de Queijo Unidade, Ovo Caipira, Parmesão',prep:'',
+      custoFT:8.82, pv:31.5, mv:30,
       ings:[
-        {n:'Suco de Laranja', q:0.300},
-      ], pv:12.00, mv:50 },
-
-    { id:'smothie-morango', nome:'Smothie de Morango com Iogurte',
-      desc:'Morango fresco, iogurte grego, mel e granola — cremoso e refrescante',
-      prep:'Bater morango com iogurte grego e mel até cremoso. Servir com granola por cima.',
+        {n:'Queijo Canastra', q:0.05, u:'kg', p:50},
+        {n:'Pão de Queijo Unidade', q:1, u:'Und', p:2.4524},
+        {n:'Ovo Caipira', q:2, u:'Und', p:1},
+        {n:'Parmesão', q:0.005, u:'kg', p:105.86},
+        {n:'Bacon Preparado', q:0.036, u:'kg', p:37.1867},
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.013, u:'kg', p:28.9},
+        {n:'Cogumelo', q:0.05, u:'kg', p:68.76},
+        {n:'Cream Cheese', q:0.054, u:'kg', p:36.9},
+        {n:'Pesto', q:0.008, u:'kg', p:26.6581},
+        {n:'Ovo', q:2, u:'Und', p:0.5},
+        {n:'Leite', q:0.005, u:'L', p:4.69},
+        {n:'Parmesão', q:0.025, u:'kg', p:105.86},
+        {n:'Azeite', q:0.013, u:'L', p:78},
+        {n:'Tomate Confit', q:0.033, u:'kg', p:32.924},
+        {n:'Cebolete', q:0.005, u:'kg', p:10}
+      ]},
+  ]},
+  { nome:'Smothies e Bebidas', tabLabel:'DRINKS', sub:'Smothies, Sucos e Sodas Artesanais', pratos:[
+    { id:'antioxidante-da-casa', nome:'Antioxidante da Casa', desc:'Polpa de Cupuaçu, Morango Congelado',prep:'',
+      custoFT:3.85, pv:13.75, mv:30,
       ings:[
-        {n:'Morango',        q:0.120},
-        {n:'Iogurte Grego',  q:0.100},
-        {n:'Mel',            q:0.020},
-        {n:'Granola',        q:0.020},
-        {n:'Leite Integral', q:0.050},
-      ], pv:18.00, mv:40 },
+        {n:'Polpa de Cupuaçu', q:1, u:'Und', p:2.5},
+        {n:'Morango Congelado', q:0.1, u:'kg', p:13.5}
+      ]},
+    { id:'verde-c-trico', nome:'Verde Cítrico', desc:'Polpa de Abacaxi, Limão Taiti, Couve',prep:'',
+      custoFT:4.28, pv:15.29, mv:30,
+      ings:[
+        {n:'Polpa de Abacaxi', q:2, u:'Und', p:1.5},
+        {n:'Limão Taiti', q:0.075, u:'kg', p:5},
+        {n:'Couve', q:0.05, u:'kg', p:18}
+      ]},
+    { id:'soda-laranja-com-morango', nome:'Soda Laranja com Morango', desc:'Água com gás, Gelo, Xarope, Laranja Suco',prep:'',
+      custoFT:10.37, pv:37.04, mv:30,
+      ings:[
+        {n:'Água com gás', q:0.001, u:'L', p:3.5},
+        {n:'Gelo', q:0.18, u:'kg', p:2.5},
+        {n:'Xarope', q:0.06, u:'L', p:74},
+        {n:'Laranja Suco', q:0.2, u:'Und', p:7.9},
+        {n:'Limão Taiti', q:0.08, u:'kg', p:5}
+      ]},
+    { id:'pink-lemonade', nome:'Pink Lemonade', desc:'Água com gás, Gelo, Xarope, Limão Taiti',prep:'',
+      custoFT:8.79, pv:31.39, mv:30,
+      ings:[
+        {n:'Água com gás', q:0.001, u:'L', p:3.5},
+        {n:'Gelo', q:0.18, u:'kg', p:2.5},
+        {n:'Xarope', q:0.06, u:'L', p:74},
+        {n:'Limão Taiti', q:0.08, u:'kg', p:5}
+      ]},
+    { id:'soda-de-tangerina', nome:'Soda de Tangerina', desc:'Água com gás, Gelo, Xarope, Limão Taiti',prep:'',
+      custoFT:8.79, pv:31.39, mv:30,
+      ings:[
+        {n:'Água com gás', q:0.001, u:'L', p:3.5},
+        {n:'Gelo', q:0.18, u:'kg', p:2.5},
+        {n:'Xarope', q:0.06, u:'L', p:74},
+        {n:'Limão Taiti', q:0.08, u:'kg', p:5}
+      ]},
+    { id:'soda-de-amora', nome:'Soda de Amora', desc:'Água com gás, Gelo, Xarope, Laranja',prep:'',
+      custoFT:8.79, pv:31.39, mv:30,
+      ings:[
+        {n:'Água com gás', q:0.001, u:'L', p:3.5},
+        {n:'Gelo', q:0.18, u:'kg', p:2.5},
+        {n:'Xarope', q:0.06, u:'L', p:74},
+        {n:'Laranja', q:0.1, u:'kg', p:4}
+      ]},
+    { id:'soda-de-ma-verde', nome:'Soda de Maçã Verde', desc:'Água com gás, Gelo, Xarope, Limão Taiti',prep:'',
+      custoFT:8.88, pv:31.71, mv:30,
+      ings:[
+        {n:'Água com gás', q:0.001, u:'L', p:3.5},
+        {n:'Gelo', q:0.18, u:'kg', p:2.5},
+        {n:'Xarope', q:0.06, u:'L', p:74},
+        {n:'Limão Taiti', q:0.08, u:'kg', p:5},
+        {n:'Hortelã', q:0.005, u:'kg', p:18}
+      ]},
+    { id:'suco-laranja-com-morango', nome:'Suco Laranja com Morango', desc:'Morango Congelado, Laranja Suco',prep:'',
+      custoFT:4.62, pv:16.5, mv:30,
+      ings:[
+        {n:'Morango Congelado', q:0.05, u:'kg', p:13.5},
+        {n:'Laranja Suco', q:0.5, u:'Und', p:7.9}
+      ]},
+    { id:'suco-abacaxi-com-hortel', nome:'Suco Abacaxi com Hortelã', desc:'Polpa de Abacaxi, Hortelã',prep:'',
+      custoFT:1.52, pv:5.43, mv:30,
+      ings:[
+        {n:'Polpa de Abacaxi', q:1, u:'Und', p:1.5},
+        {n:'Hortelã', q:0.001, u:'kg', p:18}
+      ]},
+    { id:'suco-maracuj-com-manga', nome:'Suco Maracujá com Manga', desc:'Polpa de Maracujá, Polpa de Manga',prep:'',
+      custoFT:1.72, pv:6.14, mv:30,
+      ings:[
+        {n:'Polpa de Maracujá', q:0.5, u:'Und', p:2.15},
+        {n:'Polpa de Manga', q:0.5, u:'Und', p:1.3}
+      ]},
+    { id:'suco-maracuj', nome:'Suco Maracujá', desc:'Polpa de Maracujá',prep:'',
+      custoFT:2.15, pv:7.68, mv:30,
+      ings:[
+        {n:'Polpa de Maracujá', q:1, u:'Und', p:2.15}
+      ]},
+    { id:'suco-laranja', nome:'Suco Laranja', desc:'Laranja Suco',prep:'',
+      custoFT:7.9, pv:28.21, mv:30,
+      ings:[
+        {n:'Laranja Suco', q:1, u:'Und', p:7.9}
+      ]},
+    { id:'suco-amora-com-morango', nome:'Suco Amora com Morango', desc:'Morango Congelado, Polpa de Amora',prep:'',
+      custoFT:1.68, pv:6, mv:30,
+      ings:[
+        {n:'Morango Congelado', q:0.05, u:'kg', p:13.5},
+        {n:'Polpa de Amora', q:0.5, u:'Und', p:2}
+      ]},
+    { id:'suco-graviola', nome:'Suco Graviola', desc:'Polpa de Cupuaçu',prep:'',
+      custoFT:2.5, pv:8.93, mv:30,
+      ings:[
+        {n:'Polpa de Cupuaçu', q:1, u:'Und', p:2.5}
+      ]},
+  ]},
+  { nome:'Toasts e Combos', tabLabel:'TOASTS', sub:'Toasts no Pão Italiano e Combos', pratos:[
+    { id:'abacate-e-bacon', nome:'Abacate e Bacon', desc:'Creme de Abacate, Vinagrete, Manteiga, Cheddar',prep:'',
+      custoFT:10.92, pv:39, mv:30,
+      ings:[
+        {n:'Creme de Abacate', q:0.05, u:'kg', p:11.2639},
+        {n:'Vinagrete', q:0.056, u:'kg', p:34.7827},
+        {n:'Manteiga', q:0.027, u:'kg', p:28.9},
+        {n:'Cheddar', q:0.032, u:'kg', p:65.3},
+        {n:'Ovo Caipira', q:2, u:'Und', p:1},
+        {n:'Bacon', q:0.04, u:'kg', p:27.89},
+        {n:'Cebolinha', q:0.001, u:'kg', p:20},
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8}
+      ]},
+    { id:'salm-o-e-abacate', nome:'Salmão e Abacate', desc:'Pão Italiano, Manteiga, Creme de Abacate, Vinagrete',prep:'',
+      custoFT:11.97, pv:42.75, mv:30,
+      ings:[
+        {n:'Pão Italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.01, u:'kg', p:28.9},
+        {n:'Creme de Abacate', q:0.05, u:'kg', p:11.2639},
+        {n:'Vinagrete', q:0.05, u:'kg', p:34.7827},
+        {n:'Salmão', q:0.07, u:'kg', p:93.9434},
+        {n:'Limão Taiti', q:0.04, u:'kg', p:5},
+        {n:'Azeite', q:0.002, u:'L', p:78},
+        {n:'Cebolete', q:0.005, u:'kg', p:10}
+      ]},
+    { id:'salm-o-sour', nome:'Salmão Sour', desc:'Focaccia, Salmão, Azeite, Cream Cheese',prep:'',
+      custoFT:10.93, pv:39.04, mv:30,
+      ings:[
+        {n:'Focaccia', q:0.166, u:'kg', p:12.396},
+        {n:'Salmão', q:0.07, u:'kg', p:93.9434},
+        {n:'Azeite', q:0.004, u:'L', p:78},
+        {n:'Cream Cheese', q:0.051, u:'kg', p:36.9},
+        {n:'Pimenta do Reino', q:0.001, u:'kg', p:97},
+        {n:'Sal', q:0.001, u:'kg', p:2.59}
+      ]},
+    { id:'frango-caprese', nome:'Frango Caprese', desc:'Pão italiano, Manteiga, Frango desfiado, Tomate Confit',prep:'',
+      custoFT:9.39, pv:33.54, mv:30,
+      ings:[
+        {n:'Pão italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.013, u:'kg', p:28.9},
+        {n:'Frango desfiado', q:0.08, u:'kg', p:32.9001},
+        {n:'Tomate Confit', q:0.023, u:'kg', p:32.924},
+        {n:'Cream Cheese', q:0.04, u:'kg', p:36.9},
+        {n:'Mussarela', q:0.03, u:'kg', p:46},
+        {n:'Pesto', q:0.014, u:'kg', p:26.6581}
+      ]},
+    { id:'porkim-canastra', nome:'Porkim Canastra', desc:'Pão italiano, Manteiga, Queijo Canastra, Mussarela',prep:'',
+      custoFT:9.46, pv:33.79, mv:30,
+      ings:[
+        {n:'Pão italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.013, u:'kg', p:28.9},
+        {n:'Queijo Canastra', q:0.041, u:'kg', p:50},
+        {n:'Mussarela', q:0.06, u:'kg', p:46},
+        {n:'Pernil Desfiado', q:0.03, u:'kg', p:43.1667},
+        {n:'Milho Crocante', q:0.01, u:'kg', p:53},
+        {n:'Cebolete', q:0.005, u:'kg', p:10}
+      ]},
+    { id:'vegano', nome:'Vegano', desc:'Pão italiano, Manteiga, Tomate Seco, Azeite',prep:'',
+      custoFT:7.69, pv:27.46, mv:30,
+      ings:[
+        {n:'Pão italiano', q:0.5, u:'Und', p:4.8},
+        {n:'Manteiga', q:0.013, u:'kg', p:28.9},
+        {n:'Tomate Seco', q:0.015, u:'kg', p:27.22},
+        {n:'Azeite', q:0.013, u:'L', p:78},
+        {n:'Cogumelo', q:0.05, u:'kg', p:68.76},
+        {n:'Cebolete', q:0.005, u:'kg', p:10}
+      ]},
+    { id:'mev-um-cafezim', nome:'Mevê um Cafezim', desc:'Broa Combo, Pão de Queijo Porção, Grão de Café, Água com Gás',prep:'',
+      custoFT:6, pv:21.43, mv:30,
+      ings:[
+        {n:'Broa Combo', q:1, u:'Und', p:2.6846},
+        {n:'Pão de Queijo Porção', q:2, u:'Und', p:0.6131},
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Água com Gás', q:0.05, u:'L', p:3.5},
+        {n:'Biscoitinho do Café', q:1, u:'Und', p:0.1182}
+      ]},
+    { id:'p-de-caf-2024', nome:'Pé de Café 2024', desc:'Cookie Recheado, Toast Frango Caprese, Cappuccino de Ovomaltine',prep:'',
+      custoFT:18.88, pv:67.43, mv:30,
+      ings:[
+        {n:'Cookie Recheado', q:1, u:'Und', p:7.1564},
+        {n:'Toast Frango Caprese', q:1, u:'Und', p:9.3942},
+        {n:'Cappuccino de Ovomaltine', q:1, u:'Und', p:2.334}
+      ]},
+    { id:'mineirim-uai-tradicional', nome:'Mineirim, Uai! - Tradicional', desc:'Pão Petrópolis, Cream Cheese, Leite, Pó de Cappuccino',prep:'',
+      custoFT:5.87, pv:20.96, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Cream Cheese', q:0.03, u:'kg', p:36.9},
+        {n:'Leite', q:0.1, u:'L', p:4.69},
+        {n:'Pó de Cappuccino', q:0.03, u:'kg', p:60},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9},
+        {n:'Canela', q:0.02, u:'kg', p:32},
+        {n:'Pastelzinho de Chuva', q:2, u:'Und', p:0.1266}
+      ]},
+    { id:'completim-tradicional', nome:'Completim - Tradicional', desc:'Pão Petrópolis, Mussarela Fatiada, Presunto, Requeijão Balde',prep:'',
+      custoFT:14.32, pv:51.14, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Mussarela Fatiada', q:0.05, u:'kg', p:46},
+        {n:'Presunto', q:0.026, u:'kg', p:22},
+        {n:'Requeijão Balde', q:0.05, u:'kg', p:33.83},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9},
+        {n:'Laranja Suco', q:0.6, u:'Und', p:7.9},
+        {n:'Pó de Cappuccino', q:0.03, u:'kg', p:60},
+        {n:'Bolo de Cenoura', q:1, u:'Und', p:1.1474},
+        {n:'Leite', q:0.1, u:'L', p:4.69}
+      ]},
+    { id:'mineirim-uai-italiano', nome:'Mineirim, Uai! - Italiano', desc:'Pão Petrópolis, Cream Cheese, Leite, Grão de Café',prep:'',
+      custoFT:5.79, pv:20.68, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Cream Cheese', q:0.03, u:'kg', p:36.9},
+        {n:'Leite', q:0.05, u:'L', p:4.69},
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9},
+        {n:'Canela', q:0.02, u:'kg', p:32},
+        {n:'Pastelzinho de Chuva', q:2, u:'Und', p:0.1266},
+        {n:'Cacau 100%', q:0.002, u:'kg', p:75.6}
+      ]},
+    { id:'completim-italiano', nome:'Completim - Italiano', desc:'Pão Petrópolis, Mussarela Fatiada, Presunto, Requeijão Balde',prep:'',
+      custoFT:13.67, pv:48.82, mv:30,
+      ings:[
+        {n:'Pão Petrópolis', q:0.045, u:'kg', p:26},
+        {n:'Mussarela Fatiada', q:0.05, u:'kg', p:46},
+        {n:'Presunto', q:0.026, u:'kg', p:22},
+        {n:'Requeijão Balde', q:0.05, u:'kg', p:33.83},
+        {n:'Manteiga', q:0.015, u:'kg', p:28.9},
+        {n:'Laranja Suco', q:0.6, u:'Und', p:7.9},
+        {n:'Grão de Café', q:0.02, u:'kg', p:90},
+        {n:'Bolo de Cenoura', q:0.5, u:'Und', p:1.1474},
+        {n:'Leite', q:0.05, u:'L', p:4.69},
+        {n:'Cacau 100%', q:0.002, u:'kg', p:75.6}
+      ]},
   ]},
 ];
 
+let precos = {
+  'Batata Congelada':{p:19, u:'kg'},
+  'Maionese de Pesto':{p:13.5764, u:'kg'},
+  'Sal':{p:2.59, u:'kg'},
+  'Tilápia':{p:49.4318, u:'kg'},
+  'Panko':{p:22.8, u:'kg'},
+  'Ovo':{p:0.5, u:'Und'},
+  'Farinha de Trigo':{p:4.48, u:'kg'},
+  'Torresmo':{p:27.9, u:'kg'},
+  'Limão Cravo':{p:4, u:'kg'},
+  'Frango Desfiado':{p:32.9001, u:'kg'},
+  'Requeijão Balde':{p:33.83, u:'kg'},
+  'Leite':{p:4.69, u:'L'},
+  'Maisena':{p:19, u:'kg'},
+  'Arroz Preparado':{p:7.2426, u:'kg'},
+  'Molho de Tomate':{p:7.9145, u:'kg'},
+  'Batata Frita':{p:27.417, u:'kg'},
+  'Filet Mignon':{p:90, u:'kg'},
+  'Mussarela Fatiada':{p:46, u:'kg'},
+  'Salsa Desidratada':{p:30, u:'kg'},
+  'Arroz a Dodó':{p:14.1397, u:'kg'},
+  'Vinagrete':{p:34.7827, u:'kg'},
+  'Contrafilé':{p:56, u:'kg'},
+  'Feijão Preparado':{p:3.462, u:'kg'},
+  'Fettuccine':{p:18.8571, u:'kg'},
+  'Molho Madeira':{p:58.26, u:'kg'},
+  'Manteiga':{p:28.9, u:'kg'},
+  'Queijo Canastra':{p:50, u:'kg'},
+  'Salsinha':{p:19.9, u:'kg'},
+  'Farofa de Cebola':{p:5.65, u:'kg'},
+  'Couve':{p:18, u:'kg'},
+  'Alho':{p:18, u:'kg'},
+  'Banha':{p:14, u:'kg'},
+  'Frango':{p:21.9835, u:'kg'},
+  'Lombo':{p:41.5, u:'kg'},
+  'Couve Preparada':{p:46.8333, u:'kg'},
+  'Feijão da Roça':{p:16.6036, u:'kg'},
+  'Bacon Preparado':{p:37.1867, u:'kg'},
+  'Pernil Desfiado':{p:43.1667, u:'kg'},
+  'Água':{p:0.03, u:'L'},
+  'Limão Taiti':{p:5, u:'kg'},
+  'Milho Crocante':{p:53, u:'kg'},
+  'Limão Siciliano':{p:17, u:'kg'},
+  'Creme de Leite':{p:16.45, u:'kg'},
+  'Cebolinha':{p:20, u:'kg'},
+  'Cebola':{p:5, u:'kg'},
+  'Mostarda':{p:6.33, u:'kg'},
+  'Bebida Alcoólica Mista':{p:50, u:'L'},
+  'Ketchup':{p:10.9, u:'kg'},
+  'Cogumelo':{p:68.76, u:'kg'},
+  'Azeite':{p:78, u:'L'},
+  'Salmão':{p:93.9434, u:'kg'},
+  'Purê de Abobora':{p:14.2392, u:'kg'},
+  'Arroz de Ervas':{p:9.4217, u:'kg'},
+  'Legumes Salteados':{p:17.8913, u:'kg'},
+  'Castanha':{p:32, u:'kg'},
+  'Bife de Brócolis':{p:3.8595, u:'Und'},
+  'Tilápia Empanada':{p:46.2443, u:'kg'},
+  'Arroz Piamontese':{p:34.9661, u:'kg'},
+  'Crocante de Frango':{p:4.779, u:'Und'},
+  'Batata Palha':{p:21.1946, u:'kg'},
+  'Laranja':{p:4, u:'kg'},
+  'Feijoada':{p:22.1934, u:'kg'},
+  'Alface Crespa Roxa':{p:11.96, u:'kg'},
+  'Tomate Cereja':{p:26.67, u:'kg'},
+  'Crouton':{p:13.518, u:'kg'},
+  'Mostarda e Mel':{p:17.8339, u:'kg'},
+  'Alface Americana':{p:14.4, u:'kg'},
+  'Parmesão':{p:105.86, u:'kg'},
+  'Molho Caesar':{p:22.9952, u:'kg'},
+  'Alface Roxa':{p:11.96, u:'kg'},
+  'Cenoura':{p:5, u:'kg'},
+  'Beterraba':{p:4, u:'kg'},
+  'Pepino':{p:4, u:'kg'},
+  'Rúcula':{p:10.4, u:'kg'},
+  'Tomate Seco':{p:27.22, u:'kg'},
+  'Cream Cheese':{p:36.9, u:'kg'},
+  'Pesto':{p:26.6581, u:'kg'},
+  'Presunto Parma':{p:73.55, u:'kg'},
+  'Aceto Balsâmico':{p:37.5, u:'kg'},
+  'Grão de Bico Cozido':{p:4.022, u:'kg'},
+  'Cebola Roxa':{p:13.33, u:'kg'},
+  'Azeitona':{p:27.22, u:'kg'},
+  'Azeite de Ervas':{p:21.4995, u:'kg'},
+  'Salada Caprese':{p:4.4739, u:'kg'},
+  'Alface':{p:11.42, u:'kg'},
+  'Pimenta do Reino':{p:97, u:'kg'},
+  'Pó de Cappuccino':{p:60, u:'kg'},
+  'Canela':{p:32, u:'kg'},
+  'Biscoitinho do Café':{p:0.1182, u:'Und'},
+  'Grão de Café':{p:90, u:'kg'},
+  'Cacau 100%':{p:75.6, u:'kg'},
+  'Pó de Cappuccino Gelado':{p:90, u:'kg'},
+  'Gelo':{p:2.5, u:'kg'},
+  'Brigadeiro Cobertura':{p:24.4482, u:'kg'},
+  'Chantilly':{p:8.5183, u:'kg'},
+  'Ovomaltine':{p:59.33, u:'kg'},
+  'Pó de Chocolate Europeu':{p:65, u:'kg'},
+  'Nutella':{p:50.96, u:'kg'},
+  'Chá Und':{p:1.6, u:'Und'},
+  'Pó de Chai':{p:115, u:'kg'},
+  'Água com Gás':{p:3.5, u:'L'},
+  'Café':{p:100, u:'kg'},
+  'Filtro Clever':{p:0.85, u:'Und'},
+  'Filtro Koar':{p:0.6, u:'Und'},
+  'Drip Coffe':{p:2.5, u:'Und'},
+  'Descafeinado':{p:4.89, u:'Und'},
+  'Laranja Suco':{p:7.9, u:'Und'},
+  'Açúcar Refinado':{p:3.49, u:'kg'},
+  'Xarope':{p:74, u:'L'},
+  'Tônica':{p:3.21, u:'Und'},
+  'Calda de caramelo':{p:12.3358, u:'kg'},
+  'Granulê Chocolate Meio Amargo':{p:100, u:'kg'},
+  'Pasta de Pistache':{p:43, u:'kg'},
+  'Sorvete':{p:13, u:'kg'},
+  'Pasta de Caramelo':{p:43, u:'kg'},
+  'Leite de Aveia':{p:12.61, u:'L'},
+  'Leite em Pó':{p:39.75, u:'kg'},
+  'Leite Condensado':{p:14.41, u:'kg'},
+  'Chocolate Branco':{p:48.45, u:'kg'},
+  'Gelatina em Pó Incolor':{p:272.91, u:'kg'},
+  'Biscoito de Maisena':{p:19.35, u:'kg'},
+  'Biscoito Racheiro':{p:14, u:'kg'},
+  'Doce de Leite':{p:23.9, u:'kg'},
+  'Farofa de Coco':{p:40.4212, u:'kg'},
+  'Massa Brigadeiro Branco':{p:24.6564, u:'kg'},
+  'Confeito Branco':{p:19, u:'kg'},
+  'Massa Brigadeiro Chocolate':{p:32.3242, u:'kg'},
+  'Xerem de amendoim':{p:32, u:'kg'},
+  'Chocolate Meio Amargo':{p:51.15, u:'kg'},
+  'Chocolate ao Leite':{p:46.4, u:'kg'},
+  'Mel':{p:35, u:'kg'},
+  'Açúcar de Confeiteiro':{p:21.25, u:'kg'},
+  'Óreo Triturado':{p:41, u:'kg'},
+  'Óleo':{p:8.55, u:'kg'},
+  'Maracujá':{p:60, u:'kg'},
+  'Cookie Tradicional':{p:13.5476, u:'kg'},
+  'Kinder':{p:81.39, u:'kg'},
+  'Cookie especial':{p:16.8118, u:'kg'},
+  'Kit Kat':{p:96.38, u:'kg'},
+  'Fubá':{p:4.5, u:'kg'},
+  'Açúcar Cristal':{p:2.49, u:'kg'},
+  'Margarina':{p:9.33, u:'kg'},
+  'Fermento Químico':{p:41.95, u:'kg'},
+  'Vinagre':{p:16, u:'L'},
+  'Bolo de Cenoura':{p:1.1474, u:'Und'},
+  'Brownie':{p:29.6647, u:'kg'},
+  'Extrato de Baunilha':{p:333, u:'kg'},
+  'Fermento':{p:41.5, u:'kg'},
+  'Amora Congelada':{p:21.9, u:'kg'},
+  'Pão Petrópolis':{p:26, u:'kg'},
+  'Presunto':{p:22, u:'kg'},
+  'Tapioca':{p:8.75, u:'kg'},
+  'Mussarela':{p:46, u:'kg'},
+  'Massa Quiche':{p:6.5342, u:'kg'},
+  'Recheio Quiche':{p:21.574, u:'kg'},
+  'Alho Poró':{p:16, u:'kg'},
+  'Molho Branco':{p:23.256, u:'kg'},
+  'Pão Italiano':{p:4.8, u:'Und'},
+  'Maionese':{p:10.96, u:'kg'},
+  'Cebolete':{p:10, u:'kg'},
+  'Croissant Oui Uai':{p:6.5, u:'Und'},
+  'Tomate Confit':{p:32.924, u:'kg'},
+  'Ovo Caipira':{p:1, u:'Und'},
+  'Goiabada':{p:12.8, u:'kg'},
+  'Pão de Queijo Unidade':{p:2.4524, u:'Und'},
+  'Bacon':{p:27.89, u:'kg'},
+  'Requeijão Bisnaga':{p:63.9, u:'kg'},
+  'Pão de Queijo Porção':{p:0.6131, u:'Und'},
+  'Morango Congelado':{p:13.5, u:'kg'},
+  'Iogurte Natural':{p:17.5, u:'kg'},
+  'Granola':{p:27, u:'kg'},
+  'Coco':{p:110, u:'kg'},
+  'Chia':{p:32, u:'kg'},
+  'Polpa de Cupuaçu':{p:2.5, u:'Und'},
+  'Polpa de Abacaxi':{p:1.5, u:'Und'},
+  'Hortelã':{p:18, u:'kg'},
+  'Polpa de Maracujá':{p:2.15, u:'Und'},
+  'Polpa de Manga':{p:1.3, u:'Und'},
+  'Polpa de Amora':{p:2, u:'Und'},
+  'Creme de Abacate':{p:11.2639, u:'kg'},
+  'Cheddar':{p:65.3, u:'kg'},
+  'Focaccia':{p:12.396, u:'kg'},
+  'Broa Combo':{p:2.6846, u:'Und'},
+  'Cookie Recheado':{p:7.1564, u:'Und'},
+  'Toast Frango Caprese':{p:9.3942, u:'Und'},
+  'Cappuccino de Ovomaltine':{p:2.334, u:'Und'},
+  'Pastelzinho de Chuva':{p:0.1266, u:'Und'},
+};
 // ================================================================
 // UTILITÁRIOS
 // ================================================================
@@ -784,8 +1951,11 @@ const FP = v => F2(v*100) + '%';
 
 function calcCusto(p){
   return p.ings.reduce((s,i)=>{
-    const ref=precos[i.n]; return s+(ref?i.q*ref.p:0);
+    const ref=precos[i.n];
+    const price=ref?ref.p:(i.p||0);
+    return s+i.q*price;
   },0);
+},0);
 }
 function cmvCls(c){ return c<=0.28?'ok':c<=0.34?'alerta':'ruim'; }
 
@@ -1311,14 +2481,16 @@ let _metaTimer=null;
 function _guardarMixBase(){ cats.forEach(c=>c.pratos.forEach(p=>{ p.mv0=p.mv; })); }
 
 const CAT_RATIO = {
-  'TOASTS E COMBOS':               0.35,
-  'MONTE SUA SALADA':              0.25,
-  'CAFÉ':                          0.55,
-  'TORTAS E DOCES':                0.20,
-  'LANCHES, SANDUÍCHE E CHAPA':    0.22,
-  'PÃO DE QUEIJO':                 0.40,
-  'FRUTAS E BRUNCH':               0.18,
-  'SMOTHIES E BEBIDAS':            0.30,
+  'Entradas':                      0.30,
+  'Menu Almoço':                   0.55,
+  'Monte Sua Salada':              0.25,
+  'Café':                          0.55,
+  'Tortas e Doces':                0.20,
+  'Lanches, Sanduíche e Chapa':    0.30,
+  'Pão de Queijo':                 0.40,
+  'Frutas e Brunch':               0.15,
+  'Smothies e Bebidas':            0.30,
+  'Toasts e Combos':               0.25,
 };
 
 function aplicarMetaGlobal(){
